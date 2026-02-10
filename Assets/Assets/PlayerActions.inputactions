@@ -1,0 +1,35 @@
+{
+    "version": 1,
+    "name": "PlayerActions",
+    "maps": [
+        {
+            "name": "BattlefieldActions",
+            "id": "4b5df73e-209e-4bbd-8ee9-1e87622f7263",
+            "actions": [
+                {
+                    "name": "Select",
+                    "type": "Button",
+                    "id": "9928b7f1-741e-4caa-bc82-b07e1ace47c9",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a6eaeb27-ae89-4ab6-a6ad-b41465f83ccb",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
