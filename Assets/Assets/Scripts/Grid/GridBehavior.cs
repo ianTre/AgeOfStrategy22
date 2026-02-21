@@ -59,9 +59,9 @@ public class GridBehavior : MonoBehaviour
     {
         foreach (GameObject obj in gridArray)
         {
-            obj.GetComponent<GridStats>().Visited = -1;
+            obj.GetComponent<GridStats>().visited = -1;
         }
-        gridArray[startX, startY].GetComponent<GridStats>().Visited = 0;
+        gridArray[startX, startY].GetComponent<GridStats>().visited = 0;
     }
 
     bool TestDirection(int x, int y , int step , int direction)
@@ -74,25 +74,25 @@ public class GridBehavior : MonoBehaviour
         switch (direction)
         {
             case 1:
-                if (y + 1 < rows && gridArray[x, y + 1] && gridArray[x, y + 1].GetComponent<GridStats>().Visited == step)
+                if (y + 1 < rows && gridArray[x, y + 1] && gridArray[x, y + 1].GetComponent<GridStats>().visited == step)
                     return true;
                 else
                     return false;
 
             case 2:
-                if (x + 1 < columns && gridArray[x + 1 , y ] && gridArray[x + 1, y ].GetComponent<GridStats>().Visited == step)
+                if (x + 1 < columns && gridArray[x + 1 , y ] && gridArray[x + 1, y ].GetComponent<GridStats>().visited == step)
                     return true;
                 else
                     return false;
 
             case 3:
-                if (y - 1 > -1  && gridArray[x, y - 1] && gridArray[x, y - 1].GetComponent<GridStats>().Visited == step)
+                if (y - 1 > -1  && gridArray[x, y - 1] && gridArray[x, y - 1].GetComponent<GridStats>().visited == step)
                     return true;
                 else
                     return false;
 
             case 4:
-                if (x - 1 > -1 && gridArray[x - 1 , y] && gridArray[x - 1 , y ].GetComponent<GridStats>().Visited == step)
+                if (x - 1 > -1 && gridArray[x - 1 , y] && gridArray[x - 1 , y ].GetComponent<GridStats>().visited == step)
                     return true;
                 else
                     return false;
@@ -105,7 +105,7 @@ public class GridBehavior : MonoBehaviour
     void SetupVisited(int x , int y , int step)
     {
         if (gridArray[x, y])
-            gridArray[x, y].GetComponent<GridStats>().Visited = step;
+            gridArray[x, y].GetComponent<GridStats>().visited = step;
     }
 
     void SetDistance()
@@ -118,7 +118,7 @@ public class GridBehavior : MonoBehaviour
         {
             foreach (GameObject obj in gridArray)
             {
-                if(obj.GetComponent<GridStats>().Visited == step-1)
+                if(obj.GetComponent<GridStats>().visited == step-1)
                     TestFourDirections(obj.GetComponent<GridStats>().x, obj.GetComponent<GridStats>().y, step);
 
             }
