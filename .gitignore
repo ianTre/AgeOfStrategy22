@@ -60,6 +60,7 @@ sysinfo.txt
 
 # Unity3D generated version file
 /[Pp]roject[Ss]ettings/[Pp]roject[Vv]ersion.txt
+/ProjectSettings/ProjectVersion.txt
 
 # Builds
 *.apk
