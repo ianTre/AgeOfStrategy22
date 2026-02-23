@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-public class InputController : MonoBehaviour
+public class InputManager : MonoBehaviour
 {
     Camera mainCamera;
     PlayerActions playerActions;
