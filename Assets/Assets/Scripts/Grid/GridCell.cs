@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GridStats : MonoBehaviour , IMouseActionable
+public class GridCell : MonoBehaviour , IMouseActionable
 {
     public bool isOffset = false;
     public bool isSelected = false;
@@ -10,6 +10,8 @@ public class GridStats : MonoBehaviour , IMouseActionable
     public int x = 0;
     public int y = 0;
     public Material Normal, Offset, Highligh;
+    public bool isOccupied = false;
+    public GameObject unitPrefab;
 
     public bool IsSelected => isSelected;
 

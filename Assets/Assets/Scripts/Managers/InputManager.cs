@@ -11,6 +11,8 @@ public class InputManager : MonoBehaviour
     PlayerActions playerActions;
     private GameObject lastSelectedObject;
     private GameObject lastHoveredObject;
+    private GameManager gameManager;
+
 
     private void Awake()
     {
@@ -18,6 +20,17 @@ public class InputManager : MonoBehaviour
         playerActions = new PlayerActions();
         playerActions.BattlefieldActions.Enable();
     }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        gameManager = FindObjectOfType<GameManager>();
+        if (gameManager == null)
+        {
+            throw new Exception("Game Manager not found in the scene");
+        }
+    }
+
 
     private void OnEnable()
     {
@@ -39,11 +52,7 @@ public class InputManager : MonoBehaviour
 
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+
 
     // Update is called once per frame
     void Update()
@@ -78,15 +87,10 @@ public class InputManager : MonoBehaviour
         {
             return;
         }
-        IMouseActionable lastActionable = null;
-        lastSelectedObject?.TryGetComponent<IMouseActionable>(out lastActionable);
-        hit.transform.TryGetComponent<IMouseActionable>(out IMouseActionable actionable);
-        
-        if(lastActionable != null)
-            lastActionable.Deselect();
-        if(actionable != null)
-            actionable.Select();
-        lastSelectedObject = hit.transform.gameObject;
 
+        GameObject newSelectedObject = hit.transform.gameObject;
+        gameManager.ClickOnNewObject(newSelectedObject);
     }
+
+
 }

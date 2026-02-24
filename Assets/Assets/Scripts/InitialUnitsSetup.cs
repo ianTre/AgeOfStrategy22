@@ -13,43 +13,43 @@ public class InitialUnitsSetup : MonoBehaviour
     [SerializeField] int SpiermanAmmountEnemy;
     [SerializeField] UnitData Spierman;
 
-    private List<(UnitData, int)> unitDataList;
+    private List<UnitModel> unitDataList;
 
     public InitialUnitsSetup()
     {
-        unitDataList = new List<(UnitData, int)>();
+        unitDataList = new List<UnitModel>();
     }
 
-    public List<(UnitData,int)> PlayerInitialSetup()
+    public List<UnitModel> PlayerInitialSetup()
     {
         //Man At Arms
-        if(ManAtArms != null && ManAtArmsAmmount > 0)
-            unitDataList.Add((ManAtArms, ManAtArmsAmmount));
+        if (ManAtArms != null && ManAtArmsAmmount > 0)
+            unitDataList.Add(new UnitModel( ManAtArms, ManAtArmsAmmount));
 
         //Spierman
         if(Spierman != null && SpiermanAmmount > 0)
-            unitDataList.Add((Spierman, SpiermanAmmount));
+            unitDataList.Add(new UnitModel(Spierman, SpiermanAmmount));
 
         //Add new units here
 
         return unitDataList;
     }
 
-    public List<(UnitData, int)> EnemyInitialSetup()
+    public List<UnitModel> EnemyInitialSetup()
     {
         if(equalBattle)
             return unitDataList;
 
 
-        var list = new List<(UnitData, int)>();
+        var list = new List<UnitModel>();
 
         //Man At Arms
         if (ManAtArms != null && ManAtArmsAmmountEnemy > 0)
-            list.Add((ManAtArms, ManAtArmsAmmountEnemy));
+            list.Add(new UnitModel(ManAtArms, ManAtArmsAmmountEnemy));
 
         //Spierman
         if (Spierman != null && SpiermanAmmountEnemy > 0)
-            list.Add((Spierman, SpiermanAmmountEnemy));
+            list.Add(new UnitModel(Spierman, SpiermanAmmountEnemy));
 
         //Add new units here
 

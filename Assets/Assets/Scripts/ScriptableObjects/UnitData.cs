@@ -13,6 +13,7 @@ public class UnitData : ScriptableObject
     [SerializeField] private int meleeArmor;
     [SerializeField] private int pierceArmor;
     [SerializeField] public GameObject prefab;
+    [SerializeField] public SpriteRenderer photo;
 
     public string UnitName { get { return name; } }
     //public UnitType Type { get { return type; } }

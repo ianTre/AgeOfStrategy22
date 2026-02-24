@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
 
-public class GridBehavior : MonoBehaviour
+public class GridController : MonoBehaviour
 {
     public int rows = 10;
     public int columns = 15;
@@ -45,12 +45,12 @@ public class GridBehavior : MonoBehaviour
                 GameObject obj = Instantiate(gridPrefab, new Vector3(leftBottomLocation.x + (scale * (float)i), leftBottomLocation.y, leftBottomLocation.z + scale * j), Quaternion.identity);
                 obj.name = $"Grid {i} {j}";
                 obj.transform.SetParent(gameObject.transform);
-                obj.GetComponent<GridStats>().x = i;
-                obj.GetComponent<GridStats>().y = j;
+                obj.GetComponent<GridCell>().x = i;
+                obj.GetComponent<GridCell>().y = j;
                 gridArray[i, j] = obj;
 
                 var isOffset = (i % 2 == 0 && j % 2 != 0) || (i % 2 != 0 && j % 2 == 0);
-                obj.GetComponent<GridStats>().Init(isOffset);
+                obj.GetComponent<GridCell>().Init(isOffset);
             }
         }
     }
@@ -59,9 +59,9 @@ public class GridBehavior : MonoBehaviour
     {
         foreach (GameObject obj in gridArray)
         {
-            obj.GetComponent<GridStats>().visited = -1;
+            obj.GetComponent<GridCell>().visited = -1;
         }
-        gridArray[startX, startY].GetComponent<GridStats>().visited = 0;
+        gridArray[startX, startY].GetComponent<GridCell>().visited = 0;
     }
 
     bool TestDirection(int x, int y , int step , int direction)
@@ -74,25 +74,25 @@ public class GridBehavior : MonoBehaviour
         switch (direction)
         {
             case 1:
-                if (y + 1 < rows && gridArray[x, y + 1] && gridArray[x, y + 1].GetComponent<GridStats>().visited == step)
+                if (y + 1 < rows && gridArray[x, y + 1] && gridArray[x, y + 1].GetComponent<GridCell>().visited == step)
                     return true;
                 else
                     return false;
 
             case 2:
-                if (x + 1 < columns && gridArray[x + 1 , y ] && gridArray[x + 1, y ].GetComponent<GridStats>().visited == step)
+                if (x + 1 < columns && gridArray[x + 1 , y ] && gridArray[x + 1, y ].GetComponent<GridCell>().visited == step)
                     return true;
                 else
                     return false;
 
             case 3:
-                if (y - 1 > -1  && gridArray[x, y - 1] && gridArray[x, y - 1].GetComponent<GridStats>().visited == step)
+                if (y - 1 > -1  && gridArray[x, y - 1] && gridArray[x, y - 1].GetComponent<GridCell>().visited == step)
                     return true;
                 else
                     return false;
 
             case 4:
-                if (x - 1 > -1 && gridArray[x - 1 , y] && gridArray[x - 1 , y ].GetComponent<GridStats>().visited == step)
+                if (x - 1 > -1 && gridArray[x - 1 , y] && gridArray[x - 1 , y ].GetComponent<GridCell>().visited == step)
                     return true;
                 else
                     return false;
@@ -105,7 +105,7 @@ public class GridBehavior : MonoBehaviour
     void SetupVisited(int x , int y , int step)
     {
         if (gridArray[x, y])
-            gridArray[x, y].GetComponent<GridStats>().visited = step;
+            gridArray[x, y].GetComponent<GridCell>().visited = step;
     }
 
     void SetDistance()
@@ -118,8 +118,8 @@ public class GridBehavior : MonoBehaviour
         {
             foreach (GameObject obj in gridArray)
             {
-                if(obj.GetComponent<GridStats>().visited == step-1)
-                    TestFourDirections(obj.GetComponent<GridStats>().x, obj.GetComponent<GridStats>().y, step);
+                if(obj.GetComponent<GridCell>().visited == step-1)
+                    TestFourDirections(obj.GetComponent<GridCell>().x, obj.GetComponent<GridCell>().y, step);
 
             }
         }

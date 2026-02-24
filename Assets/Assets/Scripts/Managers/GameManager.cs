@@ -8,70 +8,86 @@ public class GameManager : MonoBehaviour
 {
     public GameStages gameStage;
     private InitialUnitsSetup initialUnitsSetup;
+    private UIManager uIManager;
+    private GameObject lastSelectedObject;
+
+
+    //Nedded References
+    BattlefieldManager battlefieldManager;
+
 
     void Start()
     {
         gameStage = GameStages.Start;
+        SetupDataFor_DeployStage();
     }
 
     private void Awake()
     {
-        SetupDataFor_DeployStage();
+        uIManager = GetComponent<UIManager>();
+
+    }
+
+
+
+
+
+    // Update is called once per frame
+    void Update()
+    {
+
     }
 
     private void SetupDataFor_DeployStage()
     {
         initialUnitsSetup = GetComponent<InitialUnitsSetup>();
-        List<UnitModel> PlayerUnits = CreateListPlayerUnits();
-        List<UnitModel> EnemyUnits = CreateListEnemyUnits();
+        List<UnitModel> PlayerUnits = initialUnitsSetup.PlayerInitialSetup();
+        List<UnitModel> EnemyUnits = initialUnitsSetup.EnemyInitialSetup();
+
+        //Actual call for Stage Update
+        gameStage = GameStages.PlayerDeploy;
         StageUpdate_PlayerDeploy(PlayerUnits, EnemyUnits);
     }
 
-    /// <summary>
-    /// Retrieves a list of all player-controlled units. This method will CREATE the list of units in the battlefield-only plan of the game and will need to be replaced to GetListPlayerUnits() to GET data if we moved to CAMPAING plan.
-    /// </summary>
-    /// <returns>A list of <see cref="UnitModel"/> objects representing the player's units.  The list will be empty if the player
-    /// has no units.</returns>
-    /// <exception cref="NotImplementedException">Thrown if the method is not yet implemented.</exception>
-    private List<UnitModel> CreateListPlayerUnits()
+    private void StageUpdate_PlayerDeploy(List<UnitModel> PlayerUnits, List<UnitModel> EnemyUnits)
     {
-        var initialUnits = initialUnitsSetup.PlayerInitialSetup();
-        var playerUnits = new List<UnitModel>();
-        foreach (var unit in initialUnits)
-        {
-            playerUnits.Add(new UnitModel(unit.Item1 , unit.Item2 ));
-        }
-        return playerUnits;
+        //Prepare and Show UI
+        uIManager.Battlefield_UnitsDeploy_Canvas(PlayerUnits);
     }
 
-    private List<UnitModel> CreateListEnemyUnits()
+
+    public void ClickOnNewObject(GameObject newSelectedObject)
     {
-        var initialUnits = initialUnitsSetup.PlayerInitialSetup();
-        var playerUnits = new List<UnitModel>();
-        foreach (var unit in initialUnits)
+        IMouseActionable lastActionable = null;
+        lastSelectedObject?.TryGetComponent<IMouseActionable>(out lastActionable);
+        newSelectedObject.TryGetComponent<IMouseActionable>(out IMouseActionable actionable);
+
+        if (gameStage == GameStages.PlayerDeploy)
         {
-            playerUnits.Add(new UnitModel(unit.Item1, unit.Item2));
+            if (lastActionable != null)
+                lastActionable.Deselect();
+            if (actionable != null)
+                actionable.Select();    
         }
-        return playerUnits;
+
+        lastSelectedObject = newSelectedObject;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ClickOnCardDeploy(UnitData unitData)
     {
+        gameStage = GameStages.PlayerDeploy_UnitSelected;
         
     }
 
-    public void StageUpdate_PlayerDeploy(List<UnitModel> PlayerUnits , List<UnitModel> EnemyUnits)
-    {
-        
-    }
 
 
 
     public enum GameStages
     {
         Start = 0 ,
-        PlayerDeploy = 10 , 
+        PlayerDeploy = 10 ,
+        PlayerDeploy_UnitSelected = 11,
+        PlayerDeploy_UnitSelected_CellSelected = 12,
         EnemyDeploy = 20 ,
         PlayerTurn = 100 , 
         EnemyTurn = 200 ,

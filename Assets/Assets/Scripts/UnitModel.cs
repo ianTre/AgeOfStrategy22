@@ -9,10 +9,10 @@ namespace Assets.Assets.Scripts
 {
     public class UnitModel
     {
-        private UnitData InitialData { get; set; }
-        private int number;
-        private int totalHealth;
-        private int totalAttack;
+        public UnitData InitialData { get; set; }
+        public int number;
+        public int totalHealth;
+        public int totalAttack;
 
 
         public UnitModel(UnitData initialData , int initialNumber)

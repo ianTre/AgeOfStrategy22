@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 2804377009841445718}
   - component: {fileID: 2061033889752878472}
   - component: {fileID: 6622460230802670079}
-  - component: {fileID: 5974860978779132159}
+  - component: {fileID: 4318231634341150291}
   m_Layer: 0
-  m_Name: GridCell
+  m_Name: Grid
   m_TagString: Grid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -106,7 +106,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5974860978779132159
+--- !u!114 &4318231634341150291
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,10 +115,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1343811214212185095}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 262c99617b87127488f06b5d0883c1a8, type: 3}
+  m_Script: {fileID: 11500000, guid: afb63b2416a24b84c82d9eadbd05ed5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Visited: 1
+  isOffset: 0
+  isSelected: 0
+  visited: 1
   x: 0
   y: 0
   Normal: {fileID: 2100000, guid: 5a71529f031683a4cb0fb7262bb1b137, type: 2}
