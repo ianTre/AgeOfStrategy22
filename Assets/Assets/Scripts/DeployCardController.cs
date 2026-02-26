@@ -34,6 +34,7 @@ public class DeployCardController : MonoBehaviour
 
     public void ShowUnitData(UnitData data, int number)
     {
+        unitData = data;
         this.transform.gameObject.SetActive(true);
         var numberText = numberPanel.transform.GetChild(0);
         var textComponent = numberText.GetComponent<TextMeshProUGUI>();

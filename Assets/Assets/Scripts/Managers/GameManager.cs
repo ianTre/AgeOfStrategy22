@@ -18,13 +18,16 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        gameStage = GameStages.Start;
+        battlefieldManager = GetComponent<BattlefieldManager>();
+        uIManager = GetComponent<UIManager>();
+        
         SetupDataFor_DeployStage();
     }
 
     private void Awake()
     {
-        uIManager = GetComponent<UIManager>();
+        gameStage = GameStages.Start;
+        
 
     }
 
@@ -70,13 +73,25 @@ public class GameManager : MonoBehaviour
                 actionable.Select();    
         }
 
+        if( gameStage == GameStages.PlayerDeploy_UnitSelected)
+        {
+            if (newSelectedObject.tag == "Grid")
+            {
+                gameStage = GameStages.PlayerDeploy_UnitSelected_CellSelected;
+                newSelectedObject.TryGetComponent<GridCell>(out GridCell gridCell);
+                if (gridCell != null)
+                    battlefieldManager.TryAddUnit(gridCell);
+            }
+        }
+
         lastSelectedObject = newSelectedObject;
     }
 
     public void ClickOnCardDeploy(UnitData unitData)
     {
         gameStage = GameStages.PlayerDeploy_UnitSelected;
-        
+        Debug.Log($"Card {unitData.name} was clicked");
+        battlefieldManager.SetUnitToCreate(unitData);
     }
 
 
