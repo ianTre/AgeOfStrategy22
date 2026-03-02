@@ -80,18 +80,24 @@ public class GameManager : MonoBehaviour
                 gameStage = GameStages.PlayerDeploy_UnitSelected_CellSelected;
                 newSelectedObject.TryGetComponent<GridCell>(out GridCell gridCell);
                 if (gridCell != null)
-                    battlefieldManager.TryAddUnit(gridCell);
+                {
+                    var isSuccess = battlefieldManager.TryAddUnit(gridCell);
+                    if(isSuccess)
+                    {
+                        gameStage = GameStages.PlayerDeploy;
+                    }
+                }
             }
         }
 
         lastSelectedObject = newSelectedObject;
     }
 
-    public void ClickOnCardDeploy(UnitData unitData)
+    public void ClickOnCardDeploy(DeployCardController deployCardController)
     {
         gameStage = GameStages.PlayerDeploy_UnitSelected;
-        Debug.Log($"Card {unitData.name} was clicked");
-        battlefieldManager.SetUnitToCreate(unitData);
+        Debug.Log($"Card {deployCardController.unitsInitialData.name} was clicked");
+        battlefieldManager.SetUnitToCreate(deployCardController);
     }
 
 

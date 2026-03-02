@@ -11,6 +11,7 @@ public class BattlefieldManager : MonoBehaviour
     List<UnitModel> EnemyUnits;
     private GridController gridController;
     private UnitData intendedUnitToCreate;
+    private DeployCardController lastClickedCard;
     void Start()
     {
         gridController = FindObjectOfType<GridController>();
@@ -33,11 +34,13 @@ public class BattlefieldManager : MonoBehaviour
         gridController.gridArray[x, y].GetComponent<GridCell>().isOccupied = true;
         Instantiate(intendedUnitToCreate.prefab , gridController.gridArray[x, y].transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
         //PlayerUnits.Add(intendedUnitToCreate);
+        lastClickedCard.DisableCard();
         return true;
     }
 
-    internal void SetUnitToCreate(UnitData unitData)
+    internal void SetUnitToCreate(DeployCardController deployCardController)
     {
-        intendedUnitToCreate = unitData;
+        lastClickedCard = deployCardController;
+        intendedUnitToCreate = deployCardController.unitsInitialData;
     }
 }

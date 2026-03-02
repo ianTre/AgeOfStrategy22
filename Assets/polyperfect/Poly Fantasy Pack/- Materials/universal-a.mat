@@ -31,7 +31,7 @@ Material:
   - TransparentDepthPrepass
   - TransparentDepthPostpass
   - TransparentBackface
-  m_LockedProperties: 
+  m_LockedProperties: _ParallaxMap _Smoothness
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:

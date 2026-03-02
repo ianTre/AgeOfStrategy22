@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2601277412367000666, guid: 1db0fe75ae318724686ca378176fbd94, type: 3}
       propertyPath: m_Name
-      value: Man_Blacksmith_A Variant
+      value: ManAtArms
       objectReference: {fileID: 0}
     - target: {fileID: 3409867765619736288, guid: 1db0fe75ae318724686ca378176fbd94, type: 3}
       propertyPath: m_LocalScale.x
@@ -64,8 +64,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8769181917337379994, guid: 1db0fe75ae318724686ca378176fbd94, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: b03ac6ace17da0343b0ed47403b4e155, type: 2}
+    - target: {fileID: 8769181917337379994, guid: 1db0fe75ae318724686ca378176fbd94, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2601277412367000666, guid: 1db0fe75ae318724686ca378176fbd94, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -5991667897996803586}
   m_SourcePrefab: {fileID: 100100000, guid: 1db0fe75ae318724686ca378176fbd94, type: 3}
+--- !u!1 &4138094116943848924 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2601277412367000666, guid: 1db0fe75ae318724686ca378176fbd94, type: 3}
+  m_PrefabInstance: {fileID: 2122583740490416518}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-5991667897996803586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4138094116943848924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48c3ce381e350344ea1abb5be7e5715f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationStateName: IdleStanding
+  targetLoopCount: 3
