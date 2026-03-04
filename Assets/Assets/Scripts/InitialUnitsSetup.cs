@@ -12,6 +12,10 @@ public class InitialUnitsSetup : MonoBehaviour
     [SerializeField] int SpiermanAmmount;
     [SerializeField] int SpiermanAmmountEnemy;
     [SerializeField] UnitData Spierman;
+    [SerializeField] int KnightAmmount;
+    [SerializeField] int KnightAmmountEnemy;
+    [SerializeField] UnitData Knight;
+    [SerializeField] List<UnitInitialSetup> UnitList;
 
     private List<UnitModel> unitDataList;
 
@@ -22,16 +26,10 @@ public class InitialUnitsSetup : MonoBehaviour
 
     public List<UnitModel> PlayerInitialSetup()
     {
-        //Man At Arms
-        if (ManAtArms != null && ManAtArmsAmmount > 0)
-            unitDataList.Add(new UnitModel( ManAtArms, ManAtArmsAmmount));
-
-        //Spierman
-        if(Spierman != null && SpiermanAmmount > 0)
-            unitDataList.Add(new UnitModel(Spierman, SpiermanAmmount));
-
-        //Add new units here
-
+        foreach (UnitInitialSetup model in UnitList)
+        {
+            unitDataList.Add(new UnitModel(model.unitData, model.playerAmmount));
+        }
         return unitDataList;
     }
 
@@ -40,18 +38,11 @@ public class InitialUnitsSetup : MonoBehaviour
         if(equalBattle)
             return unitDataList;
 
-
         var list = new List<UnitModel>();
-
-        //Man At Arms
-        if (ManAtArms != null && ManAtArmsAmmountEnemy > 0)
-            list.Add(new UnitModel(ManAtArms, ManAtArmsAmmountEnemy));
-
-        //Spierman
-        if (Spierman != null && SpiermanAmmountEnemy > 0)
-            list.Add(new UnitModel(Spierman, SpiermanAmmountEnemy));
-
-        //Add new units here
+        foreach (UnitInitialSetup model in UnitList)
+        {
+            list.Add(new UnitModel(model.unitData, model.playerAmmount));
+        }
 
         return list;
     }
