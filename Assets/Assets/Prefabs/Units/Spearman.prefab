@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3915958362508182197, guid: b53c54438110487458c4e7a56b7c47ea, type: 3}
       propertyPath: m_Name
-      value: Man_Villager_A Variant
+      value: Spearman
       objectReference: {fileID: 0}
     - target: {fileID: 4401028174208899087, guid: b53c54438110487458c4e7a56b7c47ea, type: 3}
       propertyPath: m_LocalScale.x
@@ -67,5 +67,28 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3915958362508182197, guid: b53c54438110487458c4e7a56b7c47ea, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -4602686216962904700}
   m_SourcePrefab: {fileID: 100100000, guid: b53c54438110487458c4e7a56b7c47ea, type: 3}
+--- !u!1 &7442173959025539028 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3915958362508182197, guid: b53c54438110487458c4e7a56b7c47ea, type: 3}
+  m_PrefabInstance: {fileID: 5845582890827806049}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-4602686216962904700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7442173959025539028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85a2bb68bdf33484ebd08dde225f387d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}
+  isSelected: 0
+  cell: {fileID: 0}

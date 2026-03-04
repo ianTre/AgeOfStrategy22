@@ -1980,6 +1980,7 @@ GameObject:
   - component: {fileID: 7496071821258552348}
   - component: {fileID: 4532672155796876902}
   - component: {fileID: -2147848312917763233}
+  - component: {fileID: 5403871776816891539}
   m_Layer: 0
   m_Name: ManKnight_Armor_Sword
   m_TagString: Untagged
@@ -2041,6 +2042,21 @@ MonoBehaviour:
   IdleAnimationShortStateName: IdleHolding
   targetLoopCount: 3
   hasChangedToIdle: 0
+--- !u!114 &5403871776816891539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7155293158469676710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85a2bb68bdf33484ebd08dde225f387d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}
+  isSelected: 0
+  cell: {fileID: 0}
 --- !u!1 &7386135762463922171
 GameObject:
   m_ObjectHideFlags: 0

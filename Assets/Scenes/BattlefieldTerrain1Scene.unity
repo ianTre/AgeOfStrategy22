@@ -2409,15 +2409,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   equalBattle: 1
-  ManAtArmsAmmount: 12
-  ManAtArmsAmmountEnemy: 15
-  ManAtArms: {fileID: 11400000, guid: f5e27201a26eeb044b6ef2aa889c9637, type: 2}
-  SpiermanAmmount: 26
-  SpiermanAmmountEnemy: 0
-  Spierman: {fileID: 11400000, guid: ed07d688be8d08145a975f24e133284a, type: 2}
-  KnightAmmount: 20
-  KnightAmmountEnemy: 15
-  Knight: {fileID: 11400000, guid: cf447acd2c531cf47aa2f3347a0c8ef8, type: 2}
+  UnitList:
+  - name: ManAtArms
+    playerAmmount: 12
+    enemyAmmount: 15
+    unitData: {fileID: 11400000, guid: f5e27201a26eeb044b6ef2aa889c9637, type: 2}
+  - name: Spierman
+    playerAmmount: 20
+    enemyAmmount: 8
+    unitData: {fileID: 11400000, guid: ed07d688be8d08145a975f24e133284a, type: 2}
+  - name: Knight
+    playerAmmount: 15
+    enemyAmmount: 12
+    unitData: {fileID: 11400000, guid: cf447acd2c531cf47aa2f3347a0c8ef8, type: 2}
 --- !u!114 &1809800795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2456,6 +2460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae877b4a955602d41ade14fc6cc00544, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectionLightPrefab: {fileID: 1584155493631336094, guid: d8fcda64f7ad694459957ed45c66127c, type: 3}
 --- !u!1 &1846104631
 GameObject:
   m_ObjectHideFlags: 0

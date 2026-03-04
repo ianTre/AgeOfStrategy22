@@ -45,8 +45,21 @@ public class GridCell : MonoBehaviour , IMouseActionable
 
     public void Select()
     {
-        isSelected = true;
+        this.isSelected = true;
         this.Highlight();
+        if(this.unitPrefab != null)
+        {
+            unitPrefab.GetComponent<Unit>().SelectByPass();
+        }
+    }
+
+    public bool TryAddUnit(GameObject unitPrefab)
+    {
+        if (isOccupied)
+            return false;
+        isOccupied = true;
+        this.unitPrefab = unitPrefab;
+        return true;
     }
 
 
@@ -66,4 +79,7 @@ public class GridCell : MonoBehaviour , IMouseActionable
         if(!isSelected)
             this.UnHighlight();
     }
+
+
+
 }

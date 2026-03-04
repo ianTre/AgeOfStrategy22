@@ -79,6 +79,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2601277412367000666, guid: 1db0fe75ae318724686ca378176fbd94, type: 3}
       insertIndex: -1
       addedObject: {fileID: -5991667897996803586}
+    - targetCorrespondingSourceObject: {fileID: 2601277412367000666, guid: 1db0fe75ae318724686ca378176fbd94, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -5669739517664809142}
   m_SourcePrefab: {fileID: 100100000, guid: 1db0fe75ae318724686ca378176fbd94, type: 3}
 --- !u!1 &4138094116943848924 stripped
 GameObject:
@@ -97,5 +100,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48c3ce381e350344ea1abb5be7e5715f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationStateName: IdleStanding
+  IdleAnimationLongStateName: IdleStanding
+  IdleAnimationShortStateName: IdleStanding
   targetLoopCount: 3
+  hasChangedToIdle: 0
+--- !u!114 &-5669739517664809142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4138094116943848924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85a2bb68bdf33484ebd08dde225f387d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}
+  isSelected: 0
+  cell: {fileID: 0}

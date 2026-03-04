@@ -5,16 +5,10 @@ using UnityEngine;
 
 public class InitialUnitsSetup : MonoBehaviour
 {
+    /// <summary>
+    /// If true, the player and the enemy will have the same units in the same amount, and it will ignore the enemy ammoutn field. If false, they will be different.
+    /// </summary>
     [SerializeField] bool equalBattle;
-    [SerializeField] int ManAtArmsAmmount;
-    [SerializeField] int ManAtArmsAmmountEnemy;
-    [SerializeField] UnitData ManAtArms;
-    [SerializeField] int SpiermanAmmount;
-    [SerializeField] int SpiermanAmmountEnemy;
-    [SerializeField] UnitData Spierman;
-    [SerializeField] int KnightAmmount;
-    [SerializeField] int KnightAmmountEnemy;
-    [SerializeField] UnitData Knight;
     [SerializeField] List<UnitInitialSetup> UnitList;
 
     private List<UnitModel> unitDataList;

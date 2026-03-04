@@ -1413,6 +1413,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5938591398547009868}
   - component: {fileID: 327128611795004214}
+  - component: {fileID: -2304260775188111131}
   m_Layer: 0
   m_Name: Man_Soldier_Ranger_Fantasy_A 1
   m_TagString: Untagged
@@ -1458,6 +1459,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-2304260775188111131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6422640790172199926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85a2bb68bdf33484ebd08dde225f387d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}
+  isSelected: 0
+  cell: {fileID: 0}
 --- !u!1 &6522634241978887078
 GameObject:
   m_ObjectHideFlags: 0

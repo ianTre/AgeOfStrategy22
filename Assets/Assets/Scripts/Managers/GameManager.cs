@@ -63,6 +63,7 @@ public class GameManager : MonoBehaviour
     {
         IMouseActionable lastActionable = null;
         lastSelectedObject?.TryGetComponent<IMouseActionable>(out lastActionable);
+        newSelectedObject = FindActionableRecursibly(newSelectedObject);
         newSelectedObject.TryGetComponent<IMouseActionable>(out IMouseActionable actionable);
 
         if (gameStage == GameStages.PlayerDeploy)
@@ -91,6 +92,21 @@ public class GameManager : MonoBehaviour
         }
 
         lastSelectedObject = newSelectedObject;
+    }
+
+    private GameObject FindActionableRecursibly(GameObject newSelectedObject)
+    {
+        var parent = newSelectedObject;
+        while (parent != null)
+        {
+            parent.TryGetComponent<IMouseActionable>(out IMouseActionable actionable);
+            if (actionable != null)
+            {
+                return parent.gameObject;
+            }
+            parent = parent.transform.parent != null ? parent.transform.parent.gameObject : null;
+        }
+        return newSelectedObject;
     }
 
     public void ClickOnCardDeploy(DeployCardController deployCardController)
