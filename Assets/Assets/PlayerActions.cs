@@ -100,6 +100,15 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SpecialAction"",
+                    ""type"": ""Button"",
+                    ""id"": ""b601a217-f4a7-41cc-ba5e-e5202b0c9f1c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -113,6 +122,17 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""action"": ""Select"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""047ba6e4-4008-4965-96a4-d637eb8d1fc8"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SpecialAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -122,6 +142,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         // BattlefieldActions
         m_BattlefieldActions = asset.FindActionMap("BattlefieldActions", throwIfNotFound: true);
         m_BattlefieldActions_Select = m_BattlefieldActions.FindAction("Select", throwIfNotFound: true);
+        m_BattlefieldActions_SpecialAction = m_BattlefieldActions.FindAction("SpecialAction", throwIfNotFound: true);
     }
 
     ~@PlayerActions()
@@ -203,6 +224,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_BattlefieldActions;
     private List<IBattlefieldActionsActions> m_BattlefieldActionsActionsCallbackInterfaces = new List<IBattlefieldActionsActions>();
     private readonly InputAction m_BattlefieldActions_Select;
+    private readonly InputAction m_BattlefieldActions_SpecialAction;
     /// <summary>
     /// Provides access to input actions defined in input action map "BattlefieldActions".
     /// </summary>
@@ -218,6 +240,10 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "BattlefieldActions/Select".
         /// </summary>
         public InputAction @Select => m_Wrapper.m_BattlefieldActions_Select;
+        /// <summary>
+        /// Provides access to the underlying input action "BattlefieldActions/SpecialAction".
+        /// </summary>
+        public InputAction @SpecialAction => m_Wrapper.m_BattlefieldActions_SpecialAction;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -247,6 +273,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @Select.started += instance.OnSelect;
             @Select.performed += instance.OnSelect;
             @Select.canceled += instance.OnSelect;
+            @SpecialAction.started += instance.OnSpecialAction;
+            @SpecialAction.performed += instance.OnSpecialAction;
+            @SpecialAction.canceled += instance.OnSpecialAction;
         }
 
         /// <summary>
@@ -261,6 +290,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @Select.started -= instance.OnSelect;
             @Select.performed -= instance.OnSelect;
             @Select.canceled -= instance.OnSelect;
+            @SpecialAction.started -= instance.OnSpecialAction;
+            @SpecialAction.performed -= instance.OnSpecialAction;
+            @SpecialAction.canceled -= instance.OnSpecialAction;
         }
 
         /// <summary>
@@ -308,5 +340,12 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSelect(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SpecialAction" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSpecialAction(InputAction.CallbackContext context);
     }
 }

@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
     {
         //Prepare and Show UI
         uIManager.Battlefield_UnitsDeploy_Canvas(PlayerUnits);
+        battlefieldManager.SetPlayerInitialUnits(PlayerUnits);
     }
 
 

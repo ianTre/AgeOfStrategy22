@@ -11,6 +11,7 @@ public class GridController : MonoBehaviour
     public GameObject gridPrefab;
     public Vector3 leftBottomLocation = new Vector3(0, 0, 0);
     public GameObject[,] gridArray;
+    public List<GridCell> cellsList;
     public int startX = 0;
     public int startY = 0;
     public int endX = 0;
@@ -18,6 +19,7 @@ public class GridController : MonoBehaviour
 
     private void Awake()
     {
+        cellsList = new List<GridCell>();
         gridArray = new GameObject[columns, rows];
         if (gridPrefab)
             GenerateGrid();
@@ -48,9 +50,9 @@ public class GridController : MonoBehaviour
                 obj.GetComponent<GridCell>().x = i;
                 obj.GetComponent<GridCell>().y = j;
                 gridArray[i, j] = obj;
-
                 var isOffset = (i % 2 == 0 && j % 2 != 0) || (i % 2 != 0 && j % 2 == 0);
                 obj.GetComponent<GridCell>().Init(isOffset);
+                cellsList.Add(obj.GetComponent<GridCell>());
             }
         }
     }

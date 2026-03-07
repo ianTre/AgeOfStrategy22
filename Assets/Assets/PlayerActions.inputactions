@@ -14,6 +14,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SpecialAction",
+                    "type": "Button",
+                    "id": "b601a217-f4a7-41cc-ba5e-e5202b0c9f1c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -25,6 +34,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "047ba6e4-4008-4965-96a4-d637eb8d1fc8",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpecialAction",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -34,11 +34,12 @@ public class InputManager : MonoBehaviour
 
     private void OnEnable()
     {
-        playerActions.BattlefieldActions.Select.performed += OnClick;
-        playerActions.BattlefieldActions.Select.canceled += OnRelease;
+        playerActions.BattlefieldActions.Select.performed += OnMouseLeftClick;
+        playerActions.BattlefieldActions.Select.canceled += OnMouseLeftClickRelease;
+        playerActions.BattlefieldActions.SpecialAction.performed += OnSpecialAction;
     }
 
-    private void OnRelease(InputAction.CallbackContext context)
+    private void OnMouseLeftClickRelease(InputAction.CallbackContext context)
     {
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit))
@@ -47,9 +48,14 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    private void OnClick(InputAction.CallbackContext context)
+    private void OnMouseLeftClick(InputAction.CallbackContext context)
     {
 
+    }
+
+    private void OnSpecialAction(InputAction.CallbackContext context)
+    {
+        BattlefieldManager.instance.SpecialAction();
     }
 
 
@@ -91,6 +97,5 @@ public class InputManager : MonoBehaviour
         GameObject newSelectedObject = hit.transform.gameObject;
         gameManager.ClickOnNewObject(newSelectedObject);
     }
-
 
 }

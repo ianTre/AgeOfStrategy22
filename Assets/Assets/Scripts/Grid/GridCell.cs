@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,7 @@ public class GridCell : MonoBehaviour , IMouseActionable
     public int y = 0;
     public Material Normal, Offset, Highligh;
     public bool isOccupied = false;
-    public GameObject unitPrefab;
+    public Unit unit;
 
     public bool IsSelected => isSelected;
 
@@ -45,20 +46,23 @@ public class GridCell : MonoBehaviour , IMouseActionable
 
     public void Select()
     {
-        this.isSelected = true;
-        this.Highlight();
-        if(this.unitPrefab != null)
+        if (this.unit != null)
         {
-            unitPrefab.GetComponent<Unit>().SelectByPass();
+            unit.GetComponent<Unit>().SelectByPass();
         }
+        else
+        {
+            this.isSelected = true;
+            this.Highlight();
+        }
+
     }
 
-    public bool TryAddUnit(GameObject unitPrefab)
+    public bool TryOcuppieCell()
     {
         if (isOccupied)
             return false;
         isOccupied = true;
-        this.unitPrefab = unitPrefab;
         return true;
     }
 
@@ -67,6 +71,8 @@ public class GridCell : MonoBehaviour , IMouseActionable
     {
         isSelected = false;
         this.UnHighlight();
+        if (this.unit != null)
+            unit.GetComponent<Unit>().Deselect();
     }
 
     public void Hover()
@@ -80,6 +86,18 @@ public class GridCell : MonoBehaviour , IMouseActionable
             this.UnHighlight();
     }
 
+    internal void RemoveUnit(Unit unit)
+    {
+        if (this.unit == unit)
+        { 
+            this.unit = null;
+            this.isOccupied = false;
+        }
+    }
 
-
+    internal void OcuppyNewUnit(Unit unit)
+    {
+        this.unit = unit;
+        this.isOccupied = true;
+    }
 }
