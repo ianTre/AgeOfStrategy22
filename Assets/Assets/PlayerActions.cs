@@ -109,6 +109,15 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""GiveOrder"",
+                    ""type"": ""Button"",
+                    ""id"": ""62911326-d145-4d31-8c53-95e61f453159"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -133,6 +142,17 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""action"": ""SpecialAction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c410a4b2-834f-47cd-9972-71e89ad2c818"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GiveOrder"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -143,6 +163,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         m_BattlefieldActions = asset.FindActionMap("BattlefieldActions", throwIfNotFound: true);
         m_BattlefieldActions_Select = m_BattlefieldActions.FindAction("Select", throwIfNotFound: true);
         m_BattlefieldActions_SpecialAction = m_BattlefieldActions.FindAction("SpecialAction", throwIfNotFound: true);
+        m_BattlefieldActions_GiveOrder = m_BattlefieldActions.FindAction("GiveOrder", throwIfNotFound: true);
     }
 
     ~@PlayerActions()
@@ -225,6 +246,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     private List<IBattlefieldActionsActions> m_BattlefieldActionsActionsCallbackInterfaces = new List<IBattlefieldActionsActions>();
     private readonly InputAction m_BattlefieldActions_Select;
     private readonly InputAction m_BattlefieldActions_SpecialAction;
+    private readonly InputAction m_BattlefieldActions_GiveOrder;
     /// <summary>
     /// Provides access to input actions defined in input action map "BattlefieldActions".
     /// </summary>
@@ -244,6 +266,10 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "BattlefieldActions/SpecialAction".
         /// </summary>
         public InputAction @SpecialAction => m_Wrapper.m_BattlefieldActions_SpecialAction;
+        /// <summary>
+        /// Provides access to the underlying input action "BattlefieldActions/GiveOrder".
+        /// </summary>
+        public InputAction @GiveOrder => m_Wrapper.m_BattlefieldActions_GiveOrder;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -276,6 +302,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @SpecialAction.started += instance.OnSpecialAction;
             @SpecialAction.performed += instance.OnSpecialAction;
             @SpecialAction.canceled += instance.OnSpecialAction;
+            @GiveOrder.started += instance.OnGiveOrder;
+            @GiveOrder.performed += instance.OnGiveOrder;
+            @GiveOrder.canceled += instance.OnGiveOrder;
         }
 
         /// <summary>
@@ -293,6 +322,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @SpecialAction.started -= instance.OnSpecialAction;
             @SpecialAction.performed -= instance.OnSpecialAction;
             @SpecialAction.canceled -= instance.OnSpecialAction;
+            @GiveOrder.started -= instance.OnGiveOrder;
+            @GiveOrder.performed -= instance.OnGiveOrder;
+            @GiveOrder.canceled -= instance.OnGiveOrder;
         }
 
         /// <summary>
@@ -347,5 +379,12 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSpecialAction(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "GiveOrder" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnGiveOrder(InputAction.CallbackContext context);
     }
 }

@@ -23,7 +23,7 @@ public class ManAtArmsAnimationController : MonoBehaviour
     IEnumerator CheckAnimationLoops(int nLoops)
     {
         hasChangedToIdle = false;
-        Debug.Log("Will loop for " + nLoops + " times.");
+        //Debug.Log("Will loop for " + nLoops + " times.");
         // Wait until the animation state is playing
         while (!anim.GetCurrentAnimatorStateInfo(0).IsName(IdleAnimationLongStateName))
         {
@@ -42,12 +42,12 @@ public class ManAtArmsAnimationController : MonoBehaviour
             {
                 currentLoop = loopsCompleted;
                 nLoops--;
-                Debug.Log("Loop completed. Remaining loops: " + nLoops);
+                //Debug.Log("Loop completed. Remaining loops: " + nLoops);
             }
 
             if (nLoops == 0)
             {
-                Debug.Log("Target loops reached. Transitioning to next state/stopping.");
+                //Debug.Log("Target loops reached. Transitioning to next state/stopping.");
                 currentLoop = 0; // Reset loop count if you want to check for the next state
                 anim.SetTrigger("IdleHoldingTrigger");
                 hasChangedToIdle = true;

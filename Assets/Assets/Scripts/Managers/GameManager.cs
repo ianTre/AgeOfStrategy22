@@ -2,6 +2,7 @@ using Assets.Assets.Scripts;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -10,7 +11,7 @@ public class GameManager : MonoBehaviour
     private InitialUnitsSetup initialUnitsSetup;
     private UIManager uIManager;
     private GameObject lastSelectedObject;
-
+    public static GameManager instance;
 
     //Nedded References
     BattlefieldManager battlefieldManager;
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
         gameStage = GameStages.Start;
         
 
@@ -75,11 +77,11 @@ public class GameManager : MonoBehaviour
                 actionable.Select();    
         }
 
-        if( gameStage == GameStages.PlayerDeploy_UnitSelected)
+        if( gameStage == GameStages.PlayerDeploy_CardSelected)
         {
             if (newSelectedObject.tag == "Grid")
             {
-                gameStage = GameStages.PlayerDeploy_UnitSelected_CellSelected;
+                gameStage = GameStages.PlayerDeploy_CardSelected_CellSelected;
                 newSelectedObject.TryGetComponent<GridCell>(out GridCell gridCell);
                 if (gridCell != null)
                 {
@@ -92,7 +94,42 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        if( gameStage == GameStages.PlayerTurn || gameStage == GameStages.PlayerTurn_UnitSelected)
+        {
+            if (lastActionable != null)
+                lastActionable.Deselect();
+            if (actionable != null)
+                actionable.Select();
+            
+            Unit unit = battlefieldManager.PlayerUnits.Find(u => u.hasBeingSelected);
+            if(unit != null)
+            {
+                gameStage = GameStages.PlayerTurn_UnitSelected;
+            }
+            else
+            {
+                gameStage = GameStages.PlayerTurn;
+            }
+        }
+
         lastSelectedObject = newSelectedObject;
+    }
+
+    public void RightClickOnNewObject(GameObject newSelectedObject)
+    {
+        newSelectedObject = FindActionableRecursibly(newSelectedObject);
+        newSelectedObject.TryGetComponent<IMouseActionable>(out IMouseActionable actionable);
+
+        if (gameStage == GameStages.PlayerTurn_UnitSelected)
+        {
+            if (actionable != null)
+                actionable.Action();
+        }
+    }
+
+    public void UpdateGameStage(GameStages gameStages)
+    {
+
     }
 
     private GameObject FindActionableRecursibly(GameObject newSelectedObject)
@@ -112,22 +149,27 @@ public class GameManager : MonoBehaviour
 
     public void ClickOnCardDeploy(DeployCardController deployCardController)
     {
-        gameStage = GameStages.PlayerDeploy_UnitSelected;
+        gameStage = GameStages.PlayerDeploy_CardSelected;
         Debug.Log($"Card {deployCardController.unitsInitialData.name} was clicked");
         battlefieldManager.SetUnitToCreate(deployCardController);
     }
 
-
+    public void SpecialAction()
+    {
+        gameStage = GameStages.PlayerTurn;
+    }
 
 
     public enum GameStages
     {
         Start = 0 ,
         PlayerDeploy = 10 ,
-        PlayerDeploy_UnitSelected = 11,
-        PlayerDeploy_UnitSelected_CellSelected = 12,
+        PlayerDeploy_CardSelected = 11,
+        PlayerDeploy_CardSelected_CellSelected = 12,
         EnemyDeploy = 20 ,
         PlayerTurn = 100 , 
+        PlayerTurn_UnitSelected = 110,
+        PlayerTurn_UnitSelected_DestinySelected = 111,
         EnemyTurn = 200 ,
 
     }

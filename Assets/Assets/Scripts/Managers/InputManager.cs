@@ -37,14 +37,23 @@ public class InputManager : MonoBehaviour
         playerActions.BattlefieldActions.Select.performed += OnMouseLeftClick;
         playerActions.BattlefieldActions.Select.canceled += OnMouseLeftClickRelease;
         playerActions.BattlefieldActions.SpecialAction.performed += OnSpecialAction;
+        playerActions.BattlefieldActions.GiveOrder.performed += OnMouseRightClick;
+        playerActions.BattlefieldActions.GiveOrder.canceled += OnMouseRightClickRelease;
     }
+
+
 
     private void OnMouseLeftClickRelease(InputAction.CallbackContext context)
     {
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            SelectTargetClicked(hit);
+            var selectedObject = SelectTargetClicked(hit);
+            if(selectedObject == null)
+            {
+                return;
+            }
+            gameManager.ClickOnNewObject(selectedObject);
         }
     }
 
@@ -55,7 +64,8 @@ public class InputManager : MonoBehaviour
 
     private void OnSpecialAction(InputAction.CallbackContext context)
     {
-        BattlefieldManager.instance.SpecialAction();
+        //BattlefieldManager.instance.SpecialAction();
+        gameManager.SpecialAction();
     }
 
 
@@ -87,15 +97,33 @@ public class InputManager : MonoBehaviour
         lastHoveredObject = hit.transform.gameObject;
     }
 
-    private void SelectTargetClicked(RaycastHit hit)
+    private GameObject SelectTargetClicked(RaycastHit hit)
     {
         if (lastSelectedObject == hit.transform.gameObject)
         {
-            return;
+            return null;
         }
 
-        GameObject newSelectedObject = hit.transform.gameObject;
-        gameManager.ClickOnNewObject(newSelectedObject);
+        return hit.transform.gameObject;
+        
+    }
+
+    private void OnMouseRightClickRelease(InputAction.CallbackContext context)
+    {
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            var selectedObject = SelectTargetClicked(hit);
+            if (selectedObject == null)
+            {
+                return;
+            }
+            gameManager.RightClickOnNewObject(selectedObject);
+        }
+    }
+
+    private void OnMouseRightClick(InputAction.CallbackContext context)
+    {
     }
 
 }

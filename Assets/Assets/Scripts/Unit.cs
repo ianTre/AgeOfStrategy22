@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
+using static GameManager;
 
-public class Unit : MonoBehaviour , IMouseActionable
+public class Unit : MonoBehaviour, IMouseActionable
 {
     public UnitData data;
     public bool hasBeingSelected = false;
@@ -24,7 +27,7 @@ public class Unit : MonoBehaviour , IMouseActionable
 
     public void Hover()
     {
-        
+
     }
 
     public void Select()
@@ -32,6 +35,30 @@ public class Unit : MonoBehaviour , IMouseActionable
         CreateSelectionLight();
         this.hasBeingSelected = true;
         BattlefieldManager.instance.SelectANewUnit(this);
+
+
+        GameStages stage = GameManager.instance.gameStage;
+        switch (stage)
+        {
+            case GameStages.Start:
+            case GameStages.PlayerDeploy:
+            case GameStages.PlayerDeploy_CardSelected:
+            case GameStages.PlayerDeploy_CardSelected_CellSelected:
+                break;
+            case GameStages.EnemyDeploy:
+                break;
+            case GameStages.PlayerTurn:
+                break;
+            case GameStages.PlayerTurn_UnitSelected:
+                break;
+            case GameStages.PlayerTurn_UnitSelected_DestinySelected:
+                break;
+            case GameStages.EnemyTurn:
+                break;
+            default:
+                break;
+        }
+
     }
 
     public void SelectByPass()
@@ -41,13 +68,13 @@ public class Unit : MonoBehaviour , IMouseActionable
 
     public void UnHover()
     {
-        
+
     }
 
     public void CreateSelectionLight()
     {
         if (!this.hasBeingSelected)
-            selectionLight = Instantiate(BattlefieldManager.instance.selectionLightPrefab, this.transform.position , Quaternion.identity);
+            selectionLight = Instantiate(BattlefieldManager.instance.selectionLightPrefab, this.transform.position, Quaternion.identity);
     }
 
     public void InitUnit(UnitData data, GridCell cell)
@@ -62,11 +89,13 @@ public class Unit : MonoBehaviour , IMouseActionable
         if (newCell.isOccupied)
             return;
         this.path = BattlefieldManager.instance.FindShortestPath(this.cell, newCell);
-        this.cell.RemoveUnit(this); //Clean Old Cell
-        this.cell = newCell;
-        this.cell.OcuppyNewUnit(this); //Assign new Cell
-        StartCoroutine(MoveToNewPosition(path));
-
+        if (path != null && path.Count > 0)
+        {
+            this.cell.RemoveUnit(this); //Clean Old Cell
+            this.cell = newCell;
+            this.cell.OcuppyNewUnit(this); //Assign new Cell
+            StartCoroutine(MoveToNewPosition(path));
+        }
     }
 
     public IEnumerator MoveToNewPosition(List<GridCell> path)
@@ -109,12 +138,17 @@ public class Unit : MonoBehaviour , IMouseActionable
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+    }
+
+    public void Action()
+    {
+        throw new System.NotImplementedException();
     }
 }

@@ -55,7 +55,11 @@ public class GridCell : MonoBehaviour , IMouseActionable
             this.isSelected = true;
             this.Highlight();
         }
+    }
 
+    public void ShowStepOnMap()
+    {
+        
     }
 
     public bool TryOcuppieCell()
@@ -99,5 +103,22 @@ public class GridCell : MonoBehaviour , IMouseActionable
     {
         this.unit = unit;
         this.isOccupied = true;
+    }
+
+    public void Action()
+    {
+        if(unit != null)
+        {
+            unit.Action();
+        }
+        else
+        {
+            DoTheAction();
+        }
+    }
+
+    private void DoTheAction()
+    {
+        BattlefieldManager.instance.MoveToSelectedCell(this);
     }
 }

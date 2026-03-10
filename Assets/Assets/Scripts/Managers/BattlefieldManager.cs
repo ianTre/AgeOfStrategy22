@@ -5,12 +5,13 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class BattlefieldManager : MonoBehaviour
 {
     List<UnitModel> PlayerInitialUnits;
     List<UnitModel> EnemyInitialUnits;
-    List<Unit> PlayerUnits;
+    public List<Unit> PlayerUnits;
     public List<Unit> EnemyUnits;
     private GridController gridController;
     private UnitData intendedUnitToCreate;
@@ -85,27 +86,34 @@ public class BattlefieldManager : MonoBehaviour
             selectedUnits.ForEach(u => u.Deselect());
     }
 
-    public bool TryMoveUnit(Unit unit , GridCell destiny)
+    public void MovementCellSelected(GridCell destiny)
     {
-        if (destiny.isOccupied)
-            return false;
-
-        //TO BE CHANGED
-        return true;
+        Unit selectedUnit = PlayerUnits.Find(u => u.hasBeingSelected);
+        if(selectedUnit == null)
+            return;
+        if(destiny.isOccupied)
+            return;
+        selectedUnit.MoveToNewCell(destiny);
     }
 
-    internal List<GridCell> FindShortestPath(GridCell cell, GridCell newCell)
+    public List<GridCell> FindShortestPath(GridCell origin, GridCell destiniy)
     {
-        var list = new List<GridCell>();
-        //TO BE CHANGED
-        GameObject gameObject1 = gridController.gridArray[cell.x, cell.y + 1];
-        GameObject gameObject2 = gridController.gridArray[cell.x, cell.y + 2];
-        GridCell gridCell1 = gameObject1.GetComponent<GridCell>();
-        GridCell gridCell2 = gameObject2.GetComponent<GridCell>();
-        list.Add(gridCell1);
-        list.Add(gridCell2);
-        //HARDCODED
-        return list;
+        return gridController.FindShortestPath(origin, destiniy);
+    }
+
+    public void TestDirection(GridCell initial , GridCell destiny, int step , int direction)
+    {
+        
+    }
+
+    public void MoveToSelectedCell(GridCell destiny)
+    {
+        if(destiny.isOccupied)
+            return;
+        Unit selectedUnit = PlayerUnits.Find(u => u.hasBeingSelected);
+        if(selectedUnit == null)
+            return;
+        selectedUnit.MoveToNewCell(destiny);
     }
 
 

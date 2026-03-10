@@ -8,4 +8,5 @@ public interface IMouseActionable
     public void Deselect();
     public void Hover();
     public void UnHover();
+    public void Action();
 }
