@@ -70,7 +70,7 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: b03ac6ace17da0343b0ed47403b4e155, type: 2}
     - target: {fileID: 8769181917337379994, guid: 1db0fe75ae318724686ca378176fbd94, type: 3}
       propertyPath: m_ApplyRootMotion
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -117,5 +117,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 0}
-  isSelected: 0
+  hasBeingSelected: 0
+  number: 0
   cell: {fileID: 0}
+  path: []
+  moveSpeed: 3
+  stoppingDistance: 0.05

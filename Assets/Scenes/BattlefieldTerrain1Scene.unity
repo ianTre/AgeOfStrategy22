@@ -2548,6 +2548,10 @@ MonoBehaviour:
     playerAmmount: 15
     enemyAmmount: 12
     unitData: {fileID: 11400000, guid: cf447acd2c531cf47aa2f3347a0c8ef8, type: 2}
+  - name: MaceWarrior
+    playerAmmount: 15
+    enemyAmmount: 12
+    unitData: {fileID: 11400000, guid: 59d6e9d300439b34782ccf697d24b196, type: 2}
 --- !u!114 &1809800795
 MonoBehaviour:
   m_ObjectHideFlags: 0
