@@ -52,6 +52,7 @@ public class BattlefieldManager : MonoBehaviour
         unit.InitUnit(intendedUnitToCreate, gridCell);
         gridCell.OcuppyNewUnit(unit);
         PlayerUnits.Add(unit);
+        EnemyUnits.Add(unit);
         lastClickedCard.DisableCard();
         return true;
     }
