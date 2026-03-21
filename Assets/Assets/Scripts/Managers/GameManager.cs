@@ -159,6 +159,36 @@ public class GameManager : MonoBehaviour
         gameStage = GameStages.PlayerTurn;
     }
 
+    public void SpecialOrder1()
+    {
+        battlefieldManager.SpecialOrder1();
+    }
+
+    public void SpecialOrder2()
+    {
+        battlefieldManager.SpecialOrder2();
+    }
+
+    public void SpecialOrder3()
+    {
+        battlefieldManager.SpecialOrder3();
+    }
+
+    public void SpecialOrder4()
+    {
+        battlefieldManager.SpecialOrder4();
+    }
+
+    public void SpecialOrder5()
+    {
+        battlefieldManager.SpecialOrder5();
+    }
+
+    public void SpecialOrder6()
+    {
+        battlefieldManager.SpecialOrder6();
+    }
+
 
     public enum GameStages
     {

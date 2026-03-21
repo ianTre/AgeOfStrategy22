@@ -102,6 +102,15 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""GiveOrder"",
+                    ""type"": ""Button"",
+                    ""id"": ""62911326-d145-4d31-8c53-95e61f453159"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""SpecialAction"",
                     ""type"": ""Button"",
                     ""id"": ""b601a217-f4a7-41cc-ba5e-e5202b0c9f1c"",
@@ -111,9 +120,54 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""GiveOrder"",
+                    ""name"": ""SpecialOrder1"",
                     ""type"": ""Button"",
-                    ""id"": ""62911326-d145-4d31-8c53-95e61f453159"",
+                    ""id"": ""d7931bcb-1f45-475b-b579-bde70390dcc5"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SpecialOrder2"",
+                    ""type"": ""Button"",
+                    ""id"": ""2bf26809-8f8d-42c0-95ac-c71b7dab0128"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SpecialOrder3"",
+                    ""type"": ""Button"",
+                    ""id"": ""8ce6e852-22bf-4254-8f2e-a25ed6b44fcd"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SpecialOrder4"",
+                    ""type"": ""Button"",
+                    ""id"": ""faa49fb0-3fb2-48d1-a154-190de1cb239a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SpecialOrder5"",
+                    ""type"": ""Button"",
+                    ""id"": ""b776aed6-6a6a-478f-a51c-3c13346507d1"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SpecialOrder6"",
+                    ""type"": ""Button"",
+                    ""id"": ""1a7a552e-4513-49ce-81c4-08d52511fe93"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -153,6 +207,72 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""action"": ""GiveOrder"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""552cbb5e-5920-441f-b4c2-1a9ab0793fc7"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SpecialOrder1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3de1b03a-23ea-4c9a-a6f7-f2eae6c10cb9"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SpecialOrder2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""db15b41a-745b-44c6-93a7-6f7fffacb33a"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SpecialOrder3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""25cc791c-6348-48ed-b736-fe5ed2b330da"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SpecialOrder4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f9319ace-75fb-4bee-9936-da3514ae6240"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SpecialOrder5"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""00a1f5d4-892e-479d-91e3-ef479fc5a10f"",
+                    ""path"": ""<Keyboard>/6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SpecialOrder6"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -162,8 +282,14 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         // BattlefieldActions
         m_BattlefieldActions = asset.FindActionMap("BattlefieldActions", throwIfNotFound: true);
         m_BattlefieldActions_Select = m_BattlefieldActions.FindAction("Select", throwIfNotFound: true);
-        m_BattlefieldActions_SpecialAction = m_BattlefieldActions.FindAction("SpecialAction", throwIfNotFound: true);
         m_BattlefieldActions_GiveOrder = m_BattlefieldActions.FindAction("GiveOrder", throwIfNotFound: true);
+        m_BattlefieldActions_SpecialAction = m_BattlefieldActions.FindAction("SpecialAction", throwIfNotFound: true);
+        m_BattlefieldActions_SpecialOrder1 = m_BattlefieldActions.FindAction("SpecialOrder1", throwIfNotFound: true);
+        m_BattlefieldActions_SpecialOrder2 = m_BattlefieldActions.FindAction("SpecialOrder2", throwIfNotFound: true);
+        m_BattlefieldActions_SpecialOrder3 = m_BattlefieldActions.FindAction("SpecialOrder3", throwIfNotFound: true);
+        m_BattlefieldActions_SpecialOrder4 = m_BattlefieldActions.FindAction("SpecialOrder4", throwIfNotFound: true);
+        m_BattlefieldActions_SpecialOrder5 = m_BattlefieldActions.FindAction("SpecialOrder5", throwIfNotFound: true);
+        m_BattlefieldActions_SpecialOrder6 = m_BattlefieldActions.FindAction("SpecialOrder6", throwIfNotFound: true);
     }
 
     ~@PlayerActions()
@@ -245,8 +371,14 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_BattlefieldActions;
     private List<IBattlefieldActionsActions> m_BattlefieldActionsActionsCallbackInterfaces = new List<IBattlefieldActionsActions>();
     private readonly InputAction m_BattlefieldActions_Select;
-    private readonly InputAction m_BattlefieldActions_SpecialAction;
     private readonly InputAction m_BattlefieldActions_GiveOrder;
+    private readonly InputAction m_BattlefieldActions_SpecialAction;
+    private readonly InputAction m_BattlefieldActions_SpecialOrder1;
+    private readonly InputAction m_BattlefieldActions_SpecialOrder2;
+    private readonly InputAction m_BattlefieldActions_SpecialOrder3;
+    private readonly InputAction m_BattlefieldActions_SpecialOrder4;
+    private readonly InputAction m_BattlefieldActions_SpecialOrder5;
+    private readonly InputAction m_BattlefieldActions_SpecialOrder6;
     /// <summary>
     /// Provides access to input actions defined in input action map "BattlefieldActions".
     /// </summary>
@@ -263,13 +395,37 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Select => m_Wrapper.m_BattlefieldActions_Select;
         /// <summary>
+        /// Provides access to the underlying input action "BattlefieldActions/GiveOrder".
+        /// </summary>
+        public InputAction @GiveOrder => m_Wrapper.m_BattlefieldActions_GiveOrder;
+        /// <summary>
         /// Provides access to the underlying input action "BattlefieldActions/SpecialAction".
         /// </summary>
         public InputAction @SpecialAction => m_Wrapper.m_BattlefieldActions_SpecialAction;
         /// <summary>
-        /// Provides access to the underlying input action "BattlefieldActions/GiveOrder".
+        /// Provides access to the underlying input action "BattlefieldActions/SpecialOrder1".
         /// </summary>
-        public InputAction @GiveOrder => m_Wrapper.m_BattlefieldActions_GiveOrder;
+        public InputAction @SpecialOrder1 => m_Wrapper.m_BattlefieldActions_SpecialOrder1;
+        /// <summary>
+        /// Provides access to the underlying input action "BattlefieldActions/SpecialOrder2".
+        /// </summary>
+        public InputAction @SpecialOrder2 => m_Wrapper.m_BattlefieldActions_SpecialOrder2;
+        /// <summary>
+        /// Provides access to the underlying input action "BattlefieldActions/SpecialOrder3".
+        /// </summary>
+        public InputAction @SpecialOrder3 => m_Wrapper.m_BattlefieldActions_SpecialOrder3;
+        /// <summary>
+        /// Provides access to the underlying input action "BattlefieldActions/SpecialOrder4".
+        /// </summary>
+        public InputAction @SpecialOrder4 => m_Wrapper.m_BattlefieldActions_SpecialOrder4;
+        /// <summary>
+        /// Provides access to the underlying input action "BattlefieldActions/SpecialOrder5".
+        /// </summary>
+        public InputAction @SpecialOrder5 => m_Wrapper.m_BattlefieldActions_SpecialOrder5;
+        /// <summary>
+        /// Provides access to the underlying input action "BattlefieldActions/SpecialOrder6".
+        /// </summary>
+        public InputAction @SpecialOrder6 => m_Wrapper.m_BattlefieldActions_SpecialOrder6;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -299,12 +455,30 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @Select.started += instance.OnSelect;
             @Select.performed += instance.OnSelect;
             @Select.canceled += instance.OnSelect;
-            @SpecialAction.started += instance.OnSpecialAction;
-            @SpecialAction.performed += instance.OnSpecialAction;
-            @SpecialAction.canceled += instance.OnSpecialAction;
             @GiveOrder.started += instance.OnGiveOrder;
             @GiveOrder.performed += instance.OnGiveOrder;
             @GiveOrder.canceled += instance.OnGiveOrder;
+            @SpecialAction.started += instance.OnSpecialAction;
+            @SpecialAction.performed += instance.OnSpecialAction;
+            @SpecialAction.canceled += instance.OnSpecialAction;
+            @SpecialOrder1.started += instance.OnSpecialOrder1;
+            @SpecialOrder1.performed += instance.OnSpecialOrder1;
+            @SpecialOrder1.canceled += instance.OnSpecialOrder1;
+            @SpecialOrder2.started += instance.OnSpecialOrder2;
+            @SpecialOrder2.performed += instance.OnSpecialOrder2;
+            @SpecialOrder2.canceled += instance.OnSpecialOrder2;
+            @SpecialOrder3.started += instance.OnSpecialOrder3;
+            @SpecialOrder3.performed += instance.OnSpecialOrder3;
+            @SpecialOrder3.canceled += instance.OnSpecialOrder3;
+            @SpecialOrder4.started += instance.OnSpecialOrder4;
+            @SpecialOrder4.performed += instance.OnSpecialOrder4;
+            @SpecialOrder4.canceled += instance.OnSpecialOrder4;
+            @SpecialOrder5.started += instance.OnSpecialOrder5;
+            @SpecialOrder5.performed += instance.OnSpecialOrder5;
+            @SpecialOrder5.canceled += instance.OnSpecialOrder5;
+            @SpecialOrder6.started += instance.OnSpecialOrder6;
+            @SpecialOrder6.performed += instance.OnSpecialOrder6;
+            @SpecialOrder6.canceled += instance.OnSpecialOrder6;
         }
 
         /// <summary>
@@ -319,12 +493,30 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @Select.started -= instance.OnSelect;
             @Select.performed -= instance.OnSelect;
             @Select.canceled -= instance.OnSelect;
-            @SpecialAction.started -= instance.OnSpecialAction;
-            @SpecialAction.performed -= instance.OnSpecialAction;
-            @SpecialAction.canceled -= instance.OnSpecialAction;
             @GiveOrder.started -= instance.OnGiveOrder;
             @GiveOrder.performed -= instance.OnGiveOrder;
             @GiveOrder.canceled -= instance.OnGiveOrder;
+            @SpecialAction.started -= instance.OnSpecialAction;
+            @SpecialAction.performed -= instance.OnSpecialAction;
+            @SpecialAction.canceled -= instance.OnSpecialAction;
+            @SpecialOrder1.started -= instance.OnSpecialOrder1;
+            @SpecialOrder1.performed -= instance.OnSpecialOrder1;
+            @SpecialOrder1.canceled -= instance.OnSpecialOrder1;
+            @SpecialOrder2.started -= instance.OnSpecialOrder2;
+            @SpecialOrder2.performed -= instance.OnSpecialOrder2;
+            @SpecialOrder2.canceled -= instance.OnSpecialOrder2;
+            @SpecialOrder3.started -= instance.OnSpecialOrder3;
+            @SpecialOrder3.performed -= instance.OnSpecialOrder3;
+            @SpecialOrder3.canceled -= instance.OnSpecialOrder3;
+            @SpecialOrder4.started -= instance.OnSpecialOrder4;
+            @SpecialOrder4.performed -= instance.OnSpecialOrder4;
+            @SpecialOrder4.canceled -= instance.OnSpecialOrder4;
+            @SpecialOrder5.started -= instance.OnSpecialOrder5;
+            @SpecialOrder5.performed -= instance.OnSpecialOrder5;
+            @SpecialOrder5.canceled -= instance.OnSpecialOrder5;
+            @SpecialOrder6.started -= instance.OnSpecialOrder6;
+            @SpecialOrder6.performed -= instance.OnSpecialOrder6;
+            @SpecialOrder6.canceled -= instance.OnSpecialOrder6;
         }
 
         /// <summary>
@@ -373,6 +565,13 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSelect(InputAction.CallbackContext context);
         /// <summary>
+        /// Method invoked when associated input action "GiveOrder" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnGiveOrder(InputAction.CallbackContext context);
+        /// <summary>
         /// Method invoked when associated input action "SpecialAction" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
@@ -380,11 +579,46 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSpecialAction(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "GiveOrder" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "SpecialOrder1" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnGiveOrder(InputAction.CallbackContext context);
+        void OnSpecialOrder1(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SpecialOrder2" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSpecialOrder2(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SpecialOrder3" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSpecialOrder3(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SpecialOrder4" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSpecialOrder4(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SpecialOrder5" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSpecialOrder5(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SpecialOrder6" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSpecialOrder6(InputAction.CallbackContext context);
     }
 }

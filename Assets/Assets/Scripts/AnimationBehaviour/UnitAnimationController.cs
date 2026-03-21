@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class ManAtArmsAnimationController : MonoBehaviour
+public class UnitAnimationController : MonoBehaviour
 {
     private Animator anim;
     public string IdleAnimationLongStateName = "IdleStanding";
@@ -10,6 +11,10 @@ public class ManAtArmsAnimationController : MonoBehaviour
     // The target number of loops
     public int targetLoopCount = 3;
     public bool hasChangedToIdle = false;
+    /*public bool triggerRunning = false;
+    public bool triggerAttack = false;
+    public bool triggerDefend = false;
+    public bool triggerDeath = false;*/
 
     // Start is called before the first frame update
     void Start()
@@ -63,5 +68,25 @@ public class ManAtArmsAnimationController : MonoBehaviour
     {
         if (hasChangedToIdle && anim.GetCurrentAnimatorStateInfo(0).IsName(IdleAnimationLongStateName))
             StartCoroutine(CheckAnimationLoops(Random.Range(1, 6)));
+    }
+
+    public void TriggerRunning()
+    {
+        anim.SetTrigger("RunningTrigger");
+    }
+
+    public void TriggerAttack()
+    {
+        anim.SetTrigger("AttackTrigger");
+    }
+
+    public void TriggerDefend()
+    {
+        anim.SetTrigger("DefenseTrigger");
+    }
+    
+    public void TriggerDeath()
+    {
+        anim.SetTrigger("DeathTrigger");
     }
 }

@@ -86,6 +86,14 @@ public class BattlefieldManager : MonoBehaviour
             selectedUnits.ForEach(u => u.Deselect());
     }
 
+    public Unit ReturnSelectedUnit()
+    {
+        var selectedUnits = PlayerUnits.FindAll(u => u.hasBeingSelected);
+        if (selectedUnits != null && selectedUnits.Count > 0)
+            return selectedUnits[0];
+        return null;
+    }
+
     public void MovementCellSelected(GridCell destiny)
     {
         Unit selectedUnit = PlayerUnits.Find(u => u.hasBeingSelected);
@@ -116,6 +124,44 @@ public class BattlefieldManager : MonoBehaviour
         selectedUnit.MoveToNewCell(destiny);
     }
 
+    public void SpecialOrder1()
+    {
+        Unit selectedUnit = PlayerUnits.Find(u => u.hasBeingSelected);
+        if (selectedUnit == null)
+            return;
+        selectedUnit.GetComponent<UnitAnimationController>().TriggerAttack();
+    }
+
+    public void SpecialOrder2()
+    {
+        Unit selectedUnit = PlayerUnits.Find(u => u.hasBeingSelected);
+        if (selectedUnit == null)
+            return;
+        selectedUnit.GetComponent<UnitAnimationController>().TriggerDefend();
+    }
+
+    public void SpecialOrder3()
+    {
+        Unit selectedUnit = PlayerUnits.Find(u => u.hasBeingSelected);
+        if (selectedUnit == null)
+            return;
+        selectedUnit.GetComponent<UnitAnimationController>().TriggerDeath();
+    }
+
+    public void SpecialOrder4()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SpecialOrder5()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SpecialOrder6()
+    {
+        throw new NotImplementedException();
+    }
 
     public void SpecialAction()
     {

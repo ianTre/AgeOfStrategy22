@@ -37,6 +37,13 @@ public class InputManager : MonoBehaviour
         playerActions.BattlefieldActions.Select.performed += OnMouseLeftClick;
         playerActions.BattlefieldActions.Select.canceled += OnMouseLeftClickRelease;
         playerActions.BattlefieldActions.SpecialAction.performed += OnSpecialAction;
+        playerActions.BattlefieldActions.SpecialOrder1.performed += OnSpecialOrder1;
+        playerActions.BattlefieldActions.SpecialOrder2.performed += OnSpecialOrder2;
+        playerActions.BattlefieldActions.SpecialOrder3.performed += OnSpecialOrder3;
+        playerActions.BattlefieldActions.SpecialOrder4.performed += OnSpecialOrder4;
+        playerActions.BattlefieldActions.SpecialOrder5.performed += OnSpecialOrder5;
+        playerActions.BattlefieldActions.SpecialOrder6.performed += OnSpecialOrder6;
+
         playerActions.BattlefieldActions.GiveOrder.performed += OnMouseRightClick;
         playerActions.BattlefieldActions.GiveOrder.canceled += OnMouseRightClickRelease;
     }
@@ -68,7 +75,41 @@ public class InputManager : MonoBehaviour
         gameManager.SpecialAction();
     }
 
+    private void OnSpecialOrder1(InputAction.CallbackContext context)
+    {
+        //BattlefieldManager.instance.SpecialAction();
+        gameManager.SpecialOrder1();
+    }
 
+    private void OnSpecialOrder2(InputAction.CallbackContext context)
+    {
+        //BattlefieldManager.instance.SpecialAction();
+        gameManager.SpecialOrder2();
+    }
+
+    private void OnSpecialOrder3(InputAction.CallbackContext context)
+    {
+        //BattlefieldManager.instance.SpecialAction();
+        gameManager.SpecialOrder3();
+    }
+
+    private void OnSpecialOrder4(InputAction.CallbackContext context)
+    {
+        //BattlefieldManager.instance.SpecialAction();
+        gameManager.SpecialOrder4();
+    }
+
+    private void OnSpecialOrder5(InputAction.CallbackContext context)
+    {
+        //BattlefieldManager.instance.SpecialAction();
+        gameManager.SpecialOrder5();
+    }
+
+    private void OnSpecialOrder6(InputAction.CallbackContext context)
+    {
+        //BattlefieldManager.instance.SpecialAction();
+        gameManager.SpecialOrder6();
+    }
 
     // Update is called once per frame
     void Update()

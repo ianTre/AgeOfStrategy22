@@ -16,6 +16,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "GiveOrder",
+                    "type": "Button",
+                    "id": "62911326-d145-4d31-8c53-95e61f453159",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "SpecialAction",
                     "type": "Button",
                     "id": "b601a217-f4a7-41cc-ba5e-e5202b0c9f1c",
@@ -25,9 +34,54 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "GiveOrder",
+                    "name": "SpecialOrder1",
                     "type": "Button",
-                    "id": "62911326-d145-4d31-8c53-95e61f453159",
+                    "id": "d7931bcb-1f45-475b-b579-bde70390dcc5",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SpecialOrder2",
+                    "type": "Button",
+                    "id": "2bf26809-8f8d-42c0-95ac-c71b7dab0128",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SpecialOrder3",
+                    "type": "Button",
+                    "id": "8ce6e852-22bf-4254-8f2e-a25ed6b44fcd",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SpecialOrder4",
+                    "type": "Button",
+                    "id": "faa49fb0-3fb2-48d1-a154-190de1cb239a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SpecialOrder5",
+                    "type": "Button",
+                    "id": "b776aed6-6a6a-478f-a51c-3c13346507d1",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SpecialOrder6",
+                    "type": "Button",
+                    "id": "1a7a552e-4513-49ce-81c4-08d52511fe93",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -65,6 +119,72 @@
                     "processors": "",
                     "groups": "",
                     "action": "GiveOrder",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "552cbb5e-5920-441f-b4c2-1a9ab0793fc7",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpecialOrder1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3de1b03a-23ea-4c9a-a6f7-f2eae6c10cb9",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpecialOrder2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "db15b41a-745b-44c6-93a7-6f7fffacb33a",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpecialOrder3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "25cc791c-6348-48ed-b736-fe5ed2b330da",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpecialOrder4",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f9319ace-75fb-4bee-9936-da3514ae6240",
+                    "path": "<Keyboard>/5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpecialOrder5",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "00a1f5d4-892e-479d-91e3-ef479fc5a10f",
+                    "path": "<Keyboard>/6",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpecialOrder6",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
