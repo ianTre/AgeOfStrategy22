@@ -2198,7 +2198,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 26e6722f1164c924da5592f38f928910, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -2236,10 +2236,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 0}
   hasBeingSelected: 0
-  number: 0
+  number: 15
   cell: {fileID: 0}
   path: []
-  moveSpeed: 3
+  moveSpeed: 12
   stoppingDistance: 0.05
 --- !u!1 &8482756154077899159
 GameObject:

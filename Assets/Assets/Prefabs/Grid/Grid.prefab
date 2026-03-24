@@ -125,7 +125,7 @@ MonoBehaviour:
   x: 0
   y: 0
   Normal: {fileID: 2100000, guid: 5a71529f031683a4cb0fb7262bb1b137, type: 2}
-  Offset: {fileID: 2100000, guid: 94e8ed0c0d77e704183a963127747390, type: 2}
+  Offset: {fileID: 2100000, guid: 5a71529f031683a4cb0fb7262bb1b137, type: 2}
   Highligh: {fileID: 2100000, guid: 3be208373406e45409d8589f35860577, type: 2}
   isOccupied: 0
   unit: {fileID: 0}

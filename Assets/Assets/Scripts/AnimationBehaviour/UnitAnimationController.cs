@@ -20,12 +20,44 @@ public class UnitAnimationController : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-        // Start a Coroutine to check the loop count
-        targetLoopCount = Random.Range(1,6);
-        StartCoroutine(CheckAnimationLoops(targetLoopCount));
+        
     }
 
-    IEnumerator CheckAnimationLoops(int nLoops)
+
+    // Update is called once per frame
+    void Update()
+    {
+        /*if (hasChangedToIdle && anim.GetCurrentAnimatorStateInfo(0).IsName(IdleAnimationLongStateName))
+            StartCoroutine(CheckAnimationLoops(Random.Range(1, 6)));*/
+    }
+
+    public void TriggerIdle()
+    {
+        anim.SetTrigger("IdleHoldingTrigger");
+    }
+
+    public void TriggerRunning()
+    {
+        anim.SetTrigger("RunningTrigger");
+    }
+
+    public void TriggerAttack()
+    {
+        anim.SetTrigger("AttackTrigger");
+    }
+
+    public void TriggerDefend()
+    {
+        anim.SetTrigger("DefenseTrigger");
+    }
+    
+    public void TriggerDeath()
+    {
+        anim.SetTrigger("DeathTrigger");
+    }
+
+
+    /*IEnumerator CheckAnimationLoops(int nLoops)
     {
         hasChangedToIdle = false;
         //Debug.Log("Will loop for " + nLoops + " times.");
@@ -61,32 +93,6 @@ public class UnitAnimationController : MonoBehaviour
 
             yield return null;
         }
-    }
+    }*/
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (hasChangedToIdle && anim.GetCurrentAnimatorStateInfo(0).IsName(IdleAnimationLongStateName))
-            StartCoroutine(CheckAnimationLoops(Random.Range(1, 6)));
-    }
-
-    public void TriggerRunning()
-    {
-        anim.SetTrigger("RunningTrigger");
-    }
-
-    public void TriggerAttack()
-    {
-        anim.SetTrigger("AttackTrigger");
-    }
-
-    public void TriggerDefend()
-    {
-        anim.SetTrigger("DefenseTrigger");
-    }
-    
-    public void TriggerDeath()
-    {
-        anim.SetTrigger("DeathTrigger");
-    }
 }

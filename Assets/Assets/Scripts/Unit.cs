@@ -16,7 +16,8 @@ public class Unit : MonoBehaviour, IMouseActionable
     public List<GridCell> path;
     private GameObject selectionLight;
     [SerializeField] private float moveSpeed = 3f;       // velocidad en unidades por segundo
-    [SerializeField] private float stoppingDistance = 0.05f; // distancia mínima 
+    [SerializeField] private float rotationSpeed = 5f;   // grados por segundo para rotar suavemente
+    [SerializeField] private float stoppingDistance = 0.05f; // distancia mï¿½nima 
 
     public void Deselect()
     {
@@ -102,33 +103,37 @@ public class Unit : MonoBehaviour, IMouseActionable
     {
         if (path == null || path.Count == 0)
             yield break;
-
+        GetComponent<UnitAnimationController>().TriggerRunning();
         foreach (var gridCell in path)
         {
             if (gridCell == null)
                 continue;
 
             Vector3 target = gridCell.transform.position;
-
-            // Mover hasta la posición objetivo
-            while (Vector3.SqrMagnitude(transform.position - target) > stoppingDistance * stoppingDistance)
+            // Smooth rotation towards target
+            Quaternion targetRot = Quaternion.LookRotation(target - transform.position);
+            float angleThreshold = 1f; // degrees
+            while (Vector3.SqrMagnitude(transform.position - target) > stoppingDistance * stoppingDistance ||
+                   Quaternion.Angle(transform.rotation, targetRot) > angleThreshold)
             {
+                // Rotate towards target
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, rotationSpeed * Time.deltaTime);
+                // Move towards target
                 transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed * Time.deltaTime);
-
-                // Si hay una luz de selección, mantenerla sobre la unidad
                 if (selectionLight != null)
                     selectionLight.transform.position = transform.position;
-
-                yield return null; // esperar hasta el siguiente frame
+                yield return null;
             }
-
-            // Asegurar posición exacta al llegar
+            // Ensure final position and rotation
             transform.position = target;
+            transform.rotation = targetRot;
             if (selectionLight != null)
                 selectionLight.transform.position = transform.position;
-
             yield return null;
+
+
         }
+        GetComponent<UnitAnimationController>().TriggerIdle();
     }
 
 
