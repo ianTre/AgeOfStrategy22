@@ -10,7 +10,7 @@ public class GridCell : MonoBehaviour , IMouseActionable
     public int visited = 1;
     public int x = 0;
     public int y = 0;
-    public Material Normal, Offset, Highligh;
+    public Material Normal, Offset, Highligh, HighlighEnemy;
     public bool isOccupied = false;
     public Unit unit;
 
@@ -34,9 +34,9 @@ public class GridCell : MonoBehaviour , IMouseActionable
         this.GetComponent<MeshRenderer>().material = isOffset ? Offset : Normal;
     }
 
-    public void Highlight()
+    public void Highlight(bool isEnemy)
     {
-        this.GetComponent<MeshRenderer>().material = Highligh;
+        this.GetComponent<MeshRenderer>().material = isEnemy ? HighlighEnemy : Highligh;
     }
 
     public void UnHighlight()
@@ -53,7 +53,7 @@ public class GridCell : MonoBehaviour , IMouseActionable
         else
         {
             this.isSelected = true;
-            this.Highlight();
+            this.Highlight(BattlefieldManager.instance.IsEnemyNearBy(this));
         }
     }
 
@@ -81,7 +81,7 @@ public class GridCell : MonoBehaviour , IMouseActionable
 
     public void Hover()
     {
-        this.Highlight();
+        this.Highlight(BattlefieldManager.instance.IsEnemyNearBy(this));
     }
 
     public void UnHover()
@@ -115,6 +115,12 @@ public class GridCell : MonoBehaviour , IMouseActionable
         {
             DoTheAction();
         }
+    }
+    public bool IsGridCellNearToMe(GridCell gridCell)
+    {
+        bool isNear = this.x == gridCell.x || this.x == (gridCell.x + 1) || this.x == (gridCell.x - 1);
+        isNear = isNear && (this.y == gridCell.y || this.y == (gridCell.y + 1) || this.y == (gridCell.y - 1));
+        return isNear;
     }
 
     private void DoTheAction()
