@@ -100,6 +100,14 @@ public class BattlefieldManager : MonoBehaviour
         return null;
     }
 
+    public bool IsEnemyNearBy(GridCell gridCell)
+    {
+        if (EnemyUnits == null || EnemyUnits.Count == 0) return false;
+
+        var anyNear = EnemyUnits.Exists(u => u.cell.IsGridCellNearToMe(gridCell));
+        return anyNear;
+    }
+
     public void MovementCellSelected(GridCell destiny)
     {
         Unit selectedUnit = PlayerUnits.Find(u => u.hasBeingSelected);
