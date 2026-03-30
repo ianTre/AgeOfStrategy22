@@ -49,6 +49,11 @@ public class BattlefieldManager : MonoBehaviour
             return false;
         GameObject newUnit = Instantiate(intendedUnitToCreate.prefab , gridController.gridArray[x, y].transform.position + new Vector3(0, 0.0f, 0), Quaternion.identity);
         Unit unit = newUnit.GetComponent<Unit>();
+        if(unit == null)
+        {
+            Debug.LogError("BattlefieldManager: The prefab assigned to the DeployCardController does not have a Unit component.");
+            return false;
+        }
         unit.InitUnit(intendedUnitToCreate, gridCell);
         gridCell.OcuppyNewUnit(unit);
         PlayerUnits.Add(unit);
