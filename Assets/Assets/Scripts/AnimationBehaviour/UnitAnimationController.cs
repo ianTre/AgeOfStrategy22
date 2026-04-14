@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.ShaderGraph.Drawing.Inspector.PropertyDrawers;
 using UnityEngine;
 
 public class UnitAnimationController : MonoBehaviour
@@ -15,12 +16,19 @@ public class UnitAnimationController : MonoBehaviour
     public bool triggerAttack = false;
     public bool triggerDefend = false;
     public bool triggerDeath = false;*/
+    private AudioSource soundSource;
+    public AudioClip attackSound;
+    public AudioClip deathSound;
+    public AudioClip hitSound;
+    public AudioClip moveSound;
+    public AudioClip secondaryAttackSound;
+
 
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
-        
+        soundSource = GetComponent<AudioSource>();
     }
 
 
@@ -55,6 +63,40 @@ public class UnitAnimationController : MonoBehaviour
     {
         anim.SetTrigger("DeathTrigger");
     }
+
+    public void PlayAttackSound()
+    {
+        if(attackSound != null)
+            soundSource.clip = attackSound;
+        soundSource.Play();
+    }
+
+    public void PlaySecondaryAttackSound()
+    {
+        if (secondaryAttackSound != null)
+            soundSource.clip = secondaryAttackSound;
+        soundSource.Play();
+    }
+
+    public void PlayHitSound()
+    {
+        if (hitSound!= null)
+            soundSource.clip = hitSound;
+        soundSource.Play();
+    }
+    public void PlayDeathSound()
+    {
+        if (deathSound != null)
+            soundSource.clip = deathSound;
+        soundSource.Play();
+    }
+    public void PlayMovementSound()
+    {
+        if(moveSound != null)
+            soundSource.clip = moveSound;
+        soundSource.Play();
+    }
+
 
 
     /*IEnumerator CheckAnimationLoops(int nLoops)
