@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3915958362508182197, guid: b53c54438110487458c4e7a56b7c47ea, type: 3}
       propertyPath: m_Name
-      value: Spearman
+      value: _Spearman
       objectReference: {fileID: 0}
     - target: {fileID: 4401028174208899087, guid: b53c54438110487458c4e7a56b7c47ea, type: 3}
       propertyPath: m_LocalScale.x
@@ -67,7 +67,7 @@ PrefabInstance:
     - target: {fileID: 7778766701998948981, guid: b53c54438110487458c4e7a56b7c47ea, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 87999d9db5b0aa542834d1e2c3b05d40, type: 2}
+      objectReference: {fileID: 9100000, guid: 2a06f3b395c4c7942a23ec4af869288b, type: 2}
     - target: {fileID: 7778766701998948981, guid: b53c54438110487458c4e7a56b7c47ea, type: 3}
       propertyPath: m_ApplyRootMotion
       value: 0
@@ -113,7 +113,7 @@ MonoBehaviour:
   number: 0
   cell: {fileID: 0}
   path: []
-  moveSpeed: 3
+  moveSpeed: 10
   rotationSpeed: 5
   stoppingDistance: 0.05
 --- !u!114 &-571936176347535913

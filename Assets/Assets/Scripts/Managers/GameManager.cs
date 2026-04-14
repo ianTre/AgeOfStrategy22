@@ -29,13 +29,7 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
         gameStage = GameStages.Start;
-        
-
     }
-
-
-
-
 
     // Update is called once per frame
     void Update()
@@ -201,6 +195,5 @@ public class GameManager : MonoBehaviour
         PlayerTurn_UnitSelected = 110,
         PlayerTurn_UnitSelected_DestinySelected = 111,
         EnemyTurn = 200 ,
-
     }
 }

@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.HighDefinition;
 
 
 public class InputManager : MonoBehaviour
 {
     Camera mainCamera;
     PlayerActions playerActions;
+    DefaultInputActions defaultInputActions;
     private GameObject lastSelectedObject;
     private GameObject lastHoveredObject;
     private GameManager gameManager;
@@ -19,6 +21,8 @@ public class InputManager : MonoBehaviour
         mainCamera = Camera.main;
         playerActions = new PlayerActions();
         playerActions.BattlefieldActions.Enable();
+        defaultInputActions = new DefaultInputActions();
+        defaultInputActions.UI.Enable();
     }
 
     // Start is called before the first frame update
@@ -46,9 +50,20 @@ public class InputManager : MonoBehaviour
 
         playerActions.BattlefieldActions.GiveOrder.performed += OnMouseRightClick;
         playerActions.BattlefieldActions.GiveOrder.canceled += OnMouseRightClickRelease;
+        defaultInputActions.UI.Navigate.performed += OnNavigate;
+        defaultInputActions.UI.Navigate.canceled+= OnNavigateFinish;
     }
 
+    private void OnNavigateFinish(InputAction.CallbackContext context)
+    {
+        mainCamera.GetComponent<CameraController>().UpdateDeltaMovement(Vector2.zero);
+    }
 
+    private void OnNavigate(InputAction.CallbackContext context)
+    {
+        Vector2 delta = context.ReadValue<Vector2>();
+        mainCamera.GetComponent<CameraController>().UpdateDeltaMovement(delta);
+    }
 
     private void OnMouseLeftClickRelease(InputAction.CallbackContext context)
     {

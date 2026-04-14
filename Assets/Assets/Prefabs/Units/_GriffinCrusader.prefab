@@ -112,7 +112,7 @@ MonoBehaviour:
   number: 0
   cell: {fileID: 0}
   path: []
-  moveSpeed: 3
+  moveSpeed: 10
   rotationSpeed: 5
   stoppingDistance: 0.05
 --- !u!114 &-2565456111949015582

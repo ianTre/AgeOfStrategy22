@@ -2,22 +2,35 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public Transform target;
-    public float smoothSpeed = 0.125f;
-    public Vector3 offset;
+    [SerializeField]
+    private float moveDistance = 20f;
 
-    void LateUpdate()
+    // Speed at which the camera smoothly interpolates to the desired position.
+    [SerializeField]
+    private float transitionSpeed = 2f;
+
+    // The target position that navigation buttons update.
+    private Vector3 desiredPosition;
+    Vector2 deltaMovement; 
+
+    private void Awake()
     {
-        if(target == null) return;
-        Vector3 desiredPosition = target.position + offset;
-        Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
-        transform.position = smoothedPosition;
-        transform.LookAt(target);
+        // Start with the camera at its current world position.
+        desiredPosition = transform.position;
     }
 
-    public void MoveHorizontal(float amount)
+    public void UpdateDeltaMovement(Vector2 newDelta)
     {
-        Vector3 targetPosition = transform.position + new Vector3(amount, 0f, 0f);
-        transform.position = Vector3.Lerp(transform.position, targetPosition, smoothSpeed);
+        deltaMovement = newDelta;
+    }
+
+    private void Update()
+    {
+        if(deltaMovement != Vector2.zero)
+        {
+            desiredPosition += new Vector3(deltaMovement.x * -1, 0f, deltaMovement.y * -1) * moveDistance * Time.deltaTime;
+        }
+        // Smoothly move towards the desired position each frame.
+        transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime * transitionSpeed);
     }
 }
