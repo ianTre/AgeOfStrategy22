@@ -4513,7 +4513,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rows: 10
   columns: 15
-  scale: 10.3
+  scale: 8.2
   gridPrefab: {fileID: 1343811214212185095, guid: 48d9bb5e1966a6e44866db48cd9340ed, type: 3}
   leftBottomLocation: {x: 336.6, y: 100.1, z: 516}
   cellsList: []
