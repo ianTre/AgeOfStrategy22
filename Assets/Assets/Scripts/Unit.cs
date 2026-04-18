@@ -15,9 +15,9 @@ public class Unit : MonoBehaviour, IMouseActionable
     public GridCell cell;
     public List<GridCell> path;
     private GameObject selectionLight;
-    [SerializeField] private float moveSpeed = 3f;       // velocidad en unidades por segundo
-    [SerializeField] private float rotationSpeed = 5f;   // grados por segundo para rotar suavemente
-    [SerializeField] private float stoppingDistance = 0.05f; // distancia m�nima 
+    [SerializeField] private float moveSpeed = 3f;              // velocidad en unidades por segundo
+    [SerializeField] private float rotationSpeed = 5f;          // grados por segundo para rotar suavemente
+    [SerializeField] private float stoppingDistance = 0.05f;    // distancia m�nima 
 
     public void Deselect()
     {

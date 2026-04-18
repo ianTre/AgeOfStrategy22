@@ -21,7 +21,6 @@ public class GameManager : MonoBehaviour
     {
         battlefieldManager = GetComponent<BattlefieldManager>();
         uIManager = GetComponent<UIManager>();
-        
         SetupDataFor_DeployStage();
     }
 
@@ -53,6 +52,7 @@ public class GameManager : MonoBehaviour
         //Prepare and Show UI
         uIManager.Battlefield_UnitsDeploy_Canvas(PlayerUnits);
         battlefieldManager.SetPlayerInitialUnits(PlayerUnits);
+        battlefieldManager.SetEnemyInitialUnits(EnemyUnits);
     }
 
 

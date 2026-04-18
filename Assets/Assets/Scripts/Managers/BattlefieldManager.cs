@@ -1,4 +1,5 @@
 using Assets.Assets.Scripts;
+using Assets.Assets.Scripts.Backend;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,27 +10,33 @@ using UnityEngine.Rendering;
 
 public class BattlefieldManager : MonoBehaviour
 {
+    private DeployCardController lastClickedCard;
+    public static BattlefieldManager instance;
+    private GridController gridController;
+    private Service backendService;
+
     List<UnitModel> PlayerInitialUnits;
     List<UnitModel> EnemyInitialUnits;
     public List<Unit> PlayerUnits;
     public List<Unit> EnemyUnits;
-    private GridController gridController;
+    
     private UnitData intendedUnitToCreate;
-    private DeployCardController lastClickedCard;
     public GameObject selectionLightPrefab;
-    public static BattlefieldManager instance;
+    
+    public bool allUnitsDeployed = true; //TODO
     void Start()
     {
         gridController = FindObjectOfType<GridController>();
-        PlayerInitialUnits = new List<UnitModel>();
-        EnemyInitialUnits = new List<UnitModel>();
-        EnemyUnits = new List<Unit>();
-        PlayerUnits = new List<Unit>();
     }
 
     public void Awake()
     {
         instance = this;
+        PlayerInitialUnits = new List<UnitModel>();
+        EnemyInitialUnits = new List<UnitModel>();
+        EnemyUnits = new List<Unit>();
+        PlayerUnits = new List<Unit>();
+        backendService = new Service();
     }
 
 
@@ -57,9 +64,28 @@ public class BattlefieldManager : MonoBehaviour
         unit.InitUnit(intendedUnitToCreate, gridCell);
         gridCell.OcuppyNewUnit(unit);
         PlayerUnits.Add(unit);
-        EnemyUnits.Add(unit);
         lastClickedCard.DisableCard();
         return true;
+    }
+
+    private void CreateEnemyUnits()
+    {
+        //Add Unit1
+        int enemyXPos = 2;
+        int enemyYPos = 1;
+        GridCell gridCell = gridController.gridArray[enemyXPos, enemyYPos].GetComponent<GridCell>();
+        if (!gridCell || !gridCell.TryOcuppieCell())
+            return;        
+        GameObject newUnit = Instantiate(EnemyInitialUnits[0].InitialData.prefab, gridController.gridArray[enemyXPos, enemyYPos].transform.position + new Vector3(0, 0.0f, 0), Quaternion.identity);
+        Unit unit = newUnit.GetComponent<Unit>();
+        if (unit == null)
+        {
+            Debug.LogError("BattlefieldManager: The prefab assigned to the DeployCardController does not have a Unit component.");
+            return;
+        }
+        unit.InitUnit(EnemyInitialUnits[0].InitialData, gridCell);
+        gridCell.OcuppyNewUnit(unit);
+        EnemyUnits.Add(unit);
     }
 
     internal void SetUnitToCreate(DeployCardController deployCardController)
@@ -136,6 +162,15 @@ public class BattlefieldManager : MonoBehaviour
         if(selectedUnit == null)
             return;
         selectedUnit.MoveToNewCell(destiny);
+    }
+
+    public void StartBattleAction()
+    {
+        if (!allUnitsDeployed)
+            return;
+        backendService.DeployPlayerUnits(1, PlayerUnits);
+        CreateEnemyUnits();
+        backendService.DeployPlayerUnits(2 ,PlayerUnits);
     }
 
     public void SpecialOrder1()

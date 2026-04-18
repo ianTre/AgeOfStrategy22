@@ -6,12 +6,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "UnitData", menuName = "Units/Unit Data")]
 public class UnitData : ScriptableObject
 {
-    [SerializeField] private string unitName;
+    [SerializeField] public string unitName;
     //[SerializeField] private UnitType type;
-    [SerializeField] private int health;
-    [SerializeField] private int attack;
-    [SerializeField] private int meleeArmor;
-    [SerializeField] private int pierceArmor;
+    [SerializeField] public int health;
+    [SerializeField] public int attack;
+    [SerializeField] public int meleeArmor;
+    [SerializeField] public int pierceArmor;
+    [SerializeField] public UnitType unitType;
     [SerializeField] public GameObject prefab;
     [SerializeField] public Sprite photo;
 
