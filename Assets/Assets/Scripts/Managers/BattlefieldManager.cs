@@ -5,8 +5,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Rendering;
+using Random = UnityEngine.Random;
 
 public class BattlefieldManager : MonoBehaviour
 {
@@ -68,24 +70,33 @@ public class BattlefieldManager : MonoBehaviour
         return true;
     }
 
-    private void CreateEnemyUnits()
+    private bool CreateEnemyUnit(int xPos ,int yPos , UnitData unitData)
     {
-        //Add Unit1
-        int enemyXPos = 2;
-        int enemyYPos = 1;
-        GridCell gridCell = gridController.gridArray[enemyXPos, enemyYPos].GetComponent<GridCell>();
+        GridCell gridCell = gridController.gridArray[xPos, yPos].GetComponent<GridCell>();
         if (!gridCell || !gridCell.TryOcuppieCell())
-            return;        
-        GameObject newUnit = Instantiate(EnemyInitialUnits[0].InitialData.prefab, gridController.gridArray[enemyXPos, enemyYPos].transform.position + new Vector3(0, 0.0f, 0), Quaternion.identity);
+            return false;        
+        GameObject newUnit = Instantiate(unitData.prefab, gridController.gridArray[xPos, yPos].transform.position + new Vector3(0, 0.0f, 0), Quaternion.identity);
         Unit unit = newUnit.GetComponent<Unit>();
         if (unit == null)
         {
             Debug.LogError("BattlefieldManager: The prefab assigned to the DeployCardController does not have a Unit component.");
-            return;
+            return false;
         }
-        unit.InitUnit(EnemyInitialUnits[0].InitialData, gridCell);
+        unit.InitUnit(unitData, gridCell);
         gridCell.OcuppyNewUnit(unit);
         EnemyUnits.Add(unit);
+        return true;
+    }
+
+    private void CreateEnemyUnits()
+    {
+        foreach (UnitModel unit in EnemyInitialUnits)
+        {
+            int y = Random.Range(0, 2);
+            int x = Random.Range(0, gridController.columns);
+            CreateEnemyUnit(x, y, unit.InitialData);
+        }
+
     }
 
     internal void SetUnitToCreate(DeployCardController deployCardController)
@@ -170,8 +181,9 @@ public class BattlefieldManager : MonoBehaviour
             return;
         backendService.DeployPlayerUnits(1, PlayerUnits);
         CreateEnemyUnits();
-        backendService.DeployPlayerUnits(2 ,PlayerUnits);
+        backendService.DeployPlayerUnits(2 ,EnemyUnits);
     }
+
 
     public void SpecialOrder1()
     {
