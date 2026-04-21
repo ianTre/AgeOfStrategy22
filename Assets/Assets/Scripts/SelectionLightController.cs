@@ -18,11 +18,12 @@ public class SelectionLightController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Mantener la orientación hacia arriba de forma suave
+        // Mantener la orientaciï¿½n hacia arriba de forma suave
         transform.up = Vector3.Lerp(transform.up, Vector3.up, Time.deltaTime * upLerpSpeed);
 
         // Movimiento vertical infinito usando seno
         float y = Mathf.Sin(Time.time * speed) * amplitude;
-        transform.localPosition = startLocalPos + Vector3.up * y;
+        transform.localPosition = new Vector3(transform.localPosition.x, startLocalPos.y + (Vector3.up * y).y, transform.localPosition.z);
+        
     }
 }

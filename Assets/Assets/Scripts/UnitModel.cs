@@ -33,5 +33,6 @@ namespace Assets.Assets.Scripts
         Archer = 3,
         Ranger = 30,
         Monk = 4,
+        Axeman = 5,
     }
 }

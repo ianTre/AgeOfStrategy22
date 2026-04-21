@@ -103,7 +103,12 @@ public class Unit : MonoBehaviour, IMouseActionable
     {
         if (path == null || path.Count == 0)
             yield break;
+        if (GetComponent<UnitAnimationController>() == null)
+        {
+            Debug.LogError("Unit Animation Controller is not assigned in the prefab, please assign it to avoid this error");
+        }
         GetComponent<UnitAnimationController>().TriggerRunning();
+
         foreach (var gridCell in path)
         {
             if (gridCell == null)

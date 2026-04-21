@@ -33,7 +33,7 @@ public class UIManager : MonoBehaviour
         int index = 0;
         foreach (UnitModel PlayerUnit in PlayerUnits)
         {
-            if (panels.Count < index)
+            if (panels.Count < index + 1)
                 throw new System.Exception("Not enough panels created for all units");
             panels[index].GetComponent<DeployCardController>().ShowUnitData(PlayerUnit.InitialData, PlayerUnit.number);
             index++;
