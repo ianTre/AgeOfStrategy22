@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GridCell : MonoBehaviour , IMouseActionable
+public class GridCell : MonoBehaviour, IMouseActionable
 {
     public bool isOffset = false;
     public bool isSelected = false;
@@ -19,13 +19,13 @@ public class GridCell : MonoBehaviour , IMouseActionable
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void Init(bool isOffset)
@@ -47,8 +47,13 @@ public class GridCell : MonoBehaviour , IMouseActionable
     public void Select()
     {
         if (this.unit != null)
-        {
-            unit.GetComponent<Unit>().SelectByPass();
+        {   
+            PlayerUnit playerUnit = this.unit.GetComponent<PlayerUnit>();
+            if (playerUnit != null)
+            {
+                playerUnit.SelectByPass();
+            }
+
         }
         else
         {
@@ -59,7 +64,7 @@ public class GridCell : MonoBehaviour , IMouseActionable
 
     public void ShowStepOnMap()
     {
-        
+
     }
 
     public bool TryOcuppieCell()
@@ -76,7 +81,11 @@ public class GridCell : MonoBehaviour , IMouseActionable
         isSelected = false;
         this.UnHighlight();
         if (this.unit != null)
-            unit.GetComponent<Unit>().Deselect();
+        {
+            PlayerUnit playerUnit = this.unit.GetComponent<PlayerUnit>();
+            if (playerUnit != null)
+                playerUnit.Deselect();
+        }
     }
 
     public void Hover()
@@ -86,14 +95,14 @@ public class GridCell : MonoBehaviour , IMouseActionable
 
     public void UnHover()
     {
-        if(!isSelected)
+        if (!isSelected)
             this.UnHighlight();
     }
 
     internal void RemoveUnit(Unit unit)
     {
         if (this.unit == unit)
-        { 
+        {
             this.unit = null;
             this.isOccupied = false;
         }
@@ -107,7 +116,7 @@ public class GridCell : MonoBehaviour , IMouseActionable
 
     public void Action()
     {
-        if(unit != null)
+        if (unit != null)
         {
             unit.Action();
         }

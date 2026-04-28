@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour
             if (actionable != null)
                 actionable.Select();
             
-            Unit unit = battlefieldManager.PlayerUnits.Find(u => u.hasBeingSelected);
+            Unit unit = battlefieldManager.PlayerUnits.Find(u => u.transform.GetComponent<PlayerUnit>().hasBeingSelected);
             if(unit != null)
             {
                 gameStage = GameStages.PlayerTurn_UnitSelected;

@@ -63,6 +63,7 @@ public class BattlefieldManager : MonoBehaviour
             Debug.LogError("BattlefieldManager: The prefab assigned to the DeployCardController does not have a Unit component.");
             return false;
         }
+        newUnit.AddComponent<PlayerUnit>();
         unit.InitUnit(intendedUnitToCreate, gridCell);
         gridCell.OcuppyNewUnit(unit);
         PlayerUnits.Add(unit);
@@ -117,21 +118,21 @@ public class BattlefieldManager : MonoBehaviour
 
     public void SelectANewUnit(Unit unit)
     {
-        var selectedUnits = PlayerUnits.FindAll(u => u.hasBeingSelected && u != unit);
+        var selectedUnits = PlayerUnits.FindAll(u => u.transform.GetComponent<PlayerUnit>().hasBeingSelected && u != unit);
         if (selectedUnits != null && selectedUnits.Count > 0)
-            selectedUnits.ForEach(u => u.Deselect());
+            selectedUnits.ForEach(u => u.transform.GetComponent<PlayerUnit>().Deselect());
     }
 
     public void DeselectUnits()
     {
-        var selectedUnits = PlayerUnits.FindAll(u => u.hasBeingSelected);
+        var selectedUnits = PlayerUnits.FindAll(u => u.transform.GetComponent<PlayerUnit>().hasBeingSelected);
         if (selectedUnits != null && selectedUnits.Count > 0)
-            selectedUnits.ForEach(u => u.Deselect());
+            selectedUnits.ForEach(u => u.transform.GetComponent<PlayerUnit>().Deselect());
     }
 
     public Unit ReturnSelectedUnit()
     {
-        var selectedUnits = PlayerUnits.FindAll(u => u.hasBeingSelected);
+        var selectedUnits = PlayerUnits.FindAll(u => u.transform.GetComponent<PlayerUnit>());
         if (selectedUnits != null && selectedUnits.Count > 0)
             return selectedUnits[0];
         return null;
@@ -145,15 +146,6 @@ public class BattlefieldManager : MonoBehaviour
         return anyNear;
     }
 
-    public void MovementCellSelected(GridCell destiny)
-    {
-        Unit selectedUnit = PlayerUnits.Find(u => u.hasBeingSelected);
-        if(selectedUnit == null)
-            return;
-        if(destiny.isOccupied)
-            return;
-        selectedUnit.MoveToNewCell(destiny);
-    }
 
     public List<GridCell> FindShortestPath(GridCell origin, GridCell destiniy)
     {
@@ -169,10 +161,11 @@ public class BattlefieldManager : MonoBehaviour
     {
         if(destiny.isOccupied)
             return;
-        Unit selectedUnit = PlayerUnits.Find(u => u.hasBeingSelected);
+        Unit selectedUnit = PlayerUnits.Find(u => u.transform.GetComponent<PlayerUnit>().hasBeingSelected);
         if(selectedUnit == null)
             return;
         selectedUnit.MoveToNewCell(destiny);
+        InputManager.instance.DisableControllers();
     }
 
     public void StartBattleAction()
@@ -187,7 +180,7 @@ public class BattlefieldManager : MonoBehaviour
 
     public void SpecialOrder1()
     {
-        Unit selectedUnit = PlayerUnits.Find(u => u.hasBeingSelected);
+        Unit selectedUnit = PlayerUnits.Find(u => u.transform.GetComponent<PlayerUnit>().hasBeingSelected);
         if (selectedUnit == null)
             return;
         selectedUnit.GetComponent<UnitAnimationController>().TriggerAttack();
@@ -195,7 +188,7 @@ public class BattlefieldManager : MonoBehaviour
 
     public void SpecialOrder2()
     {
-        Unit selectedUnit = PlayerUnits.Find(u => u.hasBeingSelected);
+        Unit selectedUnit = PlayerUnits.Find(u => u.transform.GetComponent<PlayerUnit>().hasBeingSelected);
         if (selectedUnit == null)
             return;
         selectedUnit.GetComponent<UnitAnimationController>().TriggerDefend();
@@ -203,7 +196,7 @@ public class BattlefieldManager : MonoBehaviour
 
     public void SpecialOrder3()
     {
-        Unit selectedUnit = PlayerUnits.Find(u => u.hasBeingSelected);
+        Unit selectedUnit = PlayerUnits.Find(u => u.transform.GetComponent<PlayerUnit>().hasBeingSelected);
         if (selectedUnit == null)
             return;
         selectedUnit.GetComponent<UnitAnimationController>().TriggerDeath();
@@ -226,12 +219,6 @@ public class BattlefieldManager : MonoBehaviour
 
     public void SpecialAction()
     {
-        Unit selectedUnit = PlayerUnits.Find(u => u.hasBeingSelected);
-        if (selectedUnit == null)
-            return;
-        var cell = gridController.gridArray[selectedUnit.cell.x, selectedUnit.cell.y + 2].GetComponent<GridCell>();
-        if (cell == null)
-                return;
-        selectedUnit.MoveToNewCell(cell);
+        
     }
 }

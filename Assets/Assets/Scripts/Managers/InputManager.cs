@@ -14,6 +14,7 @@ public class InputManager : MonoBehaviour
     private GameObject lastSelectedObject;
     private GameObject lastHoveredObject;
     private GameManager gameManager;
+    public static InputManager instance;
 
 
     private void Awake()
@@ -23,6 +24,7 @@ public class InputManager : MonoBehaviour
         playerActions.BattlefieldActions.Enable();
         defaultInputActions = new DefaultInputActions();
         defaultInputActions.UI.Enable();
+        instance = this;
     }
 
     // Start is called before the first frame update
@@ -33,6 +35,16 @@ public class InputManager : MonoBehaviour
         {
             throw new Exception("Game Manager not found in the scene");
         }
+    }
+
+    public void EnableControllers()
+    {
+        this.playerActions.BattlefieldActions.Enable();
+    }
+
+    public void DisableControllers()
+    {
+        this.playerActions.BattlefieldActions.Disable();
     }
 
 
