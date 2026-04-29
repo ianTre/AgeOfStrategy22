@@ -147,43 +147,43 @@ public class GridController : MonoBehaviour
         GridCell target = null;
         
         //1
-        x = x - 1;
-        y = y;
+        x = origin.x - 1;
+        y = origin.y;
         CheckCell(gridCells, x, y, target);
 
         //2
-        x = x + 1;
-        y = y;
+        x = origin.x + 1;
+        y = origin.y;
         CheckCell(gridCells, x, y, target);
 
         //3
-        x = x;
-        y = y + 1;
+        x = origin.x;
+        y = origin.y + 1;
         CheckCell(gridCells, x, y, target);
 
         //4
-        x = x;
-        y = y - 1;
+        x = origin.x;
+        y = origin.y - 1;
         CheckCell(gridCells, x, y, target);
 
         //5
-        x = x - 1;
-        y = y - 1;
+        x = origin.x - 1;
+        y = origin.y - 1;
         CheckCell(gridCells, x, y, target);
 
         //6
-        x = x + 1;
-        y = y + 1;
+        x = origin.x + 1;
+        y = origin.y + 1;
         CheckCell(gridCells, x, y, target);
 
         //7
-        x = x + 1;
-        y = y - 1;
+        x = origin.x + 1;
+        y = origin.y - 1;
         CheckCell(gridCells, x, y, target);
 
         //8
-        x = x - 1;
-        y = y + 1;
+        x = origin.x - 1;
+        y = origin.y + 1;
         CheckCell(gridCells, x, y, target);
 
         return gridCells;
@@ -191,13 +191,20 @@ public class GridController : MonoBehaviour
 
     private GridCell CheckCell(List<GridCell> gridCells, int x, int y, GridCell target)
     {
-        if (gridArray[x, y] != null && gridArray[x, y].TryGetComponent<GridCell>(out target))
+        if (CoordinatesInsideScope(x,y) && gridArray[x, y] != null && gridArray[x, y].TryGetComponent<GridCell>(out target))
         {
             if (!target.isOccupied)
                 gridCells.Add(target);
         }
 
         return target;
+    }
+
+    private bool CoordinatesInsideScope(int x, int y)
+    {
+        if(x >= 0 && y >= 0 && x < columns && y < rows)
+            return true;
+        return false;
     }
 
     public List<GridCell> FindShortestPath(GridCell origin, GridCell destiniy)

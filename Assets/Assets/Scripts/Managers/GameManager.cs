@@ -8,6 +8,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public GameStages gameStage;
+    private GameStages oldGameStage;
     private InitialUnitsSetup initialUnitsSetup;
     private UIManager uIManager;
     private GameObject lastSelectedObject;
@@ -21,7 +22,7 @@ public class GameManager : MonoBehaviour
     {
         battlefieldManager = GetComponent<BattlefieldManager>();
         uIManager = GetComponent<UIManager>();
-        SetupDataFor_DeployStage();
+        StageUpdate_PlayerDeploy();
     }
 
     private void Awake()
@@ -33,26 +34,37 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-    }
-
-    private void SetupDataFor_DeployStage()
-    {
-        initialUnitsSetup = GetComponent<InitialUnitsSetup>();
-        List<UnitModel> PlayerUnits = initialUnitsSetup.PlayerInitialSetup();
-        List<UnitModel> EnemyUnits = initialUnitsSetup.EnemyInitialSetup();
-
-        //Actual call for Stage Update
-        gameStage = GameStages.PlayerDeploy;
-        StageUpdate_PlayerDeploy(PlayerUnits, EnemyUnits);
-    }
-
-    private void StageUpdate_PlayerDeploy(List<UnitModel> PlayerUnits, List<UnitModel> EnemyUnits)
-    {
-        //Prepare and Show UI
-        uIManager.Battlefield_UnitsDeploy_Canvas(PlayerUnits);
-        battlefieldManager.SetPlayerInitialUnits(PlayerUnits);
-        battlefieldManager.SetEnemyInitialUnits(EnemyUnits);
+        if (gameStage != oldGameStage)
+        {
+            switch (gameStage)
+            {
+                case GameStages.Start:
+                    break;
+                case GameStages.PlayerDeploy:
+                    break;
+                case GameStages.PlayerDeploy_CardSelected:
+                    break;
+                case GameStages.PlayerDeploy_CardSelected_CellSelected:
+                    break;
+                case GameStages.EnemyDeploy:
+                    break;
+                case GameStages.PlayerTurn:
+                    InputManager.instance.EnableControllers();
+                    break;
+                case GameStages.PlayerTurn_UnitSelected:
+                    break;
+                case GameStages.PlayerTurn_UnitSelected_UnitMovement:
+                    InputManager.instance.DisableControllers();
+                    break;
+                case GameStages.PlayerTurn_UnitSelected_EnemyTargetSelected:
+                    break;
+                case GameStages.EnemyTurn:
+                    break;
+                default:
+                    break;
+            }
+            oldGameStage = gameStage;
+        }
     }
 
 
@@ -68,35 +80,27 @@ public class GameManager : MonoBehaviour
             if (lastActionable != null)
                 lastActionable.Deselect();
             if (actionable != null)
-                actionable.Select();    
+                actionable.Select();
         }
 
-        if( gameStage == GameStages.PlayerDeploy_CardSelected)
+        if (gameStage == GameStages.PlayerDeploy_CardSelected)
         {
             if (newSelectedObject.tag == "Grid")
             {
-                gameStage = GameStages.PlayerDeploy_CardSelected_CellSelected;
                 newSelectedObject.TryGetComponent<GridCell>(out GridCell gridCell);
-                if (gridCell != null)
-                {
-                    var isSuccess = battlefieldManager.TryAddUnit(gridCell);
-                    if(isSuccess)
-                    {
-                        gameStage = GameStages.PlayerDeploy;
-                    }
-                }
+                StageUpdate_PlayerDeploy_CardSelected_CellSelected(gridCell);
             }
         }
 
-        if( gameStage == GameStages.PlayerTurn || gameStage == GameStages.PlayerTurn_UnitSelected)
+        if (gameStage == GameStages.PlayerTurn || gameStage == GameStages.PlayerTurn_UnitSelected)
         {
             if (lastActionable != null)
                 lastActionable.Deselect();
             if (actionable != null)
                 actionable.Select();
-            
+
             Unit unit = battlefieldManager.PlayerUnits.Find(u => u.transform.GetComponent<PlayerUnit>().hasBeingSelected);
-            if(unit != null)
+            if (unit != null)
             {
                 gameStage = GameStages.PlayerTurn_UnitSelected;
             }
@@ -121,11 +125,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void UpdateGameStage(GameStages gameStages)
-    {
-
-    }
-
     private GameObject FindActionableRecursibly(GameObject newSelectedObject)
     {
         var parent = newSelectedObject;
@@ -141,11 +140,11 @@ public class GameManager : MonoBehaviour
         return newSelectedObject;
     }
 
-    public void ClickOnCardDeploy(DeployCardController deployCardController)
+    public void CellCalledForAction(GridCell cell)
     {
-        gameStage = GameStages.PlayerDeploy_CardSelected;
-        Debug.Log($"Card {deployCardController.unitsInitialData.name} was clicked");
-        battlefieldManager.SetUnitToCreate(deployCardController);
+        var selectedUnit = battlefieldManager.GetSelectedUnit();
+        if (selectedUnit != null)
+            StageUpdate_PlayerTurn_UnitSelected_UnitMovement(selectedUnit, cell);
     }
 
     public void SpecialAction()
@@ -183,17 +182,103 @@ public class GameManager : MonoBehaviour
         battlefieldManager.SpecialOrder6();
     }
 
+    private void SetInitialDataAndDeploy(List<UnitModel> PlayerUnits, List<UnitModel> EnemyUnits)
+    {
+        //Prepare and Show UI
+        uIManager.Battlefield_UnitsDeploy_Canvas(PlayerUnits);
+        battlefieldManager.SetPlayerInitialUnits(PlayerUnits);
+    }
+
+    public void EndDeployButton()
+    {
+        List<UnitModel> EnemyUnits = initialUnitsSetup.EnemyInitialSetup();
+        StageUpdate_EnemyDeploy(EnemyUnits);
+    }
+
+    public void StageUpdate_PlayerDeploy()
+    {
+        initialUnitsSetup = GetComponent<InitialUnitsSetup>();
+        List<UnitModel> PlayerUnits = initialUnitsSetup.PlayerInitialSetup();
+        List<UnitModel> EnemyUnits = initialUnitsSetup.EnemyInitialSetup();
+
+        //Actual call for Stage Update
+        gameStage = GameStages.PlayerDeploy;
+        SetInitialDataAndDeploy(PlayerUnits, EnemyUnits);
+    }
+
+    public void StageUpdate_PlayerDeploy_CardSelected(DeployCardController deployCardController)
+    {
+        gameStage = GameStages.PlayerDeploy_CardSelected;
+        battlefieldManager.SetUnitToCreate(deployCardController);
+    }
+
+    public void StageUpdate_PlayerDeploy_CardSelected_CellSelected(GridCell selectedCell)
+    {
+        if (selectedCell != null)
+        {
+            gameStage = GameStages.PlayerDeploy_CardSelected_CellSelected;
+            var isSuccess = battlefieldManager.TryAddUnit(selectedCell);
+            if (isSuccess)
+            {
+                gameStage = GameStages.PlayerDeploy;
+            }
+        }
+    }
+
+    public void StageUpdate_EnemyDeploy(List<UnitModel> enemyUnits)
+    {
+        gameStage = GameStages.EnemyDeploy;
+        InputManager.instance.DisableControllers();
+        battlefieldManager.StartBattleAction(enemyUnits);
+        var deployCanvas = GameObject.Find("Battlefield_UnitsDeploy_Canvas");
+        if (deployCanvas == null)
+            throw new Exception("Cant find Battlefield_UnitsDeploy_Canvas");
+        deployCanvas.SetActive(false);
+        StageUpdate_PlayerTurn();
+    }
+
+    public void StageUpdate_PlayerTurn()
+    {
+        gameStage = GameStages.PlayerTurn;
+        InputManager.instance.EnableControllers();
+    }
+
+    public void StageUpdate_PlayerTurn_UnitSelected(Unit selectedUnit)
+    {
+        BattlefieldManager.instance.SelectANewUnit(selectedUnit);
+        gameStage = GameStages.PlayerTurn_UnitSelected;
+    }
+
+
+    public void StageUpdate_PlayerTurn_UnitSelected_UnitMovement(Unit selectedUnit, GridCell destinyCell)
+    {
+        gameStage = GameStages.PlayerTurn_UnitSelected_UnitMovement;
+        InputManager.instance.DisableControllers();
+        battlefieldManager.MoveToSelectedCell(selectedUnit, destinyCell);
+    }
+
+    public void StageUpdate_EnemyTurn()
+    {
+        gameStage = GameStages.EnemyTurn;
+        StageUpdate_PlayerTurn();
+    }
+
+
+
+
+
 
     public enum GameStages
     {
-        Start = 0 ,
-        PlayerDeploy = 10 ,
+        Start = 0,
+        PlayerDeploy = 10,
         PlayerDeploy_CardSelected = 11,
         PlayerDeploy_CardSelected_CellSelected = 12,
-        EnemyDeploy = 20 ,
-        PlayerTurn = 100 , 
+        EnemyDeploy = 20,
+        PlayerTurn = 100,
         PlayerTurn_UnitSelected = 110,
-        PlayerTurn_UnitSelected_DestinySelected = 111,
-        EnemyTurn = 200 ,
+        PlayerTurn_UnitSelected_UnitMovement = 111,
+        PlayerTurn_UnitSelected_EnemyTargetSelected = 112,
+        EnemyTurn = 200,
     }
 }

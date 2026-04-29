@@ -83,7 +83,7 @@ public class DeployCardController : MonoBehaviour
     {
         if (!cardIsEnable)
             return;
-        gameManager.ClickOnCardDeploy(this);
+        gameManager.StageUpdate_PlayerDeploy_CardSelected(this);
         SelectCard();
     }
 

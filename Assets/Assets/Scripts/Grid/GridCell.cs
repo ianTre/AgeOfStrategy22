@@ -13,6 +13,7 @@ public class GridCell : MonoBehaviour, IMouseActionable
     public Material Normal, Offset, Highligh, HighlighEnemy;
     public bool isOccupied = false;
     public Unit unit;
+    private bool skipHover = false;
 
     public bool IsSelected => isSelected;
 
@@ -90,6 +91,8 @@ public class GridCell : MonoBehaviour, IMouseActionable
 
     public void Hover()
     {
+        if (skipHover)
+            return;
         this.Highlight(false);
     }
 
@@ -134,6 +137,6 @@ public class GridCell : MonoBehaviour, IMouseActionable
 
     private void DoTheAction()
     {
-        BattlefieldManager.instance.MoveToSelectedCell(this);
+        GameManager.instance.CellCalledForAction(this);
     }
 }

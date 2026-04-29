@@ -3,11 +3,13 @@ using Assets.Assets.Scripts.Backend;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Rendering;
+using static UnityEngine.UI.CanvasScaler;
 using Random = UnityEngine.Random;
 
 public class BattlefieldManager : MonoBehaviour
@@ -89,9 +91,9 @@ public class BattlefieldManager : MonoBehaviour
         return true;
     }
 
-    private void CreateEnemyUnits()
+    private void CreateEnemyUnits(List<UnitModel> enemyUnits)
     {
-        foreach (UnitModel unit in EnemyInitialUnits)
+        foreach (UnitModel unit in enemyUnits)
         {
             int y = Random.Range(0, 2);
             int x = Random.Range(0, gridController.columns);
@@ -111,16 +113,17 @@ public class BattlefieldManager : MonoBehaviour
         this.PlayerInitialUnits = playerUnits;
     }
 
-    public void SetEnemyInitialUnits(List<UnitModel> enemyUnits)
-    {
-        this.EnemyInitialUnits = enemyUnits;
-    }
-
     public void SelectANewUnit(Unit unit)
     {
         var selectedUnits = PlayerUnits.FindAll(u => u.transform.GetComponent<PlayerUnit>().hasBeingSelected && u != unit);
         if (selectedUnits != null && selectedUnits.Count > 0)
             selectedUnits.ForEach(u => u.transform.GetComponent<PlayerUnit>().Deselect());
+    }
+
+    public Unit GetSelectedUnit()
+    {
+        var selectedUnit = PlayerUnits.FirstOrDefault(u => u.transform.GetComponent<PlayerUnit>().hasBeingSelected);
+        return selectedUnit;
     }
 
     public void DeselectUnits()
@@ -157,23 +160,21 @@ public class BattlefieldManager : MonoBehaviour
         
     }
 
-    public void MoveToSelectedCell(GridCell destiny)
+
+
+    public void MoveToSelectedCell(Unit selectedUnit ,GridCell destiny)
     {
-        if(destiny.isOccupied)
-            return;
-        Unit selectedUnit = PlayerUnits.Find(u => u.transform.GetComponent<PlayerUnit>().hasBeingSelected);
-        if(selectedUnit == null)
+        if (destiny.isOccupied)
             return;
         selectedUnit.MoveToNewCell(destiny);
-        InputManager.instance.DisableControllers();
     }
 
-    public void StartBattleAction()
+    public void StartBattleAction(List<UnitModel> enemyUnits)
     {
         if (!allUnitsDeployed)
             return;
         backendService.DeployPlayerUnits(1, PlayerUnits);
-        CreateEnemyUnits();
+        CreateEnemyUnits(enemyUnits);
         backendService.DeployPlayerUnits(2 ,EnemyUnits);
     }
 

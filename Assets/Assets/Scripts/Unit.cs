@@ -77,7 +77,7 @@ public class Unit : MonoBehaviour , ISoldier
 
         }
         GetComponent<UnitAnimationController>().TriggerIdle();
-        InputManager.instance.EnableControllers();
+        GameManager.instance.gameStage = GameStages.EnemyTurn;
     }
 
 

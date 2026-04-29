@@ -24,31 +24,7 @@ public class PlayerUnit : MonoBehaviour , IMouseActionable
     {
         CreateSelectionLight();
         this.hasBeingSelected = true;
-        BattlefieldManager.instance.SelectANewUnit(this.transform.GetComponent<Unit>());
-
-
-        GameStages stage = GameManager.instance.gameStage;
-        switch (stage)
-        {
-            case GameStages.Start:
-            case GameStages.PlayerDeploy:
-            case GameStages.PlayerDeploy_CardSelected:
-            case GameStages.PlayerDeploy_CardSelected_CellSelected:
-                break;
-            case GameStages.EnemyDeploy:
-                break;
-            case GameStages.PlayerTurn:
-                break;
-            case GameStages.PlayerTurn_UnitSelected:
-                break;
-            case GameStages.PlayerTurn_UnitSelected_DestinySelected:
-                break;
-            case GameStages.EnemyTurn:
-                break;
-            default:
-                break;
-        }
-
+        GameManager.instance.StageUpdate_PlayerTurn_UnitSelected(this.transform.GetComponent<Unit>());
     }
 
     public void SelectByPass()
