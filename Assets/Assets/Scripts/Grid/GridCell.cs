@@ -90,7 +90,7 @@ public class GridCell : MonoBehaviour, IMouseActionable
 
     public void Hover()
     {
-        this.Highlight(BattlefieldManager.instance.IsEnemyNearBy(this));
+        this.Highlight(false);
     }
 
     public void UnHover()

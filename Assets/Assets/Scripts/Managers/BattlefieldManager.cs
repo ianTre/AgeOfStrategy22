@@ -221,4 +221,11 @@ public class BattlefieldManager : MonoBehaviour
     {
         
     }
+
+    internal void SelectTargetUnit(Unit unit)
+    {
+        var cells = gridController.FindAllNeighbours(unit.cell);
+        foreach (var cell in cells) 
+            cell.Highlight(true);
+    }
 }

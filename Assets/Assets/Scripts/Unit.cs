@@ -83,7 +83,7 @@ public class Unit : MonoBehaviour , ISoldier
 
     public void Action()
     {
-        throw new System.NotImplementedException();
+        BattlefieldManager.instance.SelectTargetUnit(this);
     }
 
     public void Attack(ISoldier targetSoldier)

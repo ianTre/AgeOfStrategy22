@@ -139,6 +139,67 @@ public class GridController : MonoBehaviour
         }
     }
 
+    public List<GridCell> FindAllNeighbours(GridCell origin)
+    {
+        List<GridCell> gridCells = new List<GridCell>();
+        int x = origin.x;
+        int y = origin.y;
+        GridCell target = null;
+        
+        //1
+        x = x - 1;
+        y = y;
+        CheckCell(gridCells, x, y, target);
+
+        //2
+        x = x + 1;
+        y = y;
+        CheckCell(gridCells, x, y, target);
+
+        //3
+        x = x;
+        y = y + 1;
+        CheckCell(gridCells, x, y, target);
+
+        //4
+        x = x;
+        y = y - 1;
+        CheckCell(gridCells, x, y, target);
+
+        //5
+        x = x - 1;
+        y = y - 1;
+        CheckCell(gridCells, x, y, target);
+
+        //6
+        x = x + 1;
+        y = y + 1;
+        CheckCell(gridCells, x, y, target);
+
+        //7
+        x = x + 1;
+        y = y - 1;
+        CheckCell(gridCells, x, y, target);
+
+        //8
+        x = x - 1;
+        y = y + 1;
+        CheckCell(gridCells, x, y, target);
+
+        return gridCells;
+    }
+
+    private GridCell CheckCell(List<GridCell> gridCells, int x, int y, GridCell target)
+    {
+        if (gridArray[x, y] != null && gridArray[x, y].TryGetComponent<GridCell>(out target))
+        {
+            if (!target.isOccupied)
+                gridCells.Add(target);
+        }
+
+        return target;
+    }
+
     public List<GridCell> FindShortestPath(GridCell origin, GridCell destiniy)
     {
         this.startX = origin.x;
