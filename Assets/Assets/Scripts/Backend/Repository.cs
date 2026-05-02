@@ -9,6 +9,7 @@ namespace Assets.Assets.Scripts.Backend
     public class Repository
     {
         public List<PlayerUnit> units = new List<PlayerUnit>();
+        int idIndexer = 0;
 
         public void AddUnit(int playerId ,UnitType unitType, int health , int xPos , int yPos)
         {
@@ -16,13 +17,29 @@ namespace Assets.Assets.Scripts.Backend
             {
                 throw new Exception("There is already an unit in this position");
             }
-            PlayerUnit unit = new PlayerUnit(playerId , unitType , health , xPos , yPos);
+            PlayerUnit unit = new PlayerUnit(playerId , unitType , health , xPos , yPos, ++idIndexer);
             units.Add(unit);
+        }
+
+        internal PlayerUnit GetPlayerUnit(GridCell cell, UnitType unitType, int health, int playerId)
+        {
+            return this.units.FirstOrDefault(unit => unit.xPos == cell.x && unit.yPos == cell.y && unit.unitType == unitType && unit.health == health && unit.playerId == playerId);
         }
 
         internal List<PlayerUnit> GetPlayerUnits(int playerId)
         {
             return units.Where(u => u.playerId == playerId).ToList();
+        }
+
+        internal void MoveUnit(int unitId, int x, int y)
+        {
+            PlayerUnit unit = units.FirstOrDefault(u => u.id == unitId);
+            if(unit == null)
+            {
+                throw new Exception("Unit not found");
+            }
+            unit.xPos = x;
+            unit.yPos = y;
         }
     }
 
@@ -33,14 +50,16 @@ namespace Assets.Assets.Scripts.Backend
         public int health;
         public int xPos;
         public int yPos;
+        public int id;
 
-        public PlayerUnit(int playerId , UnitType unitType , int health , int xPos , int yPos)
+        public PlayerUnit(int playerId , UnitType unitType , int health , int xPos , int yPos , int id)
         {
             this.playerId = playerId;
             this.unitType = unitType;
             this.health = health;
             this.xPos = xPos;
             this.yPos = yPos;
+            this.id = id;
         }
     }
 }

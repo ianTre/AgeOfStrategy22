@@ -1,4 +1,5 @@
 using Assets.Assets.Scripts.Interfaces;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -27,21 +28,9 @@ public class Unit : MonoBehaviour , ISoldier
         this.cell = cell;
     }
 
-    public void MoveToNewCell(GridCell newCell)
-    {
-        if (newCell.isOccupied)
-            return;
-        this.path = BattlefieldManager.instance.FindShortestPath(this.cell, newCell);
-        if (path != null && path.Count > 0)
-        {
-            this.cell.RemoveUnit(this); //Clean Old Cell
-            this.cell = newCell;
-            this.cell.OcuppyNewUnit(this); //Assign new Cell
-            StartCoroutine(MoveToNewPosition(path));
-        }
-    }
 
-    public IEnumerator MoveToNewPosition(List<GridCell> path)
+
+    public IEnumerator MoveToNewPosition(List<GridCell> path,Action onComplete)
     {
         if (path == null || path.Count == 0)
             yield break;
@@ -73,11 +62,9 @@ public class Unit : MonoBehaviour , ISoldier
             transform.position = target;
             transform.rotation = targetRot;
             yield return null;
-
-
         }
         GetComponent<UnitAnimationController>().TriggerIdle();
-        GameManager.instance.gameStage = GameStages.EnemyTurn;
+        onComplete?.Invoke();
     }
 
 
@@ -94,5 +81,11 @@ public class Unit : MonoBehaviour , ISoldier
     public void ReceiveDamage(float damageAmmount)
     {
         throw new System.NotImplementedException();
+    }
+
+    public IEnumerator AttackTarget(Unit target, Action onComplete)
+    {
+        yield return new WaitForSeconds(1.5f); // Simulate attack delay
+        this.transform.LookAt(target.transform);
     }
 }

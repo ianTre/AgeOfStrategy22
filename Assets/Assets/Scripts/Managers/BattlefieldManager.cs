@@ -3,12 +3,14 @@ using Assets.Assets.Scripts.Backend;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Rendering;
+using static GameManager;
 using static UnityEngine.UI.CanvasScaler;
 using Random = UnityEngine.Random;
 
@@ -25,6 +27,7 @@ public class BattlefieldManager : MonoBehaviour
     public List<Unit> EnemyUnits;
     
     private UnitData intendedUnitToCreate;
+    private Unit targetEnemyUnit;
     public GameObject selectionLightPrefab;
     
     public bool allUnitsDeployed = true; //TODO
@@ -95,9 +98,14 @@ public class BattlefieldManager : MonoBehaviour
     {
         foreach (UnitModel unit in enemyUnits)
         {
-            int y = Random.Range(0, 2);
-            int x = Random.Range(0, gridController.columns);
-            CreateEnemyUnit(x, y, unit.InitialData);
+            bool created = false;
+            while(!created)
+            {
+                int y = Random.Range(0, 2);
+                int x = Random.Range(0, gridController.columns);
+                created = CreateEnemyUnit(x, y, unit.InitialData);
+            }
+            
         }
 
     }
@@ -121,6 +129,12 @@ public class BattlefieldManager : MonoBehaviour
     }
 
     public Unit GetSelectedUnit()
+    {
+        var selectedUnit = PlayerUnits.FirstOrDefault(u => u.transform.GetComponent<PlayerUnit>().hasBeingSelected);
+        return selectedUnit;
+    }
+
+    public Unit GetTargetUnit()
     {
         var selectedUnit = PlayerUnits.FirstOrDefault(u => u.transform.GetComponent<PlayerUnit>().hasBeingSelected);
         return selectedUnit;
@@ -160,13 +174,34 @@ public class BattlefieldManager : MonoBehaviour
         
     }
 
-
-
-    public void MoveToSelectedCell(Unit selectedUnit ,GridCell destiny)
+    public bool TryToMoveToNewCell(GridCell newCell, Unit unitToMove , Action onComplete)
     {
-        if (destiny.isOccupied)
-            return;
-        selectedUnit.MoveToNewCell(destiny);
+        if (newCell.isOccupied)
+            return false;
+        unitToMove.path = FindShortestPath(unitToMove.cell, newCell);
+        if (unitToMove.path != null && unitToMove.path.Count > 0)
+        {
+            unitToMove.cell.RemoveUnit(unitToMove); //Clean Old Cell
+            unitToMove.cell = newCell;
+            unitToMove.cell.OcuppyNewUnit(unitToMove); //Assign new Cell
+            backendService.MoveUnitOnMap(newCell, unitToMove);
+            StartCoroutine(unitToMove.MoveToNewPosition(unitToMove.path , onComplete));
+            
+            return true;
+        }
+        return false;
+    }
+
+
+    public bool TryToAttackTarget(Unit target , Unit attacker , Action onComplete)
+    {
+        if (target == null || attacker == null)
+            return false;
+        if (!IsEnemyNearBy(attacker.cell))
+            return false;
+        backendService.AttackUnit(target, attacker);
+        StartCoroutine(attacker.AttackTarget(target, onComplete));
+        return true;
     }
 
     public void StartBattleAction(List<UnitModel> enemyUnits)
@@ -223,10 +258,32 @@ public class BattlefieldManager : MonoBehaviour
         
     }
 
-    internal void SelectTargetUnit(Unit unit)
+    internal void SelectTargetUnit(Unit target)
     {
-        var cells = gridController.FindAllNeighbours(unit.cell);
+        Unit playerUnit = GetSelectedUnit();
+        if (playerUnit == null)
+        {
+            Debug.Log("Player unit selected not Found in SelectTargetUnit");
+            GameManager.instance.StageUpdate_PlayerTurn();
+        }
+
+        if (!GameManager.instance.CheckStage(GameManager.GameStages.PlayerTurn_UnitSelected))
+            return;
+        targetEnemyUnit = target;
+        var cells = gridController.FindAllNeighbours(target.cell);
         foreach (var cell in cells) 
             cell.Highlight(true);
+        GameManager.instance.StageUpdate_PlayerTurn_UnitSelected_EnemyTargetSelected(playerUnit, target);
+    }
+
+    internal Unit GetTargetEnemyUnit()
+    {
+        return targetEnemyUnit;
+    }
+
+    internal void SaveAttack(Unit playerUnit, Unit targetUnit)
+    {
+        //TODO : Save Attack to send to backend when the player confirms the attack action
+        return;
     }
 }

@@ -10,8 +10,7 @@ namespace Assets.Assets.Scripts.Interfaces
 {
     public interface ISoldier
     {
-        public void MoveToNewCell(GridCell newCell);
-        public IEnumerator MoveToNewPosition(List<GridCell> path);
+        public IEnumerator MoveToNewPosition(List<GridCell> path, Action onComplete);
         public void Action();
         public void Attack(ISoldier targetSoldier);
         public void ReceiveDamage(float damageAmmount);

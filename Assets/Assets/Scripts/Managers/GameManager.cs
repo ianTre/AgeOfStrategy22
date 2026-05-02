@@ -1,4 +1,6 @@
 using Assets.Assets.Scripts;
+using Assets.Assets.Scripts.Backend;
+using Assets.Assets.Scripts.Managers;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,6 +18,7 @@ public class GameManager : MonoBehaviour
 
     //Nedded References
     BattlefieldManager battlefieldManager;
+    AIEnemyManager aIEnemyManager;
 
 
     void Start()
@@ -23,6 +26,8 @@ public class GameManager : MonoBehaviour
         battlefieldManager = GetComponent<BattlefieldManager>();
         uIManager = GetComponent<UIManager>();
         StageUpdate_PlayerDeploy();
+        GridController gridController = FindObjectOfType<GridController>();
+        aIEnemyManager = new AIEnemyManager(gridController);
     }
 
     private void Awake()
@@ -49,12 +54,10 @@ public class GameManager : MonoBehaviour
                 case GameStages.EnemyDeploy:
                     break;
                 case GameStages.PlayerTurn:
-                    InputManager.instance.EnableControllers();
                     break;
                 case GameStages.PlayerTurn_UnitSelected:
                     break;
                 case GameStages.PlayerTurn_UnitSelected_UnitMovement:
-                    InputManager.instance.DisableControllers();
                     break;
                 case GameStages.PlayerTurn_UnitSelected_EnemyTargetSelected:
                     break;
@@ -63,8 +66,8 @@ public class GameManager : MonoBehaviour
                 default:
                     break;
             }
-            oldGameStage = gameStage;
         }
+        oldGameStage = gameStage;
     }
 
 
@@ -75,12 +78,15 @@ public class GameManager : MonoBehaviour
         newSelectedObject = FindActionableRecursibly(newSelectedObject);
         newSelectedObject.TryGetComponent<IMouseActionable>(out IMouseActionable actionable);
 
+        lastSelectedObject = newSelectedObject;
+
         if (gameStage == GameStages.PlayerDeploy)
         {
             if (lastActionable != null)
                 lastActionable.Deselect();
             if (actionable != null)
                 actionable.Select();
+            return;
         }
 
         if (gameStage == GameStages.PlayerDeploy_CardSelected)
@@ -90,6 +96,7 @@ public class GameManager : MonoBehaviour
                 newSelectedObject.TryGetComponent<GridCell>(out GridCell gridCell);
                 StageUpdate_PlayerDeploy_CardSelected_CellSelected(gridCell);
             }
+            return;
         }
 
         if (gameStage == GameStages.PlayerTurn || gameStage == GameStages.PlayerTurn_UnitSelected)
@@ -98,19 +105,7 @@ public class GameManager : MonoBehaviour
                 lastActionable.Deselect();
             if (actionable != null)
                 actionable.Select();
-
-            Unit unit = battlefieldManager.PlayerUnits.Find(u => u.transform.GetComponent<PlayerUnit>().hasBeingSelected);
-            if (unit != null)
-            {
-                gameStage = GameStages.PlayerTurn_UnitSelected;
-            }
-            else
-            {
-                gameStage = GameStages.PlayerTurn;
-            }
         }
-
-        lastSelectedObject = newSelectedObject;
     }
 
     public void RightClickOnNewObject(GameObject newSelectedObject)
@@ -118,10 +113,21 @@ public class GameManager : MonoBehaviour
         newSelectedObject = FindActionableRecursibly(newSelectedObject);
         newSelectedObject.TryGetComponent<IMouseActionable>(out IMouseActionable actionable);
 
-        if (gameStage == GameStages.PlayerTurn_UnitSelected)
+        if (CheckStage(GameStages.PlayerTurn_UnitSelected))
         {
             if (actionable != null)
                 actionable.Action();
+            return;
+        }
+
+        if (CheckStage(GameStages.PlayerTurn_UnitSelected_EnemyTargetSelected))
+        {
+            //Should select 
+            if (newSelectedObject.TryGetComponent<GridCell>(out GridCell cell))
+            {
+                actionable.Action();
+            }
+            return;
         }
     }
 
@@ -143,8 +149,18 @@ public class GameManager : MonoBehaviour
     public void CellCalledForAction(GridCell cell)
     {
         var selectedUnit = battlefieldManager.GetSelectedUnit();
-        if (selectedUnit != null)
-            StageUpdate_PlayerTurn_UnitSelected_UnitMovement(selectedUnit, cell);
+        if (CheckStage(GameStages.PlayerTurn_UnitSelected))
+        {
+            if (selectedUnit != null)
+                StageUpdate_PlayerTurn_UnitSelected_UnitMovement(selectedUnit, cell);
+        }
+
+        if(CheckStage(GameStages.PlayerTurn_UnitSelected_EnemyTargetSelected))
+        {
+            Unit targetUnit = battlefieldManager.GetTargetEnemyUnit();
+            if (selectedUnit != null && targetUnit != null)
+                StageUpdate_PlayerTurn_UnitSelected_EnemyTargetSelected_PositionToAttackSelected(selectedUnit, targetUnit, cell);
+        }
     }
 
     public void SpecialAction()
@@ -249,24 +265,57 @@ public class GameManager : MonoBehaviour
         gameStage = GameStages.PlayerTurn_UnitSelected;
     }
 
+    public void StageUpdate_PlayerTurn_UnitSelected_EnemyTargetSelected(Unit playerUnit , Unit targetUnit)
+    {
+        gameStage = GameStages.PlayerTurn_UnitSelected_EnemyTargetSelected;
+
+    }
+
+    public void StageUpdate_PlayerTurn_UnitSelected_EnemyTargetSelected_PositionToAttackSelected(Unit playerUnit, Unit targetUnit, GridCell cellToAttack)
+    {
+        gameStage = GameStages.PlayerTurn_UnitSelected_EnemyTargetSelected_PositionToAttackSelected;
+        battlefieldManager.TryToMoveToNewCell(cellToAttack, playerUnit, () =>
+        {
+            PrepareToAttackUnit(playerUnit, targetUnit);
+        });
+    }
+
+
+    public void PrepareToAttackUnit(Unit playerUnit , Unit targetUnit)
+    {
+        battlefieldManager.TryToAttackTarget(playerUnit, targetUnit, () =>
+        {
+            StageUpdate_PlayerTurn_UnitSelected_EnemyTargetSelected_PositionToAttackSelected_attackMade(playerUnit,targetUnit);
+        });
+    }
+
+    public void StageUpdate_PlayerTurn_UnitSelected_EnemyTargetSelected_PositionToAttackSelected_attackMade(Unit playerUnit , Unit targetUnit)
+    {
+        gameStage = GameStages.PlayerTurn_UnitSelected_EnemyTargetSelected_PositionToAttackSelected_attackMade;
+        battlefieldManager.SaveAttack(playerUnit,targetUnit);
+    }
+
 
     public void StageUpdate_PlayerTurn_UnitSelected_UnitMovement(Unit selectedUnit, GridCell destinyCell)
     {
         gameStage = GameStages.PlayerTurn_UnitSelected_UnitMovement;
         InputManager.instance.DisableControllers();
-        battlefieldManager.MoveToSelectedCell(selectedUnit, destinyCell);
+        battlefieldManager.TryToMoveToNewCell(destinyCell, selectedUnit , () =>
+        {
+            StageUpdate_EnemyTurn();
+        });
     }
 
     public void StageUpdate_EnemyTurn()
     {
         gameStage = GameStages.EnemyTurn;
-        StageUpdate_PlayerTurn();
+        aIEnemyManager.ChooseNextMovement();
     }
 
-
-
-
-
+    internal bool CheckStage(GameStages stage)
+    {
+        return gameStage == stage;
+    }
 
     public enum GameStages
     {
@@ -277,8 +326,10 @@ public class GameManager : MonoBehaviour
         EnemyDeploy = 20,
         PlayerTurn = 100,
         PlayerTurn_UnitSelected = 110,
-        PlayerTurn_UnitSelected_UnitMovement = 111,
-        PlayerTurn_UnitSelected_EnemyTargetSelected = 112,
+        PlayerTurn_UnitSelected_EnemyTargetSelected = 115,
+        PlayerTurn_UnitSelected_EnemyTargetSelected_PositionToAttackSelected = 116,
+        PlayerTurn_UnitSelected_EnemyTargetSelected_PositionToAttackSelected_attackMade = 118,
+        PlayerTurn_UnitSelected_UnitMovement = 120,
         EnemyTurn = 200,
     }
 }

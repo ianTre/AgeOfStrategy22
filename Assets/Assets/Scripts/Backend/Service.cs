@@ -28,5 +28,24 @@ namespace Assets.Assets.Scripts.Backend
             return repository.GetPlayerUnits(playerId);
         }
 
+        public PlayerUnit FindUnit(Unit unit)
+        {
+            int PlayerId = GameManager.instance.gameStage == GameManager.GameStages.EnemyTurn ? 2 : 1;
+            return repository.GetPlayerUnit(unit.cell , unit.data.unitType , unit.data.health , PlayerId);
+        }
+
+        internal void MoveUnitOnMap(GridCell gridCell, Unit unitToMove)
+        {
+            PlayerUnit unit = FindUnit(unitToMove);
+            if (unit != null)
+            {
+                repository.MoveUnit(unit.id, gridCell.x, gridCell.y);
+            }
+        }
+
+        internal void AttackUnit(Unit target, Unit attacker)
+        {
+            return;
+        }
     }
 }

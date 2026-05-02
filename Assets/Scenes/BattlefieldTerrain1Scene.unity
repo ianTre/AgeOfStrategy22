@@ -2569,9 +2569,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1809800797}
-        m_TargetAssemblyTypeName: BattlefieldManager, Assembly-CSharp
-        m_MethodName: StartBattleAction
+      - m_Target: {fileID: 1809800795}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: EndDeployButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
