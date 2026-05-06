@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GriffinCrusader
   m_EditorClassIdentifier: 
   unitName: Griffin
-  health: 110
+  health: 80
   attack: 6
   meleeArmor: 4
   pierceArmor: 6

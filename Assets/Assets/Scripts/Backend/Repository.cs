@@ -12,7 +12,7 @@ namespace Assets.Assets.Scripts.Backend
         public List<PlayerUnit> units = new List<PlayerUnit>();
         int idIndexer = 0;
 
-        public void AddUnit(int playerId ,UnitType unitType, int health , int xPos , int yPos , int ammount , UnitData unitData)
+        public int AddUnit(int playerId ,UnitType unitType, int health , int xPos , int yPos , int ammount , UnitData unitData)
         {
             if(units.Exists(u => u.xPos == xPos && u.yPos == yPos))
             {
@@ -20,6 +20,7 @@ namespace Assets.Assets.Scripts.Backend
             }
             PlayerUnit unit = new PlayerUnit(playerId , unitType , health , xPos , yPos, ammount, ++idIndexer , unitData);
             units.Add(unit);
+            return idIndexer;
         }
 
         internal PlayerUnit GetPlayerUnit(GridCell cell, UnitType unitType, int health, int playerId)

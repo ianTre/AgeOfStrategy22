@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 namespace Assets.Assets.Scripts.Backend
 {
@@ -22,7 +23,7 @@ namespace Assets.Assets.Scripts.Backend
         {
             foreach (var unit in playerUnits)
             {
-                repository.AddUnit(playerId, unit.data.unitType, unit.data.health * unit.number , unit.cell.x, unit.cell.y, unit.number , unit.data);
+                unit.Id = repository.AddUnit(playerId, unit.data.unitType, unit.data.health * unit.number , unit.cell.x, unit.cell.y, unit.number , unit.data);
             }
         }
 
@@ -58,6 +59,11 @@ namespace Assets.Assets.Scripts.Backend
             return repository.GetPlayerUnit(unit.cell, unit.data.unitType, unit.data.health * unit.number, PlayerId);
         }
 
+        public PlayerUnit FindPlayerUnitById(int id)
+        {
+            return repository.units.FirstOrDefault(u => u.id == id);
+        }
+
         internal void MoveUnitOnMap(GridCell gridCell, Unit unitToMove)
         {
             PlayerUnit unit = FindUnit(unitToMove);
@@ -69,23 +75,55 @@ namespace Assets.Assets.Scripts.Backend
 
         internal void AttackUnit(Unit defender, Unit attacker)
         {
-            PlayerUnit defenderUnit = FindEnemyUnit(defender);
-            PlayerUnit attackerUnit = FindUnit(attacker);
+            PlayerUnit defenderUnit = FindPlayerUnitById(defender.Id);
+            PlayerUnit attackerUnit = FindPlayerUnitById(attacker.Id);
             if( defenderUnit == null || attackerUnit == null)
                 throw new Exception("Target or Attacker unit not found in the repository");
 
-            // 2. Calcular daño base con eficiencia decreciente
-            float scaledQuantity = Mathf.Pow(attacker.number, 0.9f);
-            float baseDamage = attacker.data.attack * scaledQuantity;
-
-            // 4. Reducción por armadura
-            float damageAfterArmor = baseDamage *(ARMOR_CONSTANT / (ARMOR_CONSTANT + defender.data.meleeArmor));
-            int finalDamage = Mathf.RoundToInt(damageAfterArmor);
-
-            defenderUnit.healthTotal -= finalDamage;
-            defenderUnit.ammount = Mathf.CeilToInt((float)defenderUnit.healthTotal / defender.data.health);
+            int finalDamage = CalculateDamage(attackerUnit, defenderUnit);
+            RecibirImpacto(defenderUnit, finalDamage);
+            CalcularVida(defenderUnit);
 
             return;
         }
+
+        /*public static int CalculateDamage(PlayerUnit attacker, PlayerUnit defender)
+        {
+            float scaledQuantity = (float)Math.Pow(attacker.ammount, 0.9f);
+            float baseDamage = attacker.unitData.attack * scaledQuantity;
+
+            float damageAfterArmor =
+                baseDamage * (ARMOR_CONSTANT / (float)(ARMOR_CONSTANT + defender.unitData.meleeArmor));
+
+            int finalDamage = (int)Math.Max(1, MathF.Round(damageAfterArmor));
+
+            return finalDamage;
+        }*/
+
+        private static int CalculateDamage(PlayerUnit attacker, PlayerUnit defender)
+        {
+            float scaledQuantity = (float)Math.Pow(attacker.ammount, 0.9f);
+            float baseDamage = attacker.unitData.attack * scaledQuantity;
+
+            float damageAfterArmor =
+                baseDamage * ((float)100 / (100 + defender.unitData.meleeArmor));
+
+            int finalDamage = (int)Math.Max(1, MathF.Round(damageAfterArmor));
+
+            return finalDamage;
+        }
+
+        private void RecibirImpacto(PlayerUnit unit, int damage)
+        {
+            int totalHealth = unit.healthTotal - damage;
+            totalHealth = Math.Max(0, totalHealth);
+            unit.healthTotal = totalHealth;
+        }
+
+        private void CalcularVida(PlayerUnit unit)
+        {
+            unit.ammount = (int)Math.Ceiling((float)unit.healthTotal / unit.unitData.Health);
+        }
+
     }
 }

@@ -276,6 +276,7 @@ MonoBehaviour:
   image: {fileID: 1532788278}
   numberPanel: {fileID: 1008220085}
   unitsInitialData: {fileID: 0}
+  unitsLeftToBeCreated: 0
   selectedColor: {r: 0.29803923, g: 0.8666667, b: 0.27450982, a: 0.6431373}
   RegularColor: {r: 0.4117647, g: 0.63529414, b: 0.78431374, a: 0.6039216}
 --- !u!114 &65741101
@@ -1001,6 +1002,7 @@ MonoBehaviour:
   image: {fileID: 1461965361}
   numberPanel: {fileID: 1865856054}
   unitsInitialData: {fileID: 0}
+  unitsLeftToBeCreated: 0
   selectedColor: {r: 0.29803923, g: 0.8666667, b: 0.27450982, a: 0.6431373}
   RegularColor: {r: 0.4117647, g: 0.63529414, b: 0.78431374, a: 0.6039216}
 --- !u!114 &228283288
@@ -2188,6 +2190,7 @@ MonoBehaviour:
   image: {fileID: 2022122035}
   numberPanel: {fileID: 830260352}
   unitsInitialData: {fileID: 0}
+  unitsLeftToBeCreated: 0
   selectedColor: {r: 0.29803923, g: 0.8666667, b: 0.27450982, a: 0.6431373}
   RegularColor: {r: 0.4117647, g: 0.63529414, b: 0.78431374, a: 0.6039216}
 --- !u!114 &794286409
@@ -3014,6 +3017,7 @@ MonoBehaviour:
   image: {fileID: 1333361594}
   numberPanel: {fileID: 2100259785}
   unitsInitialData: {fileID: 0}
+  unitsLeftToBeCreated: 0
   selectedColor: {r: 0.29803923, g: 0.8666667, b: 0.27450982, a: 0.6431373}
   RegularColor: {r: 0.4117647, g: 0.63529414, b: 0.78431374, a: 0.6039216}
 --- !u!114 &1236568955
@@ -4085,6 +4089,7 @@ MonoBehaviour:
   image: {fileID: 1593672496}
   numberPanel: {fileID: 1846104632}
   unitsInitialData: {fileID: 0}
+  unitsLeftToBeCreated: 0
   selectedColor: {r: 0.29803923, g: 0.8666667, b: 0.27450982, a: 0.6431373}
   RegularColor: {r: 0.4117647, g: 0.63529414, b: 0.78431374, a: 0.6039216}
 --- !u!114 &1595619847
@@ -4415,6 +4420,7 @@ MonoBehaviour:
   image: {fileID: 1177887362}
   numberPanel: {fileID: 143638289}
   unitsInitialData: {fileID: 0}
+  unitsLeftToBeCreated: 0
   selectedColor: {r: 0.29803923, g: 0.8666667, b: 0.27450982, a: 0.6431373}
   RegularColor: {r: 0.4117647, g: 0.63529414, b: 0.78431374, a: 0.6039216}
 --- !u!114 &1679859409
@@ -4674,6 +4680,7 @@ MonoBehaviour:
   image: {fileID: 178321260}
   numberPanel: {fileID: 234938786}
   unitsInitialData: {fileID: 0}
+  unitsLeftToBeCreated: 0
   selectedColor: {r: 0.29803923, g: 0.8666667, b: 0.27450982, a: 0.6431373}
   RegularColor: {r: 0.40997687, g: 0.63380206, b: 0.7830189, a: 0.6039216}
 --- !u!114 &1730292351
@@ -4928,15 +4935,15 @@ MonoBehaviour:
     enemyAmmount: 12
     unitData: {fileID: 11400000, guid: 59d6e9d300439b34782ccf697d24b196, type: 2}
   - name: Axeman
-    playerAmmount: 11
-    enemyAmmount: 15
+    playerAmmount: 10
+    enemyAmmount: 10
     unitData: {fileID: 11400000, guid: d6e24546d02145547aeda0c27abfd1cb, type: 2}
   - name: Knight
     playerAmmount: 15
     enemyAmmount: 12
     unitData: {fileID: 11400000, guid: cf447acd2c531cf47aa2f3347a0c8ef8, type: 2}
   - name: Alabardier
-    playerAmmount: 35
+    playerAmmount: 10
     enemyAmmount: 8
     unitData: {fileID: 11400000, guid: 594db0c124175e6408cb2d9c0462c089, type: 2}
   - name: Axe Warrior
@@ -5288,6 +5295,7 @@ MonoBehaviour:
   image: {fileID: 2060754639}
   numberPanel: {fileID: 136718464}
   unitsInitialData: {fileID: 0}
+  unitsLeftToBeCreated: 0
   selectedColor: {r: 0.2975763, g: 0.8679245, b: 0.27429688, a: 0.6431373}
   RegularColor: {r: 0.4117647, g: 0.63529414, b: 0.78431374, a: 0.6039216}
 --- !u!114 &1903991535
@@ -5738,6 +5746,7 @@ MonoBehaviour:
   image: {fileID: 775912718}
   numberPanel: {fileID: 1122633169}
   unitsInitialData: {fileID: 0}
+  unitsLeftToBeCreated: 0
   selectedColor: {r: 0.29803923, g: 0.8666667, b: 0.27450982, a: 0.6431373}
   RegularColor: {r: 0.4117647, g: 0.63529414, b: 0.78431374, a: 0.6039216}
 --- !u!114 &2063371626

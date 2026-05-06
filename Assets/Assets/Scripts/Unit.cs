@@ -20,6 +20,7 @@ public class Unit : MonoBehaviour , ISoldier
     [SerializeField] private float moveSpeed = 3f;              // velocidad en unidades por segundo
     [SerializeField] private float rotationSpeed = 5f;          // grados por segundo para rotar suavemente
     [SerializeField] private float stoppingDistance = 0.05f;    // distancia m�nima 
+    public int Id;
 
 
     public void InitUnit(UnitData data, GridCell cell, int amount)
