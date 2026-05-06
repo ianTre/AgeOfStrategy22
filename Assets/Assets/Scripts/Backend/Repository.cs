@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 
 namespace Assets.Assets.Scripts.Backend
 {
@@ -11,19 +12,20 @@ namespace Assets.Assets.Scripts.Backend
         public List<PlayerUnit> units = new List<PlayerUnit>();
         int idIndexer = 0;
 
-        public void AddUnit(int playerId ,UnitType unitType, int health , int xPos , int yPos)
+        public void AddUnit(int playerId ,UnitType unitType, int health , int xPos , int yPos , int ammount , UnitData unitData)
         {
             if(units.Exists(u => u.xPos == xPos && u.yPos == yPos))
             {
                 throw new Exception("There is already an unit in this position");
             }
-            PlayerUnit unit = new PlayerUnit(playerId , unitType , health , xPos , yPos, ++idIndexer);
+            PlayerUnit unit = new PlayerUnit(playerId , unitType , health , xPos , yPos, ammount, ++idIndexer , unitData);
             units.Add(unit);
         }
 
         internal PlayerUnit GetPlayerUnit(GridCell cell, UnitType unitType, int health, int playerId)
         {
-            return this.units.FirstOrDefault(unit => unit.xPos == cell.x && unit.yPos == cell.y && unit.unitType == unitType && unit.health == health && unit.playerId == playerId);
+            var playerUnits = units.Where(u => u.playerId == playerId).ToList();
+            return this.units.FirstOrDefault(unit => unit.xPos == cell.x && unit.yPos == cell.y && unit.unitType == unitType && unit.healthTotal == health && unit.playerId == playerId);
         }
 
         internal List<PlayerUnit> GetPlayerUnits(int playerId)
@@ -47,19 +49,23 @@ namespace Assets.Assets.Scripts.Backend
     {
         public int playerId;
         public UnitType unitType;
-        public int health;
+        public int healthTotal;
+        public int ammount;
         public int xPos;
         public int yPos;
         public int id;
+        public UnitData unitData;
 
-        public PlayerUnit(int playerId , UnitType unitType , int health , int xPos , int yPos , int id)
+        public PlayerUnit(int playerId , UnitType unitType , int health , int xPos , int yPos ,int ammount , int id , UnitData unitData)
         {
             this.playerId = playerId;
             this.unitType = unitType;
-            this.health = health;
+            this.healthTotal = health;
+            this.ammount = ammount;
             this.xPos = xPos;
             this.yPos = yPos;
             this.id = id;
+            this.unitData = unitData;
         }
     }
 }

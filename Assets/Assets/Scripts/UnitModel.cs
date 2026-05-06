@@ -11,28 +11,24 @@ namespace Assets.Assets.Scripts
     {
         public UnitData InitialData { get; set; }
         public int number;
-        public int totalHealth;
-        public int totalAttack;
 
 
         public UnitModel(UnitData initialData , int initialNumber)
         {
             this.InitialData = initialData;
             this.number = initialNumber;
-            this.totalAttack = initialData.Health * initialNumber;
-            this.totalAttack = initialData.Attack * initialNumber;
         }
     }
 
     public enum UnitType
     {
-        SwordMan = 1,
-        Champion = 10,
-        Spearman = 2,
-        Pikeman = 20,
-        Archer = 3,
-        Ranger = 30,
-        Monk = 4,
-        Axeman = 5,
+        Alabardier,
+        Axeman,
+        GriffinCrusader,
+        Knight,
+        MaceWarrior,
+        ManAtArms,
+        Spierman,
+        WarAxeSoldier
     }
 }

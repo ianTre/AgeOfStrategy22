@@ -27,6 +27,7 @@ public class BattlefieldManager : MonoBehaviour
     public List<Unit> EnemyUnits;
     
     private UnitData intendedUnitToCreate;
+    private int intendedUnitAmountToCreate;
     private Unit targetEnemyUnit;
     public GameObject selectionLightPrefab;
     
@@ -69,14 +70,14 @@ public class BattlefieldManager : MonoBehaviour
             return false;
         }
         newUnit.AddComponent<PlayerUnit>();
-        unit.InitUnit(intendedUnitToCreate, gridCell);
+        unit.InitUnit(intendedUnitToCreate, gridCell, intendedUnitAmountToCreate);
         gridCell.OcuppyNewUnit(unit);
         PlayerUnits.Add(unit);
         lastClickedCard.DisableCard();
         return true;
     }
 
-    private bool CreateEnemyUnit(int xPos ,int yPos , UnitData unitData)
+    private bool CreateEnemyUnit(int xPos ,int yPos , UnitData unitData , int amount)
     {
         GridCell gridCell = gridController.gridArray[xPos, yPos].GetComponent<GridCell>();
         if (!gridCell || !gridCell.TryOcuppieCell())
@@ -88,7 +89,7 @@ public class BattlefieldManager : MonoBehaviour
             Debug.LogError("BattlefieldManager: The prefab assigned to the DeployCardController does not have a Unit component.");
             return false;
         }
-        unit.InitUnit(unitData, gridCell);
+        unit.InitUnit(unitData, gridCell, amount);
         gridCell.OcuppyNewUnit(unit);
         EnemyUnits.Add(unit);
         return true;
@@ -103,7 +104,7 @@ public class BattlefieldManager : MonoBehaviour
             {
                 int y = Random.Range(0, 2);
                 int x = Random.Range(0, gridController.columns);
-                created = CreateEnemyUnit(x, y, unit.InitialData);
+                created = CreateEnemyUnit(x, y, unit.InitialData, unit.number);
             }
             
         }
@@ -114,6 +115,7 @@ public class BattlefieldManager : MonoBehaviour
     {
         lastClickedCard = deployCardController;
         intendedUnitToCreate = deployCardController.unitsInitialData;
+        intendedUnitAmountToCreate = deployCardController.unitsLeftToBeCreated;
     }
 
     internal void SetPlayerInitialUnits(List<UnitModel> playerUnits)
@@ -181,10 +183,10 @@ public class BattlefieldManager : MonoBehaviour
         unitToMove.path = FindShortestPath(unitToMove.cell, newCell);
         if (unitToMove.path != null && unitToMove.path.Count > 0)
         {
+            backendService.MoveUnitOnMap(newCell, unitToMove);
             unitToMove.cell.RemoveUnit(unitToMove); //Clean Old Cell
             unitToMove.cell = newCell;
             unitToMove.cell.OcuppyNewUnit(unitToMove); //Assign new Cell
-            backendService.MoveUnitOnMap(newCell, unitToMove);
             StartCoroutine(unitToMove.MoveToNewPosition(unitToMove.path , onComplete));
             
             return true;
@@ -193,7 +195,7 @@ public class BattlefieldManager : MonoBehaviour
     }
 
 
-    public bool TryToAttackTarget(Unit target , Unit attacker , Action onComplete)
+    public bool TryToAttackTarget(Unit attacker, Unit target, Action onComplete)
     {
         if (target == null || attacker == null)
             return false;

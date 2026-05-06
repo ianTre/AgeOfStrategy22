@@ -22,10 +22,11 @@ public class Unit : MonoBehaviour , ISoldier
     [SerializeField] private float stoppingDistance = 0.05f;    // distancia m�nima 
 
 
-    public void InitUnit(UnitData data, GridCell cell)
+    public void InitUnit(UnitData data, GridCell cell, int amount)
     {
         this.data = data;
         this.cell = cell;
+        this.number = amount;
     }
 
 
@@ -87,5 +88,11 @@ public class Unit : MonoBehaviour , ISoldier
     {
         yield return new WaitForSeconds(1.5f); // Simulate attack delay
         this.transform.LookAt(target.transform);
+        target.transform.LookAt(this.transform);
+        this.GetComponent<UnitAnimationController>().TriggerAttack();
+        yield return new WaitForSeconds(0.3f); // Simulate attack delay
+        target.GetComponent<UnitAnimationController>().TriggerDefend();
+        yield return new WaitForSeconds(1f); // Simulate attack delay
+        onComplete?.Invoke();
     }
 }

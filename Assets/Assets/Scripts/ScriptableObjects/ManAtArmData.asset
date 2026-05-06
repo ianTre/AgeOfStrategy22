@@ -17,5 +17,6 @@ MonoBehaviour:
   attack: 4
   meleeArmor: 0
   pierceArmor: 1
+  unitType: 5
   prefab: {fileID: 4138094116943848924, guid: 8249d5003c687d146875e0bdd0340019, type: 3}
   photo: {fileID: 21300000, guid: 5206ea7061444e640af2a4f426c2d3fd, type: 3}

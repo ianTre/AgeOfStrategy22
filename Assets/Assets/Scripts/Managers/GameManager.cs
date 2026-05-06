@@ -293,6 +293,7 @@ public class GameManager : MonoBehaviour
     {
         gameStage = GameStages.PlayerTurn_UnitSelected_EnemyTargetSelected_PositionToAttackSelected_attackMade;
         battlefieldManager.SaveAttack(playerUnit,targetUnit);
+        StageUpdate_EnemyTurn();
     }
 
 
@@ -315,6 +316,11 @@ public class GameManager : MonoBehaviour
     internal bool CheckStage(GameStages stage)
     {
         return gameStage == stage;
+    }
+
+    internal bool CheckStages(List<GameStages> stages)
+    {
+        return stages.Contains(gameStage);
     }
 
     public enum GameStages

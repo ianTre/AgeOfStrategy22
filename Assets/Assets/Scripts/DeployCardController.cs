@@ -12,7 +12,7 @@ public class DeployCardController : MonoBehaviour
     [SerializeField] private RectTransform image;
     [SerializeField] private RectTransform numberPanel;
     public UnitData unitsInitialData;
-    private int unitsLeftToBeCreated = 0;
+    public int unitsLeftToBeCreated = 0;
     GameManager gameManager;
     bool cardIsEnable;
     [SerializeField] private Color selectedColor;
