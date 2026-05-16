@@ -274,9 +274,11 @@ public class BattlefieldManager : MonoBehaviour
         targetEnemyUnit = target;
         var cells = gridController.FindAllNeighbours(target.cell);
         foreach (var cell in cells) 
-            cell.Highlight(true);
+            cell.PaintCell();
         GameManager.instance.StageUpdate_PlayerTurn_UnitSelected_EnemyTargetSelected(playerUnit, target);
     }
+
+
 
     internal Unit GetTargetEnemyUnit()
     {

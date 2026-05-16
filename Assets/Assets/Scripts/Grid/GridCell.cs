@@ -15,6 +15,7 @@ public class GridCell : MonoBehaviour, IMouseActionable
     public Unit unit;
     private bool skipHover = false;
 
+
     public bool IsSelected => isSelected;
 
     // Start is called before the first frame update
@@ -27,6 +28,18 @@ public class GridCell : MonoBehaviour, IMouseActionable
     void Update()
     {
 
+    }
+
+    public void PaintCell()
+    {
+        this.skipHover = true;
+        this.Highlight(true);
+    }
+
+    public void UnPaintCell()
+    {
+        this.skipHover = false;
+        this.UnHighlight();
     }
 
     public void Init(bool isOffset)
@@ -91,15 +104,18 @@ public class GridCell : MonoBehaviour, IMouseActionable
 
     public void Hover()
     {
-        if (skipHover)
-            return;
         this.Highlight(false);
     }
 
     public void UnHover()
     {
         if (!isSelected)
-            this.UnHighlight();
+        {
+            if(skipHover)
+                this.Highlight(true);
+            else
+                this.UnHighlight();
+        }
     }
 
     internal void RemoveUnit(Unit unit)

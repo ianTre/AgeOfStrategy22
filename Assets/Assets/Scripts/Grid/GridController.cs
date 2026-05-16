@@ -189,6 +189,11 @@ public class GridController : MonoBehaviour
         return gridCells;
     }
 
+    public void UnPaintNeighbourd(GridCell target)
+    {
+        FindAllNeighbours(target).ForEach(cell => cell.UnPaintCell());
+    }
+
     private GridCell CheckCell(List<GridCell> gridCells, int x, int y, GridCell target)
     {
         if (CoordinatesInsideScope(x,y) && gridArray[x, y] != null && gridArray[x, y].TryGetComponent<GridCell>(out target))

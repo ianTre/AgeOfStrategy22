@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     private UIManager uIManager;
     private GameObject lastSelectedObject;
     public static GameManager instance;
-
+    GridController gridController;
     //Nedded References
     BattlefieldManager battlefieldManager;
     AIEnemyManager aIEnemyManager;
@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
         battlefieldManager = GetComponent<BattlefieldManager>();
         uIManager = GetComponent<UIManager>();
         StageUpdate_PlayerDeploy();
-        GridController gridController = FindObjectOfType<GridController>();
+        gridController = FindObjectOfType<GridController>();
         aIEnemyManager = new AIEnemyManager(gridController);
     }
 
@@ -268,12 +268,13 @@ public class GameManager : MonoBehaviour
     public void StageUpdate_PlayerTurn_UnitSelected_EnemyTargetSelected(Unit playerUnit , Unit targetUnit)
     {
         gameStage = GameStages.PlayerTurn_UnitSelected_EnemyTargetSelected;
-
+        
     }
 
     public void StageUpdate_PlayerTurn_UnitSelected_EnemyTargetSelected_PositionToAttackSelected(Unit playerUnit, Unit targetUnit, GridCell cellToAttack)
     {
         gameStage = GameStages.PlayerTurn_UnitSelected_EnemyTargetSelected_PositionToAttackSelected;
+        gridController.UnPaintNeighbourd(targetUnit.cell);
         battlefieldManager.TryToMoveToNewCell(cellToAttack, playerUnit, () =>
         {
             PrepareToAttackUnit(playerUnit, targetUnit);
