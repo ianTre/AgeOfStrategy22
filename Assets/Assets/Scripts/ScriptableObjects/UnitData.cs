@@ -12,6 +12,7 @@ public class UnitData : ScriptableObject
     [SerializeField] public int attack;
     [SerializeField] public int meleeArmor;
     [SerializeField] public int pierceArmor;
+    [SerializeField] public int scope = 2;
     [SerializeField] public UnitType unitType;
     [SerializeField] public GameObject prefab;
     [SerializeField] public Sprite photo;

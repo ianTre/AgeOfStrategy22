@@ -17,6 +17,7 @@ public class Unit : MonoBehaviour , ISoldier
     public int number;
     public GridCell cell;
     public List<GridCell> path;
+    public bool isAlive = true;
     [SerializeField] private float moveSpeed = 3f;              // velocidad en unidades por segundo
     [SerializeField] private float rotationSpeed = 5f;          // grados por segundo para rotar suavemente
     [SerializeField] private float stoppingDistance = 0.05f;    // distancia m�nima 
@@ -28,6 +29,8 @@ public class Unit : MonoBehaviour , ISoldier
         this.data = data;
         this.cell = cell;
         this.number = amount;
+        HealthBarController healthBarController = this.transform.GetComponentInChildren<HealthBarController>();
+        healthBarController?.InitializeMaxHealth(data.health);
     }
 
 
@@ -69,10 +72,18 @@ public class Unit : MonoBehaviour , ISoldier
         onComplete?.Invoke();
     }
 
+    public void IsAlive(bool alive)
+    {
+        this.isAlive = alive;
+    }
+
 
     public void Action()
     {
-        BattlefieldManager.instance.SelectTargetUnit(this);
+        if (isAlive)
+        {
+            BattlefieldManager.instance.SelectTargetUnit(this);
+        }
     }
 
     public void Attack(ISoldier targetSoldier)
@@ -93,6 +104,12 @@ public class Unit : MonoBehaviour , ISoldier
         this.GetComponent<UnitAnimationController>().TriggerAttack();
         yield return new WaitForSeconds(0.3f); // Simulate attack delay
         target.GetComponent<UnitAnimationController>().TriggerDefend();
+        target.GetComponentInChildren<HealthBarController>().DisplayDamage();
+        if(!target.isAlive)
+        {
+            yield return new WaitForSeconds(0.5f); // Simulate attack delay
+            target.GetComponent<UnitAnimationController>().TriggerDeath();
+        }
         yield return new WaitForSeconds(1f); // Simulate attack delay
         onComplete?.Invoke();
     }

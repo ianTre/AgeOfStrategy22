@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class GridController : MonoBehaviour
 {
@@ -33,13 +35,13 @@ public class GridController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void GenerateGrid()
@@ -65,10 +67,10 @@ public class GridController : MonoBehaviour
     private void WriteNameOnTextComponent(GameObject obj)
     {
         var textTransform = obj.transform.Find("InfoText");
-        if(textTransform != null)
+        if (textTransform != null)
         {
             var text = textTransform.GetComponent<TextMeshPro>();
-            if(text != null)
+            if (text != null)
                 text.text = obj.name;
         }
     }
@@ -80,7 +82,7 @@ public class GridController : MonoBehaviour
         {
             var text = textTransform.GetComponent<TextMeshPro>();
             if (text != null)
-                text.text += " D: " +obj.visited.ToString();
+                text.text += " D: " + obj.visited.ToString();
         }
     }
 
@@ -100,10 +102,10 @@ public class GridController : MonoBehaviour
         int y = endY;
         List<GameObject> tempList = new List<GameObject>();
         pathList.Clear();
-        if (gridArray[x,y] && gridArray[x, y].GetComponent<GridCell>().visited > 0)
+        if (gridArray[x, y] && gridArray[x, y].GetComponent<GridCell>().visited > 0)
         {
             pathList.Add(gridArray[x, y].GetComponent<GridCell>());
-            step = gridArray[x,y].GetComponent<GridCell>().visited - 1 ;
+            step = gridArray[x, y].GetComponent<GridCell>().visited - 1;
         }
         else
         {
@@ -111,9 +113,9 @@ public class GridController : MonoBehaviour
             return;
         }
 
-        for (int i = step; step > -1 ; step--)
+        for (int i = step; step > -1; step--)
         {
-            GridCell lastObj = pathList.Find(grid => grid.visited == step+1);
+            GridCell lastObj = pathList.Find(grid => grid.visited == step + 1);
             x = lastObj.x;
             y = lastObj.y;
             if (TestDirection(x, y, step, 1))
@@ -123,7 +125,7 @@ public class GridController : MonoBehaviour
             }
             if (TestDirection(x, y, step, 2))
             {
-                pathList.Add(gridArray[x + 1 , y ].GetComponent<GridCell>());
+                pathList.Add(gridArray[x + 1, y].GetComponent<GridCell>());
                 continue;
             }
             if (TestDirection(x, y, step, 3))
@@ -145,7 +147,7 @@ public class GridController : MonoBehaviour
         int x = origin.x;
         int y = origin.y;
         GridCell target = null;
-        
+
         //1
         x = origin.x - 1;
         y = origin.y;
@@ -196,7 +198,7 @@ public class GridController : MonoBehaviour
 
     private GridCell CheckCell(List<GridCell> gridCells, int x, int y, GridCell target)
     {
-        if (CoordinatesInsideScope(x,y) && gridArray[x, y] != null && gridArray[x, y].TryGetComponent<GridCell>(out target))
+        if (CoordinatesInsideScope(x, y) && gridArray[x, y] != null && gridArray[x, y].TryGetComponent<GridCell>(out target))
         {
             if (!target.isOccupied)
                 gridCells.Add(target);
@@ -207,7 +209,7 @@ public class GridController : MonoBehaviour
 
     private bool CoordinatesInsideScope(int x, int y)
     {
-        if(x >= 0 && y >= 0 && x < columns && y < rows)
+        if (x >= 0 && y >= 0 && x < columns && y < rows)
             return true;
         return false;
     }
@@ -224,7 +226,7 @@ public class GridController : MonoBehaviour
         return pathList.OrderBy(cell => cell.visited).ToList();
     }
 
-    bool TestDirection(int x, int y , int step , int direction)
+    bool TestDirection(int x, int y, int step, int direction)
     {
         // 1 is UP
         // 2 is Right
@@ -234,25 +236,25 @@ public class GridController : MonoBehaviour
         switch (direction)
         {
             case 1:
-                if (y + 1 < rows && gridArray[x, y + 1] && gridArray[x, y + 1].GetComponent<GridCell>().visited == step && !gridArray[x , y + 1 ].GetComponent<GridCell>().isOccupied)
+                if (y + 1 < rows && gridArray[x, y + 1] && gridArray[x, y + 1].GetComponent<GridCell>().visited == step && !gridArray[x, y + 1].GetComponent<GridCell>().isOccupied)
                     return true;
                 else
                     return false;
 
             case 2:
-                if (x + 1 < columns && gridArray[x + 1 , y ] && gridArray[x + 1, y ].GetComponent<GridCell>().visited == step && !gridArray[x+1 , y].GetComponent<GridCell>().isOccupied)
+                if (x + 1 < columns && gridArray[x + 1, y] && gridArray[x + 1, y].GetComponent<GridCell>().visited == step && !gridArray[x + 1, y].GetComponent<GridCell>().isOccupied)
                     return true;
                 else
                     return false;
 
             case 3:
-                if (y - 1 > -1  && gridArray[x, y - 1] && gridArray[x, y - 1].GetComponent<GridCell>().visited == step && !gridArray[x,y-1].GetComponent<GridCell>().isOccupied)
+                if (y - 1 > -1 && gridArray[x, y - 1] && gridArray[x, y - 1].GetComponent<GridCell>().visited == step && !gridArray[x, y - 1].GetComponent<GridCell>().isOccupied)
                     return true;
                 else
                     return false;
 
             case 4:
-                if (x - 1 > -1 && gridArray[x - 1 , y] && gridArray[x - 1 , y ].GetComponent<GridCell>().visited == step && !gridArray[x-1,y].GetComponent<GridCell>().isOccupied)
+                if (x - 1 > -1 && gridArray[x - 1, y] && gridArray[x - 1, y].GetComponent<GridCell>().visited == step && !gridArray[x - 1, y].GetComponent<GridCell>().isOccupied)
                     return true;
                 else
                     return false;
@@ -262,7 +264,7 @@ public class GridController : MonoBehaviour
         }
     }
 
-    void SetupVisited(int x , int y , int step)
+    void SetupVisited(int x, int y, int step)
     {
         if (gridArray[x, y])
         {
@@ -282,21 +284,94 @@ public class GridController : MonoBehaviour
         {
             foreach (GameObject obj in gridArray)
             {
-                if(obj.GetComponent<GridCell>().visited == step-1)
+                if (obj.GetComponent<GridCell>().visited == step - 1)
                     TestFourDirections(obj.GetComponent<GridCell>().x, obj.GetComponent<GridCell>().y, step);
             }
         }
     }
 
-    void TestFourDirections(int x , int y , int step)
+    void TestFourDirections(int x, int y, int step)
     {
-        if(TestDirection(x,y,-1, 1))
+        if (TestDirection(x, y, -1, 1))
             SetupVisited(x, y + 1, step);
-        if(TestDirection(x, y, -1, 2))
+        if (TestDirection(x, y, -1, 2))
             SetupVisited(x + 1, y, step);
-        if(TestDirection(x, y, -1, 3))
+        if (TestDirection(x, y, -1, 3))
             SetupVisited(x, y - 1, step);
-        if(TestDirection(x, y, -1, 4))
+        if (TestDirection(x, y, -1, 4))
             SetupVisited(x - 1, y, step);
+    }
+
+    public void InitializeCellsForDeploy()
+    {
+        var cellsToEnable = cellsList.Where(cell => cell.y >= rows - 2).ToList();
+        EnableCells(cellsToEnable);
+    }
+
+    public void DisableAllCells()
+    {
+        cellsList.ForEach(cell => cell.canBeActionable = false);
+    }
+
+    public void EnableCells(List<GridCell> gridCells)
+    {
+        gridCells.ForEach(cell => cell.canBeActionable = true);
+    }
+
+    internal void EnableScopedCells(Unit selectedUnit)
+    {
+        GridCell currentCell = selectedUnit.cell;
+        int scope = selectedUnit.data.scope;
+
+        var scopedCells = FindScopedCells(currentCell, scope);
+        EnableCells(scopedCells);
+    }
+
+    private List<GridCell> FindScopedCells(GridCell currentCell, int scope)
+    {
+        var scopedCells = new List<GridCell>();
+        int x = currentCell.x;
+        var y = currentCell.y;
+
+        int minX, maxX, minY, maxY;
+
+        minX = Mathf.Max(0, x - scope);
+        maxX = Mathf.Min(columns, x + scope);
+        minY = Mathf.Max(0, y - scope);
+        maxY = Mathf.Min(rows, y + scope);
+
+        for (int i = minX; i <= maxX; i++)
+        {
+            for (int j = minY; j <= maxY; j++)
+            {
+                if (CoordinatesInsideScope(i, j))
+                {
+                    GridCell gCell = gridArray[i, j].GetComponent<GridCell>();
+                    if (gCell == currentCell)
+                        continue;
+
+                    if (CanBeActionable(gCell))
+                        scopedCells.Add(gCell);
+                }
+            }
+        }
+
+
+        return scopedCells;
+    }
+
+    private bool CanBeActionable(GridCell gCell)
+    {
+        if (gCell.canBeActionable) //Already actionable
+            return false;
+
+        if (gCell.isOccupied && gCell.unit != null) //Cell ocuppied by friendly Unit
+        {
+            Unit unit = gCell.unit;
+            if (BattlefieldManager.instance.PlayerUnits.Contains(unit))
+                return false;
+        }
+
+        return true;
     }
 }

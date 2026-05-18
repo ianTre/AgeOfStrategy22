@@ -25,9 +25,9 @@ public class GameManager : MonoBehaviour
     {
         battlefieldManager = GetComponent<BattlefieldManager>();
         uIManager = GetComponent<UIManager>();
-        StageUpdate_PlayerDeploy();
         gridController = FindObjectOfType<GridController>();
         aIEnemyManager = new AIEnemyManager(gridController);
+        StageUpdate_PlayerPreDeploy();
     }
 
     private void Awake()
@@ -211,15 +211,23 @@ public class GameManager : MonoBehaviour
         StageUpdate_EnemyDeploy(EnemyUnits);
     }
 
-    public void StageUpdate_PlayerDeploy()
+    public void StageUpdate_PlayerPreDeploy()
     {
         initialUnitsSetup = GetComponent<InitialUnitsSetup>();
         List<UnitModel> PlayerUnits = initialUnitsSetup.PlayerInitialSetup();
         List<UnitModel> EnemyUnits = initialUnitsSetup.EnemyInitialSetup();
 
         //Actual call for Stage Update
-        gameStage = GameStages.PlayerDeploy;
         SetInitialDataAndDeploy(PlayerUnits, EnemyUnits);
+        gridController.InitializeCellsForDeploy();
+
+        StageUpdate_PlayerDeploy();
+    }
+
+    public void StageUpdate_PlayerDeploy()
+    {
+        //Actual call for Stage Update
+        gameStage = GameStages.PlayerDeploy;
     }
 
     public void StageUpdate_PlayerDeploy_CardSelected(DeployCardController deployCardController)
@@ -230,13 +238,13 @@ public class GameManager : MonoBehaviour
 
     public void StageUpdate_PlayerDeploy_CardSelected_CellSelected(GridCell selectedCell)
     {
-        if (selectedCell != null)
+        if (selectedCell != null && selectedCell.canBeActionable)
         {
             gameStage = GameStages.PlayerDeploy_CardSelected_CellSelected;
             var isSuccess = battlefieldManager.TryAddUnit(selectedCell);
             if (isSuccess)
             {
-                gameStage = GameStages.PlayerDeploy;
+                StageUpdate_PlayerDeploy();
             }
         }
     }
@@ -257,11 +265,15 @@ public class GameManager : MonoBehaviour
     {
         gameStage = GameStages.PlayerTurn;
         InputManager.instance.EnableControllers();
+        gridController.DisableAllCells();
+        gridController.EnableCells(battlefieldManager.PlayerUnits.Select(unit => unit.cell).ToList());
     }
 
     public void StageUpdate_PlayerTurn_UnitSelected(Unit selectedUnit)
     {
-        BattlefieldManager.instance.SelectANewUnit(selectedUnit);
+        BattlefieldManager.instance.DeselectAllOtherUnits(selectedUnit);
+        gridController.DisableAllCells();
+        gridController.EnableScopedCells(selectedUnit);
         gameStage = GameStages.PlayerTurn_UnitSelected;
     }
 

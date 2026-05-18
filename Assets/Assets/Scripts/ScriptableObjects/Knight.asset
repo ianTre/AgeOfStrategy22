@@ -17,6 +17,7 @@ MonoBehaviour:
   attack: 6
   meleeArmor: 4
   pierceArmor: 4
+  scope: 2
   unitType: 3
   prefab: {fileID: 7155293158469676710, guid: d394040564377514f8ca1f7de7d50cc1, type: 3}
   photo: {fileID: 21300000, guid: e77f76b3c72d07c4eb69d1e3af92b2d3, type: 3}

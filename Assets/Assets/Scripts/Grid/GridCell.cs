@@ -14,6 +14,7 @@ public class GridCell : MonoBehaviour, IMouseActionable
     public bool isOccupied = false;
     public Unit unit;
     private bool skipHover = false;
+    public bool canBeActionable = false;
 
 
     public bool IsSelected => isSelected;
@@ -60,6 +61,8 @@ public class GridCell : MonoBehaviour, IMouseActionable
 
     public void Select()
     {
+        if(!canBeActionable) 
+            return;
         if (this.unit != null)
         {   
             PlayerUnit playerUnit = this.unit.GetComponent<PlayerUnit>();
@@ -104,6 +107,8 @@ public class GridCell : MonoBehaviour, IMouseActionable
 
     public void Hover()
     {
+        if (!canBeActionable) 
+            return;
         this.Highlight(false);
     }
 
@@ -135,6 +140,8 @@ public class GridCell : MonoBehaviour, IMouseActionable
 
     public void Action()
     {
+        if (!canBeActionable)
+            return;
         if (unit != null)
         {
             unit.Action();

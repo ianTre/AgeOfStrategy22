@@ -123,7 +123,9 @@ public class BattlefieldManager : MonoBehaviour
         this.PlayerInitialUnits = playerUnits;
     }
 
-    public void SelectANewUnit(Unit unit)
+
+
+    public void DeselectAllOtherUnits(Unit unit)
     {
         var selectedUnits = PlayerUnits.FindAll(u => u.transform.GetComponent<PlayerUnit>().hasBeingSelected && u != unit);
         if (selectedUnits != null && selectedUnits.Count > 0)
@@ -200,6 +202,8 @@ public class BattlefieldManager : MonoBehaviour
         if (target == null || attacker == null)
             return false;
         if (!IsEnemyNearBy(attacker.cell))
+            return false;
+        if (!target.isAlive)
             return false;
         backendService.AttackUnit(target, attacker);
         StartCoroutine(attacker.AttackTarget(target, onComplete));

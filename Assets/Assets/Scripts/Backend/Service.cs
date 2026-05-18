@@ -80,10 +80,19 @@ namespace Assets.Assets.Scripts.Backend
             if( defenderUnit == null || attackerUnit == null)
                 throw new Exception("Target or Attacker unit not found in the repository");
 
-            int finalDamage = CalculateDamage(attackerUnit, defenderUnit);
+            /*int finalDamage = CalculateDamage(attackerUnit, defenderUnit);
             RecibirImpacto(defenderUnit, finalDamage);
-            CalcularVida(defenderUnit);
+            CalcularVida(defenderUnit);*/
 
+            int baseDamage = attackerUnit.unitData.attack - defenderUnit.unitData.meleeArmor;
+            int damage = Math.Max(1, baseDamage);
+            RecibirImpacto(defenderUnit, damage);
+            if(defenderUnit.healthTotal <= 0)
+            {
+                defender.IsAlive(false);
+            }
+            var healthBarController = defender.transform.GetComponentInChildren<HealthBarController>();
+            healthBarController?.calculateDamage(defenderUnit.healthTotal);
             return;
         }
 
