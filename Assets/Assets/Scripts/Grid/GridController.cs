@@ -141,7 +141,57 @@ public class GridController : MonoBehaviour
         }
     }
 
-    public List<GridCell> FindAllNeighbours(GridCell origin)
+    public List<GridCell> FindFreeCellsAroundTarget(GridCell origin)
+    {
+        List<GridCell> gridCells = new List<GridCell>();
+        int x = origin.x;
+        int y = origin.y;
+        GridCell target = null;
+
+        //1
+        x = origin.x - 1;
+        y = origin.y;
+        CheckCellIsFree(gridCells, x, y, target);
+
+        //2
+        x = origin.x + 1;
+        y = origin.y;
+        CheckCellIsFree(gridCells, x, y, target);
+
+        //3
+        x = origin.x;
+        y = origin.y + 1;
+        CheckCellIsFree(gridCells, x, y, target);
+
+        //4
+        x = origin.x;
+        y = origin.y - 1;
+        CheckCellIsFree(gridCells, x, y, target);
+
+        //5
+        x = origin.x - 1;
+        y = origin.y - 1;
+        CheckCellIsFree(gridCells, x, y, target);
+
+        //6
+        x = origin.x + 1;
+        y = origin.y + 1;
+        CheckCellIsFree(gridCells, x, y, target);
+
+        //7
+        x = origin.x + 1;
+        y = origin.y - 1;
+        CheckCellIsFree(gridCells, x, y, target);
+
+        //8
+        x = origin.x - 1;
+        y = origin.y + 1;
+        CheckCellIsFree(gridCells, x, y, target);
+
+        return gridCells;
+    }
+
+    public List<GridCell> findAllCellsAroundTarget(GridCell origin)
     {
         List<GridCell> gridCells = new List<GridCell>();
         int x = origin.x;
@@ -193,10 +243,10 @@ public class GridController : MonoBehaviour
 
     public void UnPaintNeighbourd(GridCell target)
     {
-        FindAllNeighbours(target).ForEach(cell => cell.UnPaintCell());
+        FindFreeCellsAroundTarget(target).ForEach(cell => cell.UnPaintCell());
     }
 
-    private GridCell CheckCell(List<GridCell> gridCells, int x, int y, GridCell target)
+    private GridCell CheckCellIsFree(List<GridCell> gridCells, int x, int y, GridCell target)
     {
         if (CoordinatesInsideScope(x, y) && gridArray[x, y] != null && gridArray[x, y].TryGetComponent<GridCell>(out target))
         {
@@ -206,6 +256,14 @@ public class GridController : MonoBehaviour
 
         return target;
     }
+
+    private void CheckCell(List<GridCell> gridCells, int x, int y, GridCell target)
+    {
+        if (CoordinatesInsideScope(x, y) && gridArray[x, y] != null && gridArray[x, y].TryGetComponent<GridCell>(out target))
+            gridCells.Add(target);
+    }
+
+
 
     private bool CoordinatesInsideScope(int x, int y)
     {
@@ -318,16 +376,16 @@ public class GridController : MonoBehaviour
         gridCells.ForEach(cell => cell.canBeActionable = true);
     }
 
-    internal void EnableScopedCells(Unit selectedUnit)
+    internal void EnableScopedCells(Unit selectedUnit,List<Unit> samePlayerUnits)
     {
         GridCell currentCell = selectedUnit.cell;
         int scope = selectedUnit.data.scope;
 
-        var scopedCells = FindScopedCells(currentCell, scope);
+        var scopedCells = FindScopedCells(currentCell, scope, samePlayerUnits);
         EnableCells(scopedCells);
     }
 
-    private List<GridCell> FindScopedCells(GridCell currentCell, int scope)
+    private List<GridCell> FindScopedCells(GridCell currentCell, int scope,List<Unit> samePlayerUnits)
     {
         var scopedCells = new List<GridCell>();
         int x = currentCell.x;
@@ -350,7 +408,7 @@ public class GridController : MonoBehaviour
                     if (gCell == currentCell)
                         continue;
 
-                    if (CanBeActionable(gCell))
+                    if (CanBeActionable(gCell, samePlayerUnits))
                         scopedCells.Add(gCell);
                 }
             }
@@ -360,7 +418,7 @@ public class GridController : MonoBehaviour
         return scopedCells;
     }
 
-    private bool CanBeActionable(GridCell gCell)
+    private bool CanBeActionable(GridCell gCell, List<Unit> samePlayerUnits)
     {
         if (gCell.canBeActionable) //Already actionable
             return false;
@@ -368,7 +426,7 @@ public class GridController : MonoBehaviour
         if (gCell.isOccupied && gCell.unit != null) //Cell ocuppied by friendly Unit
         {
             Unit unit = gCell.unit;
-            if (BattlefieldManager.instance.PlayerUnits.Contains(unit))
+            if (samePlayerUnits.Contains(unit))
                 return false;
         }
 

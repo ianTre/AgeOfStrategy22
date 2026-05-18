@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -273,7 +274,7 @@ public class GameManager : MonoBehaviour
     {
         BattlefieldManager.instance.DeselectAllOtherUnits(selectedUnit);
         gridController.DisableAllCells();
-        gridController.EnableScopedCells(selectedUnit);
+        gridController.EnableScopedCells(selectedUnit,battlefieldManager.PlayerUnits);
         gameStage = GameStages.PlayerTurn_UnitSelected;
     }
 
@@ -322,8 +323,18 @@ public class GameManager : MonoBehaviour
 
     public void StageUpdate_EnemyTurn()
     {
+        Unit enemyUnit = aIEnemyManager.ChooseNextUnit();
+        BattlefieldManager.instance.DeselectAllOtherUnits(enemyUnit);
+        gridController.DisableAllCells();
+        gridController.EnableScopedCells(enemyUnit,battlefieldManager.EnemyUnits);
+
+        StageUpdate_EnemyTurn_MovementSelected(enemyUnit);
+    }
+
+    public void StageUpdate_EnemyTurn_MovementSelected(Unit enemyUnit)
+    {
         gameStage = GameStages.EnemyTurn;
-        aIEnemyManager.ChooseNextMovement();
+        aIEnemyManager.ChooseNextMovement(enemyUnit);
     }
 
     internal bool CheckStage(GameStages stage)
