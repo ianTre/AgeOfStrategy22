@@ -9,6 +9,8 @@ public class HealthBarController : MonoBehaviour
     Transform cam;
     int health;
     Slider slider = null;
+    public Color playerColor;
+    public Color enemyColor;
     void Start()
     {
         cam = Camera.main.transform;
@@ -17,7 +19,7 @@ public class HealthBarController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void DisplayDamage()
@@ -40,6 +42,18 @@ public class HealthBarController : MonoBehaviour
             slider.maxValue = health;
             slider.value = health;
         }
+
+        var unit = GetComponentInParent<Unit>();
+        var fill = healthCanvas.transform.Find("Fill");
+        if (unit == null || fill == null)
+        {
+            Debug.LogError("Can find Unit in parent object or Slider named Fill");
+        }
+
+        fill.GetComponent<Image>().color = unit.isPlayerUnit ? playerColor : enemyColor;
+
+
+
     }
 
     private void LateUpdate()

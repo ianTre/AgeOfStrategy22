@@ -64,13 +64,13 @@ public class BattlefieldManager : MonoBehaviour
             return false;
         GameObject newUnit = Instantiate(intendedUnitToCreate.prefab , gridController.gridArray[x, y].transform.position + new Vector3(0, 0.0f, 0), Quaternion.identity);
         Unit unit = newUnit.GetComponent<Unit>();
-        if(unit == null)
+        if (unit == null)
         {
             Debug.LogError("BattlefieldManager: The prefab assigned to the DeployCardController does not have a Unit component.");
             return false;
         }
         newUnit.AddComponent<PlayerUnit>();
-        unit.InitUnit(intendedUnitToCreate, gridCell, intendedUnitAmountToCreate);
+        unit.InitUnit(intendedUnitToCreate, gridCell, intendedUnitAmountToCreate , true);
         gridCell.OcuppyNewUnit(unit);
         PlayerUnits.Add(unit);
         lastClickedCard.DisableCard();
@@ -89,7 +89,7 @@ public class BattlefieldManager : MonoBehaviour
             Debug.LogError("BattlefieldManager: The prefab assigned to the DeployCardController does not have a Unit component.");
             return false;
         }
-        unit.InitUnit(unitData, gridCell, amount);
+        unit.InitUnit(unitData, gridCell, amount , false);
         gridCell.OcuppyNewUnit(unit);
         EnemyUnits.Add(unit);
         return true;

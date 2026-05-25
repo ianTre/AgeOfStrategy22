@@ -22,13 +22,15 @@ public class Unit : MonoBehaviour , ISoldier
     [SerializeField] private float rotationSpeed = 5f;          // grados por segundo para rotar suavemente
     [SerializeField] private float stoppingDistance = 0.05f;    // distancia m�nima 
     public int Id;
+    public bool isPlayerUnit = true;
 
 
-    public void InitUnit(UnitData data, GridCell cell, int amount)
+    public void InitUnit(UnitData data, GridCell cell, int amount , bool isPlayer)
     {
         this.data = data;
         this.cell = cell;
         this.number = amount;
+        this.isPlayerUnit = isPlayer;
         HealthBarController healthBarController = this.transform.GetComponentInChildren<HealthBarController>();
         healthBarController?.InitializeMaxHealth(data.health);
     }

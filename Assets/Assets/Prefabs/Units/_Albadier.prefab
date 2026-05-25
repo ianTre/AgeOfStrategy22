@@ -117,6 +117,7 @@ MonoBehaviour:
   number: 0
   cell: {fileID: 0}
   path: []
+  isAlive: 1
   moveSpeed: 10
   rotationSpeed: 5
   stoppingDistance: 0.05
