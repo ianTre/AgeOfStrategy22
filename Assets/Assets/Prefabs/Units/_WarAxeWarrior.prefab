@@ -333,7 +333,7 @@ GameObject:
   - component: {fileID: -4160154197632845904}
   m_Layer: 0
   m_Name: _WarAxeWarrior
-  m_TagString: Untagged
+  m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -393,10 +393,12 @@ MonoBehaviour:
   number: 0
   cell: {fileID: 0}
   path: []
+  isAlive: 1
   moveSpeed: 10
   rotationSpeed: 5
   stoppingDistance: 0.05
   Id: 0
+  isPlayerUnit: 1
 --- !u!114 &-3336852305563569820
 MonoBehaviour:
   m_ObjectHideFlags: 0

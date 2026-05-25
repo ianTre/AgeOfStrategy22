@@ -11,9 +11,13 @@ public class HealthBarController : MonoBehaviour
     Slider slider = null;
     public Color playerColor;
     public Color enemyColor;
+    public HealthValue healthValue;
+    public Vector3 LowScale = new Vector3(0.1f, 0.07f, 0.07f);
+    public Vector3 HighScale = new Vector3(0.2f, 0.15f, 0.15f);
     void Start()
     {
         cam = Camera.main.transform;
+        healthValue.SetInitialHealthValue(health);
     }
 
     // Update is called once per frame
@@ -52,12 +56,21 @@ public class HealthBarController : MonoBehaviour
 
         fill.GetComponent<Image>().color = unit.isPlayerUnit ? playerColor : enemyColor;
 
-
-
     }
 
     private void LateUpdate()
     {
         this.transform.forward = -cam.forward;
+    }
+    public void OnBarHover()
+    {
+            healthValue?.ShowHealthValue(health.ToString());
+            this.transform.localScale = HighScale;
+
+    }
+    public void OnBarExit()
+    {
+            healthValue?.HideHealthValue();
+            this.transform.localScale = LowScale;        
     }
 }

@@ -10,7 +10,7 @@ using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
 using static GameManager;
 
-public class Unit : MonoBehaviour , ISoldier
+public class Unit : MonoBehaviour , ISoldier, IFocusable
 {
     public UnitData data;
     
@@ -114,5 +114,25 @@ public class Unit : MonoBehaviour , ISoldier
         }
         yield return new WaitForSeconds(1f); // Simulate attack delay
         onComplete?.Invoke();
+    }
+
+    public void Hover()
+    {
+        var healthBarController = this.transform.GetComponentInChildren<HealthBarController>();
+        if (healthBarController == null)
+        {
+            Debug.LogError("HealthBarController not found in children of Unit");
+        }
+        healthBarController?.OnBarHover();
+    }
+
+    public void UnHover()
+    {
+        var healthBarController = this.transform.GetComponentInChildren<HealthBarController>();
+        if (healthBarController == null)
+        {
+            Debug.LogError("HealthBarController not found in children of Unit");
+        }
+        healthBarController?.OnBarExit();
     }
 }

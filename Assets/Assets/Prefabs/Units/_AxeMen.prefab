@@ -936,7 +936,7 @@ GameObject:
   - component: {fileID: -7934765326994261611}
   m_Layer: 0
   m_Name: _AxeMen
-  m_TagString: Untagged
+  m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -996,10 +996,12 @@ MonoBehaviour:
   number: 0
   cell: {fileID: 0}
   path: []
+  isAlive: 1
   moveSpeed: 10
   rotationSpeed: 5
   stoppingDistance: 0.05
   Id: 0
+  isPlayerUnit: 1
 --- !u!114 &-7322972881439929067
 MonoBehaviour:
   m_ObjectHideFlags: 0

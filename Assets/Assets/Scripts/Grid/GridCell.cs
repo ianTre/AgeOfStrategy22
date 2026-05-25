@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GridCell : MonoBehaviour, IMouseActionable
+public class GridCell : MonoBehaviour, IMouseActionable, IFocusable
 {
     public bool isOffset = false;
     public bool isSelected = false;
@@ -107,19 +107,29 @@ public class GridCell : MonoBehaviour, IMouseActionable
 
     public void Hover()
     {
+        if (this.isOccupied && this.unit != null)
+            this.unit.Hover();
+
         if (!canBeActionable) 
             return;
         this.Highlight(false);
+        
     }
 
     public void UnHover()
     {
+        if (this.unit != null)
+            this.unit.UnHover();
+
         if (!isSelected)
         {
             if(skipHover)
                 this.Highlight(true);
             else
+            { 
                 this.UnHighlight();
+                
+            }
         }
     }
 

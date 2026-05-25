@@ -154,9 +154,9 @@ public class InputManager : MonoBehaviour
         {
             return;
         }
-        IMouseActionable lastActionable = null;
-        lastHoveredObject?.TryGetComponent<IMouseActionable>(out lastActionable);
-        hit.transform.TryGetComponent<IMouseActionable>(out IMouseActionable actionable);
+        IFocusable lastActionable = null;
+        lastHoveredObject?.TryGetComponent<IFocusable>(out lastActionable);
+        hit.transform.TryGetComponent<IFocusable>(out IFocusable actionable);
         
         if (lastActionable != null)
             lastActionable.UnHover();

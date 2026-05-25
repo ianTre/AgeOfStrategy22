@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: _Spearman
       objectReference: {fileID: 0}
+    - target: {fileID: 3915958362508182197, guid: b53c54438110487458c4e7a56b7c47ea, type: 3}
+      propertyPath: m_TagString
+      value: Unit
+      objectReference: {fileID: 0}
     - target: {fileID: 4401028174208899087, guid: b53c54438110487458c4e7a56b7c47ea, type: 3}
       propertyPath: m_LocalScale.x
       value: 4
@@ -118,10 +122,12 @@ MonoBehaviour:
   number: 0
   cell: {fileID: 0}
   path: []
+  isAlive: 1
   moveSpeed: 10
   rotationSpeed: 5
   stoppingDistance: 0.05
   Id: 0
+  isPlayerUnit: 1
 --- !u!114 &-571936176347535913
 MonoBehaviour:
   m_ObjectHideFlags: 0

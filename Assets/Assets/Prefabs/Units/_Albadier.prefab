@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: _Albadier
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4cc0e316f05186d44bc07328450a770a, type: 3}
+      propertyPath: m_TagString
+      value: Unit
+      objectReference: {fileID: 0}
     - target: {fileID: 2664098864995057252, guid: 4cc0e316f05186d44bc07328450a770a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -122,6 +126,7 @@ MonoBehaviour:
   rotationSpeed: 5
   stoppingDistance: 0.05
   Id: 0
+  isPlayerUnit: 1
 --- !u!114 &4290965111681343179
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -6,7 +6,11 @@ public interface IMouseActionable
 {
     public void Select();
     public void Deselect();
+    public void Action();
+}
+
+public interface IFocusable
+{
     public void Hover();
     public void UnHover();
-    public void Action();
 }
