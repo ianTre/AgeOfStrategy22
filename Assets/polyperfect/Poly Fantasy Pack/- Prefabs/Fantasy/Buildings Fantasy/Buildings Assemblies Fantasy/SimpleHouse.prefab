@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7378490595973919675}
   m_Layer: 0
-  m_Name: Assembly_House_A_Fantasy
+  m_Name: SimpleHouse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -298,8 +298,76 @@ Transform:
   - {fileID: 708020984823902040}
   - {fileID: 708020985172141925}
   - {fileID: 1408032975405978212}
+  - {fileID: 6057109074027032214}
+  - {fileID: 7085624879880730787}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &5062757728442644976
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7378490595973919675}
+    m_Modifications:
+    - target: {fileID: 1318899145406338918, guid: 8bb170ed74439444c82756232d8e2619, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.028683
+      objectReference: {fileID: 0}
+    - target: {fileID: 1318899145406338918, guid: 8bb170ed74439444c82756232d8e2619, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.339
+      objectReference: {fileID: 0}
+    - target: {fileID: 1318899145406338918, guid: 8bb170ed74439444c82756232d8e2619, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.006
+      objectReference: {fileID: 0}
+    - target: {fileID: 1318899145406338918, guid: 8bb170ed74439444c82756232d8e2619, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.368
+      objectReference: {fileID: 0}
+    - target: {fileID: 1318899145406338918, guid: 8bb170ed74439444c82756232d8e2619, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1318899145406338918, guid: 8bb170ed74439444c82756232d8e2619, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1318899145406338918, guid: 8bb170ed74439444c82756232d8e2619, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1318899145406338918, guid: 8bb170ed74439444c82756232d8e2619, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1318899145406338918, guid: 8bb170ed74439444c82756232d8e2619, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1318899145406338918, guid: 8bb170ed74439444c82756232d8e2619, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1318899145406338918, guid: 8bb170ed74439444c82756232d8e2619, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1803264372017106396, guid: 8bb170ed74439444c82756232d8e2619, type: 3}
+      propertyPath: m_Name
+      value: Floor_4x4m
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8bb170ed74439444c82756232d8e2619, type: 3}
+--- !u!4 &6057109074027032214 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1318899145406338918, guid: 8bb170ed74439444c82756232d8e2619, type: 3}
+  m_PrefabInstance: {fileID: 5062757728442644976}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7378490595310387192
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -355,6 +423,10 @@ PrefabInstance:
     - target: {fileID: 5327029295307987278, guid: 513da640b0f2f1b4ab9708925580f824, type: 3}
       propertyPath: m_Name
       value: Roof_Regular_2x1m_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 5327029295307987278, guid: 513da640b0f2f1b4ab9708925580f824, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -433,6 +505,10 @@ PrefabInstance:
     - target: {fileID: 3114269663912306538, guid: b723e1ba8bb344543b2878adfeeb15f7, type: 3}
       propertyPath: m_Name
       value: Roof_Steep_2m_Front_B_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3114269663912306538, guid: b723e1ba8bb344543b2878adfeeb15f7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -652,6 +728,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Regular_Steep_2m_Front_B_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 5663788209727592218, guid: c5270e76717b5824c81cad29f853c530, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -673,6 +753,10 @@ PrefabInstance:
     - target: {fileID: 222060793686889641, guid: d654e47c8254a1a4992082402ac16eba, type: 3}
       propertyPath: m_Name
       value: Roof_Regular_2m_Edge_A_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 222060793686889641, guid: d654e47c8254a1a4992082402ac16eba, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 603266506965372435, guid: d654e47c8254a1a4992082402ac16eba, type: 3}
       propertyPath: m_RootOrder
@@ -1546,6 +1630,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Steep_2x2m_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 1505898727626830247, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2282716184922598173, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
       propertyPath: m_RootOrder
       value: 121
@@ -2044,6 +2132,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Regular_2m_Edge_A_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 222060793686889641, guid: d654e47c8254a1a4992082402ac16eba, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 603266506965372435, guid: d654e47c8254a1a4992082402ac16eba, type: 3}
       propertyPath: m_RootOrder
       value: 59
@@ -2257,6 +2349,10 @@ PrefabInstance:
     - target: {fileID: 1332943355522849748, guid: 4b34db4b12fcba349b1bf536c03636c1, type: 3}
       propertyPath: m_Name
       value: Roof_Regular_1m_Front_B_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1332943355522849748, guid: 4b34db4b12fcba349b1bf536c03636c1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1816147227468906862, guid: 4b34db4b12fcba349b1bf536c03636c1, type: 3}
       propertyPath: m_RootOrder
@@ -2538,6 +2634,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Regular_1m_Front_B_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 1332943355522849748, guid: 4b34db4b12fcba349b1bf536c03636c1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1816147227468906862, guid: 4b34db4b12fcba349b1bf536c03636c1, type: 3}
       propertyPath: m_RootOrder
       value: 51
@@ -2752,6 +2852,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Steep_1x1m_Decor_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 6129563876306121302, guid: ac0f0ac5c91ce824cabbf03ad6412901, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6799104419347212524, guid: ac0f0ac5c91ce824cabbf03ad6412901, type: 3}
       propertyPath: m_RootOrder
       value: 100
@@ -2865,6 +2969,10 @@ PrefabInstance:
     - target: {fileID: 5327029295307987278, guid: 513da640b0f2f1b4ab9708925580f824, type: 3}
       propertyPath: m_Name
       value: Roof_Regular_2x1m_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 5327029295307987278, guid: 513da640b0f2f1b4ab9708925580f824, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3096,6 +3204,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Regular_Steep_2x2m_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 6573670144269292842, guid: 7b32d2b90785e0848bc2497a7576445e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3319,6 +3431,10 @@ PrefabInstance:
     - target: {fileID: 1505898727626830247, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
       propertyPath: m_Name
       value: Roof_Steep_2x2m_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1505898727626830247, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2282716184922598173, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
       propertyPath: m_RootOrder
@@ -3686,6 +3802,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Steep_2m_Center_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 4962339823713020788, guid: 4fc40d74986153444a5cf2b5cddba1e3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5734794727853666766, guid: 4fc40d74986153444a5cf2b5cddba1e3, type: 3}
       propertyPath: m_RootOrder
       value: 105
@@ -3812,6 +3932,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Regular_1x1m_Decor_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 8781410208590082598, guid: 64ab72aeee9c9334b96489ea5fece446, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3889,6 +4013,10 @@ PrefabInstance:
     - target: {fileID: 4550609559183800385, guid: 4f24fbbb09c429a49803ae2660cfb5df, type: 3}
       propertyPath: m_Name
       value: Roof_Regular_2m_Edge_B_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4550609559183800385, guid: 4f24fbbb09c429a49803ae2660cfb5df, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4038,6 +4166,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Regular_2x1m_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 5327029295307987278, guid: 513da640b0f2f1b4ab9708925580f824, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4141,6 +4273,10 @@ PrefabInstance:
     - target: {fileID: 1332943355522849748, guid: 4b34db4b12fcba349b1bf536c03636c1, type: 3}
       propertyPath: m_Name
       value: Roof_Regular_1m_Front_B_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1332943355522849748, guid: 4b34db4b12fcba349b1bf536c03636c1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1816147227468906862, guid: 4b34db4b12fcba349b1bf536c03636c1, type: 3}
       propertyPath: m_RootOrder
@@ -4322,6 +4458,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Regular_2x1m_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 5327029295307987278, guid: 513da640b0f2f1b4ab9708925580f824, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4343,6 +4483,10 @@ PrefabInstance:
     - target: {fileID: 1179152482747754956, guid: d5f3027bdc10dcb40ab99719d0f81947, type: 3}
       propertyPath: m_Name
       value: Roof_Regular_Edge_Front_B_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179152482747754956, guid: d5f3027bdc10dcb40ab99719d0f81947, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1951994067357496182, guid: d5f3027bdc10dcb40ab99719d0f81947, type: 3}
       propertyPath: m_RootOrder
@@ -4874,6 +5018,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Regular_2x1m_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 5327029295307987278, guid: 513da640b0f2f1b4ab9708925580f824, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5154,6 +5302,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Steep_Edge_Front_A_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 1068163104859654794, guid: 322308f1f17971c4cbed59405d6a09c0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5223,6 +5375,10 @@ PrefabInstance:
     - target: {fileID: 4550609559183800385, guid: 4f24fbbb09c429a49803ae2660cfb5df, type: 3}
       propertyPath: m_Name
       value: Roof_Regular_2m_Edge_B_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4550609559183800385, guid: 4f24fbbb09c429a49803ae2660cfb5df, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5302,6 +5458,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Regular_Steep_2x2m_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 6573670144269292842, guid: 7b32d2b90785e0848bc2497a7576445e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5323,6 +5483,10 @@ PrefabInstance:
     - target: {fileID: 1505898727626830247, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
       propertyPath: m_Name
       value: Roof_Steep_2x2m_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1505898727626830247, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2282716184922598173, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
       propertyPath: m_RootOrder
@@ -5393,6 +5557,10 @@ PrefabInstance:
     - target: {fileID: 4634895688507741762, guid: 410e4932ead826e4dadafba991c1ba01, type: 3}
       propertyPath: m_Name
       value: Roof_Steep_1x2m_Decor_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4634895688507741762, guid: 410e4932ead826e4dadafba991c1ba01, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5411538666865429752, guid: 410e4932ead826e4dadafba991c1ba01, type: 3}
       propertyPath: m_RootOrder
@@ -5607,6 +5775,10 @@ PrefabInstance:
     - target: {fileID: 1505898727626830247, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
       propertyPath: m_Name
       value: Roof_Steep_2x2m_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1505898727626830247, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2282716184922598173, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
       propertyPath: m_RootOrder
@@ -5877,6 +6049,10 @@ PrefabInstance:
     - target: {fileID: 6573670144269292842, guid: 7b32d2b90785e0848bc2497a7576445e, type: 3}
       propertyPath: m_Name
       value: Roof_Regular_Steep_2x2m_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6573670144269292842, guid: 7b32d2b90785e0848bc2497a7576445e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6258,6 +6434,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Steep_2m_Center_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 4962339823713020788, guid: 4fc40d74986153444a5cf2b5cddba1e3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5734794727853666766, guid: 4fc40d74986153444a5cf2b5cddba1e3, type: 3}
       propertyPath: m_RootOrder
       value: 104
@@ -6327,6 +6507,10 @@ PrefabInstance:
     - target: {fileID: 1505898727626830247, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
       propertyPath: m_Name
       value: Roof_Steep_2x2m_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1505898727626830247, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2282716184922598173, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
       propertyPath: m_RootOrder
@@ -6593,6 +6777,10 @@ PrefabInstance:
     - target: {fileID: 5663788209727592218, guid: c5270e76717b5824c81cad29f853c530, type: 3}
       propertyPath: m_Name
       value: Roof_Regular_Steep_2m_Front_B_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 5663788209727592218, guid: c5270e76717b5824c81cad29f853c530, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7166,6 +7354,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Regular_Steep_2x2m_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 6573670144269292842, guid: 7b32d2b90785e0848bc2497a7576445e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7265,6 +7457,10 @@ PrefabInstance:
     - target: {fileID: 1505898727626830247, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
       propertyPath: m_Name
       value: Roof_Steep_2x2m_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1505898727626830247, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2282716184922598173, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
       propertyPath: m_RootOrder
@@ -7379,6 +7575,10 @@ PrefabInstance:
     - target: {fileID: 3114269663912306538, guid: b723e1ba8bb344543b2878adfeeb15f7, type: 3}
       propertyPath: m_Name
       value: Roof_Steep_2m_Front_B_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3114269663912306538, guid: b723e1ba8bb344543b2878adfeeb15f7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7746,6 +7946,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Regular_Steep_1x2m_Decor_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 6566854881421754877, guid: 9cd9a266a06356a4e954154444b3fe32, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7767,6 +7971,10 @@ PrefabInstance:
     - target: {fileID: 1505898727626830247, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
       propertyPath: m_Name
       value: Roof_Steep_2x2m_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1505898727626830247, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2282716184922598173, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
       propertyPath: m_RootOrder
@@ -7894,6 +8102,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Regular_Steep_2x2m_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 6573670144269292842, guid: 7b32d2b90785e0848bc2497a7576445e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7959,6 +8171,10 @@ PrefabInstance:
     - target: {fileID: 5327029295307987278, guid: 513da640b0f2f1b4ab9708925580f824, type: 3}
       propertyPath: m_Name
       value: Roof_Regular_2x1m_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 5327029295307987278, guid: 513da640b0f2f1b4ab9708925580f824, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8116,6 +8332,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Steep_Edge_Front_A_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 1068163104859654794, guid: 322308f1f17971c4cbed59405d6a09c0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8207,6 +8427,10 @@ PrefabInstance:
     - target: {fileID: 1505898727626830247, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
       propertyPath: m_Name
       value: Roof_Steep_2x2m_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1505898727626830247, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2282716184922598173, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
       propertyPath: m_RootOrder
@@ -8343,6 +8567,10 @@ PrefabInstance:
     - target: {fileID: 5924362952039450914, guid: e0ad72386b937d948b24e778eb1cb081, type: 3}
       propertyPath: m_Name
       value: Roof_Steep_1m_Front_A_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 5924362952039450914, guid: e0ad72386b937d948b24e778eb1cb081, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6448099254525989784, guid: e0ad72386b937d948b24e778eb1cb081, type: 3}
       propertyPath: m_RootOrder
@@ -8483,6 +8711,10 @@ PrefabInstance:
     - target: {fileID: 4634895688507741762, guid: 410e4932ead826e4dadafba991c1ba01, type: 3}
       propertyPath: m_Name
       value: Roof_Steep_1x2m_Decor_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4634895688507741762, guid: 410e4932ead826e4dadafba991c1ba01, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5411538666865429752, guid: 410e4932ead826e4dadafba991c1ba01, type: 3}
       propertyPath: m_RootOrder
@@ -9010,6 +9242,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Steep_2m_Front_B_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 3114269663912306538, guid: b723e1ba8bb344543b2878adfeeb15f7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9533,6 +9769,10 @@ PrefabInstance:
     - target: {fileID: 1332943355522849748, guid: 4b34db4b12fcba349b1bf536c03636c1, type: 3}
       propertyPath: m_Name
       value: Roof_Regular_1m_Front_B_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1332943355522849748, guid: 4b34db4b12fcba349b1bf536c03636c1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1816147227468906862, guid: 4b34db4b12fcba349b1bf536c03636c1, type: 3}
       propertyPath: m_RootOrder
@@ -10130,6 +10370,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Regular_Edge_Front_A_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 7115415042444548676, guid: 91729eb63d968394fb53e1e48d193acf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7634965744896213246, guid: 91729eb63d968394fb53e1e48d193acf, type: 3}
       propertyPath: m_RootOrder
       value: 78
@@ -10270,6 +10514,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Steep_2x2m_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 1505898727626830247, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2282716184922598173, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
       propertyPath: m_RootOrder
       value: 132
@@ -10347,6 +10595,10 @@ PrefabInstance:
     - target: {fileID: 6129563876306121302, guid: ac0f0ac5c91ce824cabbf03ad6412901, type: 3}
       propertyPath: m_Name
       value: Roof_Steep_1x1m_Decor_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6129563876306121302, guid: ac0f0ac5c91ce824cabbf03ad6412901, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6799104419347212524, guid: ac0f0ac5c91ce824cabbf03ad6412901, type: 3}
       propertyPath: m_RootOrder
@@ -10482,6 +10734,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Regular_2x1m_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 5327029295307987278, guid: 513da640b0f2f1b4ab9708925580f824, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10547,6 +10803,10 @@ PrefabInstance:
     - target: {fileID: 3114269663912306538, guid: b723e1ba8bb344543b2878adfeeb15f7, type: 3}
       propertyPath: m_Name
       value: Roof_Steep_2m_Front_B_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3114269663912306538, guid: b723e1ba8bb344543b2878adfeeb15f7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10639,6 +10899,10 @@ PrefabInstance:
     - target: {fileID: 1505898727626830247, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
       propertyPath: m_Name
       value: Roof_Steep_2x2m_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1505898727626830247, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2282716184922598173, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
       propertyPath: m_RootOrder
@@ -11082,6 +11346,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Steep_2m_Front_B_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 3114269663912306538, guid: b723e1ba8bb344543b2878adfeeb15f7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11173,6 +11441,10 @@ PrefabInstance:
     - target: {fileID: 1505898727626830247, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
       propertyPath: m_Name
       value: Roof_Steep_2x2m_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1505898727626830247, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2282716184922598173, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
       propertyPath: m_RootOrder
@@ -11534,6 +11806,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Regular_2x1m_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 5327029295307987278, guid: 513da640b0f2f1b4ab9708925580f824, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11621,6 +11897,10 @@ PrefabInstance:
     - target: {fileID: 4962339823713020788, guid: 4fc40d74986153444a5cf2b5cddba1e3, type: 3}
       propertyPath: m_Name
       value: Roof_Steep_2m_Center_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962339823713020788, guid: 4fc40d74986153444a5cf2b5cddba1e3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5734794727853666766, guid: 4fc40d74986153444a5cf2b5cddba1e3, type: 3}
       propertyPath: m_RootOrder
@@ -11962,6 +12242,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Regular_Steep_1x2m_Decor_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 6566854881421754877, guid: 9cd9a266a06356a4e954154444b3fe32, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12132,6 +12416,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Steep_2x2m_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 1505898727626830247, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2282716184922598173, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
       propertyPath: m_RootOrder
       value: 118
@@ -12209,6 +12497,10 @@ PrefabInstance:
     - target: {fileID: 1332221742835833304, guid: d79f490bcd95e564c9e6019f5c96dfa4, type: 3}
       propertyPath: m_Name
       value: Roof_Regular_1m_Front_A_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1332221742835833304, guid: d79f490bcd95e564c9e6019f5c96dfa4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1816868409728058210, guid: d79f490bcd95e564c9e6019f5c96dfa4, type: 3}
       propertyPath: m_RootOrder
@@ -12390,6 +12682,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Regular_2x1m_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 5327029295307987278, guid: 513da640b0f2f1b4ab9708925580f824, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12468,6 +12764,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Regular_Steep_2m_Front_B_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 5663788209727592218, guid: c5270e76717b5824c81cad29f853c530, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12545,6 +12845,10 @@ PrefabInstance:
     - target: {fileID: 3114269663912306538, guid: b723e1ba8bb344543b2878adfeeb15f7, type: 3}
       propertyPath: m_Name
       value: Roof_Steep_2m_Front_B_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3114269663912306538, guid: b723e1ba8bb344543b2878adfeeb15f7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12649,6 +12953,10 @@ PrefabInstance:
     - target: {fileID: 1505898727626830247, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
       propertyPath: m_Name
       value: Roof_Steep_2x2m_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1505898727626830247, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2282716184922598173, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
       propertyPath: m_RootOrder
@@ -13184,6 +13492,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Regular_2m_Edge_B_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 4550609559183800385, guid: 4f24fbbb09c429a49803ae2660cfb5df, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13320,6 +13632,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Regular_Steep_2x2m_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 6573670144269292842, guid: 7b32d2b90785e0848bc2497a7576445e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13341,6 +13657,10 @@ PrefabInstance:
     - target: {fileID: 4962339823713020788, guid: 4fc40d74986153444a5cf2b5cddba1e3, type: 3}
       propertyPath: m_Name
       value: Roof_Steep_2m_Center_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962339823713020788, guid: 4fc40d74986153444a5cf2b5cddba1e3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5734794727853666766, guid: 4fc40d74986153444a5cf2b5cddba1e3, type: 3}
       propertyPath: m_RootOrder
@@ -13616,6 +13936,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Steep_2m_Front_B_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 3114269663912306538, guid: b723e1ba8bb344543b2878adfeeb15f7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13856,6 +14180,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Regular_2m_Edge_A_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 222060793686889641, guid: d654e47c8254a1a4992082402ac16eba, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 603266506965372435, guid: d654e47c8254a1a4992082402ac16eba, type: 3}
       propertyPath: m_RootOrder
       value: 57
@@ -13921,6 +14249,10 @@ PrefabInstance:
     - target: {fileID: 1179152482747754956, guid: d5f3027bdc10dcb40ab99719d0f81947, type: 3}
       propertyPath: m_Name
       value: Roof_Regular_Edge_Front_B_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179152482747754956, guid: d5f3027bdc10dcb40ab99719d0f81947, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1951994067357496182, guid: d5f3027bdc10dcb40ab99719d0f81947, type: 3}
       propertyPath: m_RootOrder
@@ -14114,6 +14446,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Regular_1x1m_Decor_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 8781410208590082598, guid: 64ab72aeee9c9334b96489ea5fece446, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14191,6 +14527,10 @@ PrefabInstance:
     - target: {fileID: 5327029295307987278, guid: 513da640b0f2f1b4ab9708925580f824, type: 3}
       propertyPath: m_Name
       value: Roof_Regular_2x1m_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 5327029295307987278, guid: 513da640b0f2f1b4ab9708925580f824, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14287,6 +14627,10 @@ PrefabInstance:
     - target: {fileID: 1332221742835833304, guid: d79f490bcd95e564c9e6019f5c96dfa4, type: 3}
       propertyPath: m_Name
       value: Roof_Regular_1m_Front_A_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1332221742835833304, guid: d79f490bcd95e564c9e6019f5c96dfa4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1816868409728058210, guid: d79f490bcd95e564c9e6019f5c96dfa4, type: 3}
       propertyPath: m_RootOrder
@@ -14562,6 +14906,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Steep_2m_Front_B_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 3114269663912306538, guid: b723e1ba8bb344543b2878adfeeb15f7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14653,6 +15001,10 @@ PrefabInstance:
     - target: {fileID: 1505898727626830247, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
       propertyPath: m_Name
       value: Roof_Steep_2x2m_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1505898727626830247, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2282716184922598173, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
       propertyPath: m_RootOrder
@@ -14863,6 +15215,10 @@ PrefabInstance:
     - target: {fileID: 1505898727626830247, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
       propertyPath: m_Name
       value: Roof_Steep_2x2m_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1505898727626830247, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2282716184922598173, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
       propertyPath: m_RootOrder
@@ -15188,6 +15544,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Regular_Steep_2x2m_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 6573670144269292842, guid: 7b32d2b90785e0848bc2497a7576445e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15209,6 +15569,10 @@ PrefabInstance:
     - target: {fileID: 1505898727626830247, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
       propertyPath: m_Name
       value: Roof_Steep_2x2m_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1505898727626830247, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2282716184922598173, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
       propertyPath: m_RootOrder
@@ -15584,6 +15948,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Steep_2x2m_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 1505898727626830247, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2282716184922598173, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
       propertyPath: m_RootOrder
       value: 137
@@ -15661,6 +16029,10 @@ PrefabInstance:
     - target: {fileID: 6301954266769082238, guid: 864e91d3f9e390841a6b8562530d4a98, type: 3}
       propertyPath: m_Name
       value: Roof_Regular_1m_Edge_Decor_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6301954266769082238, guid: 864e91d3f9e390841a6b8562530d4a98, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6646990518074416580, guid: 864e91d3f9e390841a6b8562530d4a98, type: 3}
       propertyPath: m_RootOrder
@@ -15784,6 +16156,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Regular_2m_Edge_B_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 4550609559183800385, guid: 4f24fbbb09c429a49803ae2660cfb5df, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15887,6 +16263,10 @@ PrefabInstance:
     - target: {fileID: 4962339823713020788, guid: 4fc40d74986153444a5cf2b5cddba1e3, type: 3}
       propertyPath: m_Name
       value: Roof_Steep_2m_Center_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962339823713020788, guid: 4fc40d74986153444a5cf2b5cddba1e3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5734794727853666766, guid: 4fc40d74986153444a5cf2b5cddba1e3, type: 3}
       propertyPath: m_RootOrder
@@ -16013,6 +16393,10 @@ PrefabInstance:
     - target: {fileID: 6573670144269292842, guid: 7b32d2b90785e0848bc2497a7576445e, type: 3}
       propertyPath: m_Name
       value: Roof_Regular_Steep_2x2m_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6573670144269292842, guid: 7b32d2b90785e0848bc2497a7576445e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -16168,6 +16552,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Regular_1m_Edge_Decor_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 6301954266769082238, guid: 864e91d3f9e390841a6b8562530d4a98, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6646990518074416580, guid: 864e91d3f9e390841a6b8562530d4a98, type: 3}
       propertyPath: m_RootOrder
       value: 48
@@ -16301,6 +16689,10 @@ PrefabInstance:
     - target: {fileID: 6573670144269292842, guid: 7b32d2b90785e0848bc2497a7576445e, type: 3}
       propertyPath: m_Name
       value: Roof_Regular_Steep_2x2m_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6573670144269292842, guid: 7b32d2b90785e0848bc2497a7576445e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -16816,6 +17208,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Regular_2x1m_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 5327029295307987278, guid: 513da640b0f2f1b4ab9708925580f824, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16837,6 +17233,10 @@ PrefabInstance:
     - target: {fileID: 249393698588643329, guid: 4cc7028be66a0fe44a9264ceb9ef6062, type: 3}
       propertyPath: m_Name
       value: Roof_Steep_Center_Decor_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 249393698588643329, guid: 4cc7028be66a0fe44a9264ceb9ef6062, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 593866656072633019, guid: 4cc7028be66a0fe44a9264ceb9ef6062, type: 3}
       propertyPath: m_RootOrder
@@ -17418,6 +17818,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Steep_1m_Front_A_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 5924362952039450914, guid: e0ad72386b937d948b24e778eb1cb081, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6448099254525989784, guid: e0ad72386b937d948b24e778eb1cb081, type: 3}
       propertyPath: m_RootOrder
       value: 99
@@ -17495,6 +17899,10 @@ PrefabInstance:
     - target: {fileID: 4962339823713020788, guid: 4fc40d74986153444a5cf2b5cddba1e3, type: 3}
       propertyPath: m_Name
       value: Roof_Steep_2m_Center_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962339823713020788, guid: 4fc40d74986153444a5cf2b5cddba1e3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5734794727853666766, guid: 4fc40d74986153444a5cf2b5cddba1e3, type: 3}
       propertyPath: m_RootOrder
@@ -17688,6 +18096,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Regular_2x1m_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 5327029295307987278, guid: 513da640b0f2f1b4ab9708925580f824, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17779,6 +18191,10 @@ PrefabInstance:
     - target: {fileID: 7115415042444548676, guid: 91729eb63d968394fb53e1e48d193acf, type: 3}
       propertyPath: m_Name
       value: Roof_Regular_Edge_Front_A_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 7115415042444548676, guid: 91729eb63d968394fb53e1e48d193acf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7634965744896213246, guid: 91729eb63d968394fb53e1e48d193acf, type: 3}
       propertyPath: m_RootOrder
@@ -18560,6 +18976,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Regular_2x1m_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 5327029295307987278, guid: 513da640b0f2f1b4ab9708925580f824, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18902,6 +19322,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Regular_Steep_2m_Front_B_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 5663788209727592218, guid: c5270e76717b5824c81cad29f853c530, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -19158,6 +19582,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Steep_2x2m_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 1505898727626830247, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2282716184922598173, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
       propertyPath: m_RootOrder
       value: 135
@@ -19310,6 +19738,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Steep_2x2m_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 1505898727626830247, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2282716184922598173, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
       propertyPath: m_RootOrder
       value: 129
@@ -19444,6 +19876,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roof_Regular_Steep_2x2m_Fantasy
       objectReference: {fileID: 0}
+    - target: {fileID: 6573670144269292842, guid: 7b32d2b90785e0848bc2497a7576445e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -19513,6 +19949,10 @@ PrefabInstance:
     - target: {fileID: 4550609559183800385, guid: 4f24fbbb09c429a49803ae2660cfb5df, type: 3}
       propertyPath: m_Name
       value: Roof_Regular_2m_Edge_B_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4550609559183800385, guid: 4f24fbbb09c429a49803ae2660cfb5df, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19605,6 +20045,10 @@ PrefabInstance:
     - target: {fileID: 1505898727626830247, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
       propertyPath: m_Name
       value: Roof_Steep_2x2m_Fantasy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1505898727626830247, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2282716184922598173, guid: d1e65dadd353bff4dbbd4f9f031b8c95, type: 3}
       propertyPath: m_RootOrder
@@ -19729,4 +20173,70 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7310467264324084763, guid: 19de613b74ed74b49be0361d4a15d041, type: 3}
   m_PrefabInstance: {fileID: 7378490597439410945}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8077374713308327877
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7378490595973919675}
+    m_Modifications:
+    - target: {fileID: 1318899145406338918, guid: 8bb170ed74439444c82756232d8e2619, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.028683
+      objectReference: {fileID: 0}
+    - target: {fileID: 1318899145406338918, guid: 8bb170ed74439444c82756232d8e2619, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1318899145406338918, guid: 8bb170ed74439444c82756232d8e2619, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.006
+      objectReference: {fileID: 0}
+    - target: {fileID: 1318899145406338918, guid: 8bb170ed74439444c82756232d8e2619, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.368
+      objectReference: {fileID: 0}
+    - target: {fileID: 1318899145406338918, guid: 8bb170ed74439444c82756232d8e2619, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1318899145406338918, guid: 8bb170ed74439444c82756232d8e2619, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1318899145406338918, guid: 8bb170ed74439444c82756232d8e2619, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1318899145406338918, guid: 8bb170ed74439444c82756232d8e2619, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1318899145406338918, guid: 8bb170ed74439444c82756232d8e2619, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1318899145406338918, guid: 8bb170ed74439444c82756232d8e2619, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1318899145406338918, guid: 8bb170ed74439444c82756232d8e2619, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1803264372017106396, guid: 8bb170ed74439444c82756232d8e2619, type: 3}
+      propertyPath: m_Name
+      value: Floor_4x4m (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8bb170ed74439444c82756232d8e2619, type: 3}
+--- !u!4 &7085624879880730787 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1318899145406338918, guid: 8bb170ed74439444c82756232d8e2619, type: 3}
+  m_PrefabInstance: {fileID: 8077374713308327877}
   m_PrefabAsset: {fileID: 0}

@@ -15,26 +15,16 @@ public class PlayerUnit : MonoBehaviour , IMouseActionable
         this.hasBeingSelected = false;
     }
 
-    public void Hover()
-    {
-
-    }
-
     public void Select()
     {
         CreateSelectionLight();
         this.hasBeingSelected = true;
-        GameManager.instance.StageUpdate_PlayerTurn_UnitSelected(this.transform.GetComponent<Unit>());
+        GameManager.instance.StageUpdate_UnitSelected(this.transform.GetComponent<Unit>());
     }
 
     public void SelectByPass()
     {
         Select();
-    }
-
-    public void UnHover()
-    {
-
     }
 
     public void CreateSelectionLight()

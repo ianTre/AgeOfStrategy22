@@ -2498,6 +2498,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthBar
       objectReference: {fileID: 0}
+    - target: {fileID: 4641832600371645924, guid: 1fd65cf8b85c2834abd2b30500ba42e2, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641832600371645924, guid: 1fd65cf8b85c2834abd2b30500ba42e2, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8270151297887556800, guid: 1fd65cf8b85c2834abd2b30500ba42e2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

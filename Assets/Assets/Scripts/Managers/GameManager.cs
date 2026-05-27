@@ -347,6 +347,37 @@ public class GameManager : MonoBehaviour
         return stages.Contains(gameStage);
     }
 
+    internal void StageUpdate_UnitSelected(Unit unit)
+    {
+        switch (gameStage)
+        {
+            case GameStages.Start:
+            case GameStages.PlayerDeploy:
+            case GameStages.PlayerDeploy_CardSelected:
+            case GameStages.PlayerDeploy_CardSelected_CellSelected:
+                StageUpdate_PlayerDeploy();
+                break;
+            case GameStages.EnemyDeploy:
+                break;
+            case GameStages.PlayerTurn:
+            case GameStages.PlayerTurn_UnitSelected:
+                StageUpdate_PlayerTurn_UnitSelected(unit);
+                break;
+            case GameStages.PlayerTurn_UnitSelected_EnemyTargetSelected:
+                break;
+            case GameStages.PlayerTurn_UnitSelected_EnemyTargetSelected_PositionToAttackSelected:
+                break;
+            case GameStages.PlayerTurn_UnitSelected_EnemyTargetSelected_PositionToAttackSelected_attackMade:
+                break;
+            case GameStages.PlayerTurn_UnitSelected_UnitMovement:
+                break;
+            case GameStages.EnemyTurn:
+                break;
+            default:
+                break;
+        }
+    }
+
     public enum GameStages
     {
         Start = 0,

@@ -63,7 +63,7 @@ public class InputManager : MonoBehaviour
         playerActions.BattlefieldActions.GiveOrder.performed += OnMouseRightClick;
         playerActions.BattlefieldActions.GiveOrder.canceled += OnMouseRightClickRelease;
         defaultInputActions.UI.Navigate.performed += OnNavigate;
-        defaultInputActions.UI.Navigate.canceled+= OnNavigateFinish;
+        defaultInputActions.UI.Navigate.canceled += OnNavigateFinish;
     }
 
     private void OnNavigateFinish(InputAction.CallbackContext context)
@@ -83,7 +83,7 @@ public class InputManager : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             var selectedObject = SelectTargetClicked(hit);
-            if(selectedObject == null)
+            if (selectedObject == null)
             {
                 return;
             }
@@ -156,13 +156,31 @@ public class InputManager : MonoBehaviour
         }
         IFocusable lastActionable = null;
         lastHoveredObject?.TryGetComponent<IFocusable>(out lastActionable);
-        hit.transform.TryGetComponent<IFocusable>(out IFocusable actionable);
-        
         if (lastActionable != null)
             lastActionable.UnHover();
-        if (actionable != null)
-            actionable.Hover();
-        lastHoveredObject = hit.transform.gameObject;
+
+        var hoveredObject = FindFocuseableRecursibly(hit.transform.gameObject);
+        if (hoveredObject.TryGetComponent<IFocusable>(out IFocusable actionable))
+        {
+            if (actionable != null)
+                actionable.Hover();
+        }
+        lastHoveredObject = hoveredObject;
+    }
+
+
+    private GameObject FindFocuseableRecursibly(GameObject newSelectedObject)
+    {
+        var parent = newSelectedObject;
+        while (parent != null)
+        {
+            if (parent.TryGetComponent<IFocusable>(out IFocusable focuseable))
+            {
+                return parent.gameObject;
+            }
+            parent = parent.transform.parent != null ? parent.transform.parent.gameObject : null;
+        }
+        return newSelectedObject;
     }
 
     private GameObject SelectTargetClicked(RaycastHit hit)
@@ -173,7 +191,7 @@ public class InputManager : MonoBehaviour
         }
 
         return hit.transform.gameObject;
-        
+
     }
 
     private void OnMouseRightClickRelease(InputAction.CallbackContext context)
