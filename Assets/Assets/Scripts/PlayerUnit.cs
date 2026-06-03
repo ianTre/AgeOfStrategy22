@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static GameManager;
 
-public class PlayerUnit : MonoBehaviour , IMouseActionable
+public class PlayerUnit : MonoBehaviour, IMouseActionable
 {
     private GameObject selectionLight;
     public bool hasBeingSelected = false;
@@ -17,9 +17,11 @@ public class PlayerUnit : MonoBehaviour , IMouseActionable
 
     public void Select()
     {
-        CreateSelectionLight();
-        this.hasBeingSelected = true;
-        GameManager.instance.StageUpdate_UnitSelected(this.transform.GetComponent<Unit>());
+        if (GameManager.instance.StageUpdate_UnitSelected(this.transform.GetComponent<Unit>()))
+        {
+            CreateSelectionLight();
+            this.hasBeingSelected = true;
+        }
     }
 
     public void SelectByPass()
@@ -30,10 +32,10 @@ public class PlayerUnit : MonoBehaviour , IMouseActionable
     public void CreateSelectionLight()
     {
         if (!this.hasBeingSelected)
-            selectionLight = Instantiate(BattlefieldManager.instance.selectionLightPrefab, this.transform.position, Quaternion.identity,this.transform);
+            selectionLight = Instantiate(BattlefieldManager.instance.selectionLightPrefab, this.transform.position, Quaternion.identity, this.transform);
     }
 
-    
+
 
     public void Action()
     {

@@ -23,6 +23,7 @@ public class Unit : MonoBehaviour , ISoldier, IFocusable
     [SerializeField] private float stoppingDistance = 0.05f;    // distancia m�nima 
     public int Id;
     public bool isPlayerUnit = true;
+    public int CoolDownTurn = 0;
 
 
     public void InitUnit(UnitData data, GridCell cell, int amount , bool isPlayer)
@@ -33,6 +34,11 @@ public class Unit : MonoBehaviour , ISoldier, IFocusable
         this.isPlayerUnit = isPlayer;
         HealthBarController healthBarController = this.transform.GetComponentInChildren<HealthBarController>();
         healthBarController?.InitializeMaxHealth(data.health);
+    }
+
+    public void SetCoolDownTurn(int turn)
+    {
+        this.CoolDownTurn = turn;
     }
 
 

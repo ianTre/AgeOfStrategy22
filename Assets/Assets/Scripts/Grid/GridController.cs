@@ -368,7 +368,10 @@ public class GridController : MonoBehaviour
 
     public void DisableAllCells()
     {
-        cellsList.ForEach(cell => cell.canBeActionable = false);
+        foreach (var cell in cellsList)
+        {
+            cell.canBeActionable = false;
+        }
     }
 
     public void EnableCells(List<GridCell> gridCells)

@@ -19,9 +19,9 @@ namespace Assets.Assets.Scripts.Managers
             this.gridController = gridController;
         }
 
-        public Unit ChooseNextUnit()
+        public Unit ChooseNextUnit(int turn)
         {
-            List<Unit> enemyUnits = BattlefieldManager.instance.EnemyUnits;
+            List<Unit> enemyUnits = BattlefieldManager.instance.EnemyUnits.Where(unit => unit.CoolDownTurn <= turn).ToList();
             Unit unitToMove = null;
             while (unitToMove == null && enemyUnits.Count > 0)
             {

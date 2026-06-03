@@ -31,6 +31,7 @@ public class BattlefieldManager : MonoBehaviour
     private Unit targetEnemyUnit;
     public GameObject selectionLightPrefab;
     
+    
     public bool allUnitsDeployed = true; //TODO
     void Start()
     {
@@ -189,6 +190,7 @@ public class BattlefieldManager : MonoBehaviour
             unitToMove.cell.RemoveUnit(unitToMove); //Clean Old Cell
             unitToMove.cell = newCell;
             unitToMove.cell.OcuppyNewUnit(unitToMove); //Assign new Cell
+            unitToMove.CoolDownTurn = GameManager.instance.turn + unitToMove.data.cooldown + 1;
             StartCoroutine(unitToMove.MoveToNewPosition(unitToMove.path , onComplete));
             
             return true;
@@ -299,5 +301,10 @@ public class BattlefieldManager : MonoBehaviour
     {
         //TODO : Save Attack to send to backend when the player confirms the attack action
         return;
+    }
+
+    internal List<Unit> SetCooldownForUnits_Player(int turn )
+    {
+        return this.PlayerUnits.Where(unit => unit.CoolDownTurn <=  turn).ToList();
     }
 }
