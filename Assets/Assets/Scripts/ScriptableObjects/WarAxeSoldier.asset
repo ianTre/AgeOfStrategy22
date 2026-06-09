@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: WarAxeSoldier
   m_EditorClassIdentifier: 
   unitName: War Axe Soldier
-  health: 60
-  attack: 5
-  meleeArmor: 3
-  pierceArmor: 3
+  health: 80
+  attack: 16
+  meleeArmor: 2
+  pierceArmor: 6
+  cooldown: 6
   scope: 3
   unitType: 7
   prefab: {fileID: 1366262985531460440, guid: 643871ffe2e610046b3dfe6ab02fa29f, type: 3}

@@ -130,6 +130,7 @@ MonoBehaviour:
   stoppingDistance: 0.05
   Id: 0
   isPlayerUnit: 1
+  CoolDownTurn: 0
 --- !u!114 &4290965111681343179
 MonoBehaviour:
   m_ObjectHideFlags: 0

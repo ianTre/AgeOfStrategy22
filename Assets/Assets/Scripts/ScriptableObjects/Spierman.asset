@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Spierman
   m_EditorClassIdentifier: 
   unitName: Spierman
-  health: 20
-  attack: 2
+  health: 40
+  attack: 8
   meleeArmor: 0
   pierceArmor: 0
+  cooldown: 4
   scope: 5
   unitType: 6
   prefab: {fileID: 7442173959025539028, guid: 09ee96ff057aa65439215a812029c847, type: 3}

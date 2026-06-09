@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Knight
   m_EditorClassIdentifier: 
   unitName: Knight
-  health: 120
-  attack: 6
-  meleeArmor: 4
-  pierceArmor: 4
+  health: 80
+  attack: 16
+  meleeArmor: 6
+  pierceArmor: 2
+  cooldown: 6
   scope: 2
   unitType: 3
   prefab: {fileID: 7155293158469676710, guid: d394040564377514f8ca1f7de7d50cc1, type: 3}

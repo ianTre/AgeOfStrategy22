@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Albadier
   m_EditorClassIdentifier: 
   unitName: Albadier
-  health: 50
-  attack: 25
-  meleeArmor: 10
-  pierceArmor: 3
+  health: 80
+  attack: 16
+  meleeArmor: 2
+  pierceArmor: 2
+  cooldown: 8
   scope: 4
   unitType: 0
   prefab: {fileID: 9646155619872908, guid: 16855e1b0b546e141a7ca72b83ae25c9, type: 3}

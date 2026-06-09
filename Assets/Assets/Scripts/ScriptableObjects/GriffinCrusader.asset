@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: GriffinCrusader
   m_EditorClassIdentifier: 
   unitName: Griffin
-  health: 80
-  attack: 6
-  meleeArmor: 4
-  pierceArmor: 6
+  health: 100
+  attack: 20
+  meleeArmor: 3
+  pierceArmor: 3
+  cooldown: 6
   scope: 3
   unitType: 2
   prefab: {fileID: 3087810720983206177, guid: bc72e313966f8b04280c8890ae2869e6, type: 3}

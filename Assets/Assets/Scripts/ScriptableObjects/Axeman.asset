@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Axeman
   m_EditorClassIdentifier: 
   unitName: Axeman
-  health: 50
-  attack: 18
-  meleeArmor: 15
+  health: 40
+  attack: 8
+  meleeArmor: 0
   pierceArmor: 2
+  cooldown: 4
   scope: 4
   unitType: 1
   prefab: {fileID: 3360752932982242809, guid: af5bcb6ca31cdf24da71e60b4c901e7e, type: 3}

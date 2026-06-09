@@ -75,10 +75,10 @@ public class GameManager : MonoBehaviour
 
     public void ClickOnNewObject(GameObject newSelectedObject)
     {
-        IMouseActionable lastActionable = null;
-        lastSelectedObject?.TryGetComponent<IMouseActionable>(out lastActionable);
+        IMouseSelectable lastActionable = null;
+        lastSelectedObject?.TryGetComponent<IMouseSelectable>(out lastActionable);
         newSelectedObject = FindActionableRecursibly(newSelectedObject);
-        newSelectedObject.TryGetComponent<IMouseActionable>(out IMouseActionable actionable);
+        newSelectedObject.TryGetComponent<IMouseSelectable>(out IMouseSelectable actionable);
 
         lastSelectedObject = newSelectedObject;
 
@@ -320,6 +320,12 @@ public class GameManager : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// This is the function that will be called when the player has selected a unit, then selected an enemy target and then selected the position to attack. It will try to move the player unit to the new cell and then prepare the attack on the target unit.
+    /// </summary>
+    /// <param name="playerUnit"></param>
+    /// <param name="targetUnit"></param>
+    /// <param name="cellToAttack"></param>
     public void StageUpdate_PlayerTurn_UnitSelected_EnemyTargetSelected_PositionToAttackSelected(Unit playerUnit, Unit targetUnit, GridCell cellToAttack)
     {
         gameStage = GameStages.PlayerTurn_UnitSelected_EnemyTargetSelected_PositionToAttackSelected;

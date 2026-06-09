@@ -10,7 +10,7 @@ using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
 using static GameManager;
 
-public class Unit : MonoBehaviour , ISoldier, IFocusable
+public class Unit : MonoBehaviour , ISoldier, IFocusable , IMouseActionable
 {
     public UnitData data;
     

@@ -21,7 +21,7 @@ namespace Assets.Assets.Scripts.Managers
 
         public Unit ChooseNextUnit(int turn)
         {
-            List<Unit> enemyUnits = BattlefieldManager.instance.EnemyUnits.Where(unit => unit.CoolDownTurn <= turn).ToList();
+            List<Unit> enemyUnits = BattlefieldManager.instance.EnemyUnits.Where(unit => unit.CoolDownTurn <= turn && unit.isAlive).ToList();
             Unit unitToMove = null;
             while (unitToMove == null && enemyUnits.Count > 0)
             {
@@ -34,17 +34,19 @@ namespace Assets.Assets.Scripts.Managers
         public void ChooseNextMovement(Unit unitToMove)
         {
             GridCell cellToMove = null;
-            cellToMove = FindNextMovementOrAction(unitToMove);
+            
             bool movementOk = false;
-
-            if (cellToMove == null)
-            {
-                Debug.Log("Unit" + unitToMove.name + "couldnt find a possible movement");
-                GameManager.instance.StageUpdate_PlayerTurn();
-            }
-
             while (!movementOk)
             {
+                cellToMove = FindNextMovementOrAction(unitToMove);
+
+                if (cellToMove == null)
+                {
+                    Debug.Log("Unit" + unitToMove.name + "couldnt find a possible movement");
+                    GameManager.instance.StageUpdate_PlayerTurn();
+                }
+
+
                 movementOk = BattlefieldManager.instance.TryToMoveToNewCell(cellToMove, unitToMove, () =>
                 {
                     Unit unit = FindPlayerTargetsToHit(unitToMove);
@@ -77,7 +79,7 @@ namespace Assets.Assets.Scripts.Managers
             if (possibleMovments.Count == 0)
                 return null;
 
-            var playerUnits = BattlefieldManager.instance.PlayerUnits;
+            var playerUnits = BattlefieldManager.instance.PlayerUnits.Where(u => u.isAlive);
             var possibleTargets = possibleMovments.Where(cell => cell.isOccupied && cell.unit != null).ToList(); //List all cells with Player units.
             possibleTargets = possibleTargets.Where(cell => playerUnits.Contains(cell.unit)).ToList();
             
@@ -116,7 +118,8 @@ namespace Assets.Assets.Scripts.Managers
                 
                 if(NoAggresiveMovements.Count > 0)
                 {
-                    cellToMove = NoAggresiveMovements[0];
+                    int targetIndex = Random.Range(0, NoAggresiveMovements.Count); //Player unit whitin enemy range.
+                    cellToMove = NoAggresiveMovements[targetIndex];
                 }
             }
             return cellToMove;

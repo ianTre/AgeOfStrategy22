@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GridCell : MonoBehaviour, IMouseActionable, IFocusable
+public class GridCell : MonoBehaviour, IMouseSelectable, IFocusable , IMouseActionable
 {
     public bool isOffset = false;
     public bool isSelected = false;

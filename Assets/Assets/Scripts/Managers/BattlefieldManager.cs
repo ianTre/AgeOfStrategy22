@@ -63,7 +63,7 @@ public class BattlefieldManager : MonoBehaviour
         GridCell gridCell = gridController.gridArray[x, y].GetComponent<GridCell>();
         if (!gridCell || !gridCell.TryOcuppieCell())
             return false;
-        GameObject newUnit = Instantiate(intendedUnitToCreate.prefab , gridController.gridArray[x, y].transform.position + new Vector3(0, 0.0f, 0), Quaternion.identity);
+        GameObject newUnit = Instantiate(intendedUnitToCreate.prefab , gridController.gridArray[x, y].transform.position + new Vector3(0, 0.0f, 0), Quaternion.Euler(0,180,0));
         Unit unit = newUnit.GetComponent<Unit>();
         if (unit == null)
         {
