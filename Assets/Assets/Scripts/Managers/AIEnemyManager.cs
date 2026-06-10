@@ -115,11 +115,14 @@ namespace Assets.Assets.Scripts.Managers
             {
                 var NoAggresiveMovements = possibleMovments.Where(cell => !cell.isOccupied).ToList();
                 NoAggresiveMovements = NoAggresiveMovements.Where(cell => cell.unit == null).ToList();
-                
-                if(NoAggresiveMovements.Count > 0)
+
+                if (NoAggresiveMovements.Count > 0)
                 {
-                    int targetIndex = Random.Range(0, NoAggresiveMovements.Count); //Player unit whitin enemy range.
-                    cellToMove = NoAggresiveMovements[targetIndex];
+
+                    int targetIndex = Random.Range(0, playerUnits.Count()); //Player unit whitin enemy range.
+                    Unit playerUnittoBeSelectedbyAI = playerUnits.ToList()[targetIndex]; 
+                    cellToMove = NoAggresiveMovements.OrderBy(cell => Vector3.Distance(cell.transform.position , playerUnittoBeSelectedbyAI.transform.position)).FirstOrDefault();
+                    //TODO CHECK THIS FUNCTION
                 }
             }
             return cellToMove;
