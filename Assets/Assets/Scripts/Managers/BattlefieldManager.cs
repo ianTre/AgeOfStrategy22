@@ -135,30 +135,10 @@ public class BattlefieldManager : MonoBehaviour
 
     public Unit GetSelectedUnit()
     {
-        var selectedUnit = PlayerUnits.FirstOrDefault(u => u.transform.GetComponent<PlayerUnit>().hasBeingSelected);
+        var selectedUnit = PlayerUnits.FirstOrDefault(u => u.transform.GetComponent<PlayerUnit>().hasBeingSelected && u.isAlive);
         return selectedUnit;
     }
 
-    public Unit GetTargetUnit()
-    {
-        var selectedUnit = PlayerUnits.FirstOrDefault(u => u.transform.GetComponent<PlayerUnit>().hasBeingSelected);
-        return selectedUnit;
-    }
-
-    public void DeselectUnits()
-    {
-        var selectedUnits = PlayerUnits.FindAll(u => u.transform.GetComponent<PlayerUnit>().hasBeingSelected);
-        if (selectedUnits != null && selectedUnits.Count > 0)
-            selectedUnits.ForEach(u => u.transform.GetComponent<PlayerUnit>().Deselect());
-    }
-
-    public Unit ReturnSelectedUnit()
-    {
-        var selectedUnits = PlayerUnits.FindAll(u => u.transform.GetComponent<PlayerUnit>());
-        if (selectedUnits != null && selectedUnits.Count > 0)
-            return selectedUnits[0];
-        return null;
-    }
 
     public bool IsEnemyNearBy(GridCell gridCell)
     {
@@ -284,14 +264,6 @@ public class BattlefieldManager : MonoBehaviour
         GameManager.instance.StageUpdate_PlayerTurn_UnitSelected_EnemyTargetSelected(playerUnit, target);
     }
 
-
-    public List<Unit> GetPlayerUnits()
-    {
-        return this.PlayerUnits;
-    }
-
-
-
     internal Unit GetTargetEnemyUnit()
     {
         return targetEnemyUnit;
@@ -305,6 +277,6 @@ public class BattlefieldManager : MonoBehaviour
 
     internal List<Unit> SetCooldownForUnits_Player(int turn )
     {
-        return this.PlayerUnits.Where(unit => unit.CoolDownTurn <=  turn).ToList();
+        return this.PlayerUnits.Where(unit => unit.CoolDownTurn <=  turn && unit.isAlive).ToList();
     }
 }

@@ -125,6 +125,7 @@ MonoBehaviour:
   isAlive: 1
   moveSpeed: 10
   rotationSpeed: 5
+  attackRotationSpeed: 2
   stoppingDistance: 0.05
   Id: 0
   isPlayerUnit: 1

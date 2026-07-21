@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour
     private float transitionSpeed = 2f;
 
     // The target position that navigation buttons update.
-    private Vector3 desiredPosition;
+    public Vector3 desiredPosition;
     Vector2 deltaMovement; 
 
     private void Awake()

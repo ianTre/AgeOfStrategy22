@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="parchment" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e6d2ac"/>
+      <stop offset="100%" stop-color="#d8be91"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1920" height="1080" fill="url(#parchment)"/>
+
+  <!-- Outer frame -->
+  <rect x="40" y="40" width="1840" height="1000"
+        fill="none" stroke="#6e6a63" stroke-width="6"/>
+
+  <!-- Decorative lines -->
+  <line x1="120" y1="80" x2="1800" y2="80" stroke="#6e6a63" stroke-width="4"/>
+  <line x1="120" y1="1000" x2="1800" y2="1000" stroke="#6e6a63" stroke-width="4"/>
+  <line x1="80" y1="120" x2="80" y2="960" stroke="#6e6a63" stroke-width="4"/>
+  <line x1="1840" y1="120" x2="1840" y2="960" stroke="#6e6a63" stroke-width="4"/>
+
+  <!-- Fleur-de-lis corners -->
+  <g fill="#6e6a63" font-size="72" font-family="serif">
+    <text x="65" y="95">⚜</text>
+    <text x="1785" y="95">⚜</text>
+    <text x="65" y="1025">⚜</text>
+    <text x="1785" y="1025">⚜</text>
+  </g>
+
+  <!-- Heraldic lion placeholder -->
+  <g opacity="0.25" fill="#6e6a63">
+    <path d="M1400 650
+             C1480 580,1580 580,1640 660
+             C1680 710,1680 800,1620 850
+             C1560 900,1480 900,1420 850
+             C1360 800,1350 720,1400 650 Z"/>
+    <circle cx="1540" cy="620" r="35"/>
+  </g>
+</svg>

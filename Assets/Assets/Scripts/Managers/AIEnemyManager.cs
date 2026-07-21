@@ -34,11 +34,13 @@ namespace Assets.Assets.Scripts.Managers
         public void ChooseNextMovement(Unit unitToMove)
         {
             GridCell cellToMove = null;
-            
+            int numberOfAttempts = 8;
+
             bool movementOk = false;
-            while (!movementOk)
+            while (!movementOk && numberOfAttempts > -5) // Harcoded value : To break loop when a enemy unity has no possible movement at all.
             {
-                cellToMove = FindNextMovementOrAction(unitToMove);
+                numberOfAttempts--;
+                cellToMove = FindNextMovementOrAction(unitToMove,numberOfAttempts);
 
                 if (cellToMove == null)
                 {
@@ -72,7 +74,7 @@ namespace Assets.Assets.Scripts.Managers
             return target;
         }
 
-        private GridCell FindNextMovementOrAction(Unit unitToMove)
+        private GridCell FindNextMovementOrAction(Unit unitToMove , int numberOfAttempts)
         {
             GridCell cellToMove = null;
             var possibleMovments = gridController.cellsList.Where(cell => cell.canBeActionable).ToList();
@@ -86,6 +88,14 @@ namespace Assets.Assets.Scripts.Managers
             possibleMovments.Except(possibleTargets);
             
             bool hasAIFoundAction = false;
+
+            if (numberOfAttempts < 1) // To be tested. If numberOfAttempts == 0 , it should pick a random movement and not try to engage to Player Unit anymore , to avoid loops , and also dont loose AI turn.
+            {
+                possibleMovments.Where(cell => !cell.isOccupied).ToList();
+                var auxIndex = Random.Range(0, possibleMovments.Count());
+                cellToMove = possibleMovments[auxIndex];
+                return cellToMove;
+            }
 
             if (possibleTargets.Count > 0)  //Exists Player unit whitin enemy range.
             {

@@ -19,7 +19,8 @@ public class Unit : MonoBehaviour , ISoldier, IFocusable , IMouseActionable
     public List<GridCell> path;
     public bool isAlive = true;
     [SerializeField] private float moveSpeed = 3f;              // velocidad en unidades por segundo
-    [SerializeField] private float rotationSpeed = 5f;          // grados por segundo para rotar suavemente
+    [SerializeField] private float rotationSpeed =5f;          // grados por segundo para rotar suavemente al caminar
+    [SerializeField] private float attackRotationSpeed = 5f;    // grados por segundo para rotar suavemente al atacar
     [SerializeField] private float stoppingDistance = 0.05f;    // distancia m�nima 
     public int Id;
     public bool isPlayerUnit = true;
@@ -106,9 +107,32 @@ public class Unit : MonoBehaviour , ISoldier, IFocusable , IMouseActionable
 
     public IEnumerator AttackTarget(Unit target, Action onComplete)
     {
-        yield return new WaitForSeconds(1.5f); // Simulate attack delay
-        this.transform.LookAt(target.transform);
-        target.transform.LookAt(this.transform);
+        yield return new WaitForSeconds(0.5f); // Simulate attack delay
+
+        //Start smooth Rotation
+
+        Quaternion startRotation = transform.rotation;
+        Quaternion targetRotation = target.transform.rotation;
+        float elapsed = 0f;
+        float maxRotateTime = 1.5f; // tiempo máximo para evitar loops infinitos
+        Quaternion myTargetRot = Quaternion.LookRotation(target.transform.position - transform.position);
+        Quaternion targetTargetRot = Quaternion.LookRotation(transform.position - target.transform.position);
+
+        while ((Quaternion.Angle(transform.rotation, myTargetRot) > 0.5f 
+            || Quaternion.Angle(target.transform.rotation , targetTargetRot) > 0.5f ) && elapsed < maxRotateTime)
+        {
+            elapsed += Time.deltaTime;
+            transform.rotation = Quaternion.Slerp(startRotation, myTargetRot, rotationSpeed * elapsed);
+            target.transform.rotation = Quaternion.Slerp(targetRotation, targetTargetRot, rotationSpeed * elapsed);
+            yield return null;
+        }
+        
+
+        //Finish smooth Rotation
+
+        /*this.transform.LookAt(target.transform);
+        target.transform.LookAt(this.transform);*/
+
         this.GetComponent<UnitAnimationController>().TriggerAttack();
         yield return new WaitForSeconds(0.3f); // Simulate attack delay
         target.GetComponent<UnitAnimationController>().TriggerDefend();
