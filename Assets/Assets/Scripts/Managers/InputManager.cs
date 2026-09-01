@@ -59,11 +59,17 @@ public class InputManager : MonoBehaviour
         playerActions.BattlefieldActions.SpecialOrder4.performed += OnSpecialOrder4;
         playerActions.BattlefieldActions.SpecialOrder5.performed += OnSpecialOrder5;
         playerActions.BattlefieldActions.SpecialOrder6.performed += OnSpecialOrder6;
+        playerActions.BattlefieldActions.CancelActions.performed += OnCancelAction;
 
         playerActions.BattlefieldActions.GiveOrder.performed += OnMouseRightClick;
         playerActions.BattlefieldActions.GiveOrder.canceled += OnMouseRightClickRelease;
         defaultInputActions.UI.Navigate.performed += OnNavigate;
         defaultInputActions.UI.Navigate.canceled += OnNavigateFinish;
+    }
+
+    private void OnCancelAction(InputAction.CallbackContext context)
+    {
+        gameManager.CancelAction();
     }
 
     private void OnNavigateFinish(InputAction.CallbackContext context)

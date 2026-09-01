@@ -181,6 +181,15 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CancelActions"",
+                    ""type"": ""Button"",
+                    ""id"": ""36b60990-23ee-4f86-96f1-4d6e673c726d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -293,6 +302,17 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""action"": ""MoveCamera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""26b6a191-ff58-45a7-b238-ba1995aec037"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CancelActions"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -311,6 +331,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         m_BattlefieldActions_SpecialOrder5 = m_BattlefieldActions.FindAction("SpecialOrder5", throwIfNotFound: true);
         m_BattlefieldActions_SpecialOrder6 = m_BattlefieldActions.FindAction("SpecialOrder6", throwIfNotFound: true);
         m_BattlefieldActions_MoveCamera = m_BattlefieldActions.FindAction("MoveCamera", throwIfNotFound: true);
+        m_BattlefieldActions_CancelActions = m_BattlefieldActions.FindAction("CancelActions", throwIfNotFound: true);
     }
 
     ~@PlayerActions()
@@ -401,6 +422,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_BattlefieldActions_SpecialOrder5;
     private readonly InputAction m_BattlefieldActions_SpecialOrder6;
     private readonly InputAction m_BattlefieldActions_MoveCamera;
+    private readonly InputAction m_BattlefieldActions_CancelActions;
     /// <summary>
     /// Provides access to input actions defined in input action map "BattlefieldActions".
     /// </summary>
@@ -452,6 +474,10 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "BattlefieldActions/MoveCamera".
         /// </summary>
         public InputAction @MoveCamera => m_Wrapper.m_BattlefieldActions_MoveCamera;
+        /// <summary>
+        /// Provides access to the underlying input action "BattlefieldActions/CancelActions".
+        /// </summary>
+        public InputAction @CancelActions => m_Wrapper.m_BattlefieldActions_CancelActions;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -508,6 +534,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @MoveCamera.started += instance.OnMoveCamera;
             @MoveCamera.performed += instance.OnMoveCamera;
             @MoveCamera.canceled += instance.OnMoveCamera;
+            @CancelActions.started += instance.OnCancelActions;
+            @CancelActions.performed += instance.OnCancelActions;
+            @CancelActions.canceled += instance.OnCancelActions;
         }
 
         /// <summary>
@@ -549,6 +578,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @MoveCamera.started -= instance.OnMoveCamera;
             @MoveCamera.performed -= instance.OnMoveCamera;
             @MoveCamera.canceled -= instance.OnMoveCamera;
+            @CancelActions.started -= instance.OnCancelActions;
+            @CancelActions.performed -= instance.OnCancelActions;
+            @CancelActions.canceled -= instance.OnCancelActions;
         }
 
         /// <summary>
@@ -659,5 +691,12 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMoveCamera(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "CancelActions" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnCancelActions(InputAction.CallbackContext context);
     }
 }

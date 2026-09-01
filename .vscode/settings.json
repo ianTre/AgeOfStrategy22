@@ -51,5 +51,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "AgeOfStrategy22.sln"
+    "dotnet.defaultSolution": "AgeOfStrategy22.sln",
+    "dotnet.preferCSharpExtension": true
 }

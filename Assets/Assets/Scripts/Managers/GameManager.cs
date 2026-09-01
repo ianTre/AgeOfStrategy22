@@ -72,7 +72,34 @@ public class GameManager : MonoBehaviour
         oldGameStage = gameStage;
     }
 
+    public void CancelAction()
+    {
+        List<GameManager.GameStages> DeployStages = new List<GameManager.GameStages>()
+            {
+                GameManager.GameStages.PlayerDeploy,
+                GameManager.GameStages.PlayerDeploy_CardSelected,
+                GameManager.GameStages.PlayerDeploy_CardSelected_CellSelected,
+                GameManager.GameStages.Start,
+            };
+        if (CheckStages(DeployStages))
+        {
+            StageUpdate_PlayerDeploy();
+        }
 
+        List<GameManager.GameStages> PlayerStages = new List<GameManager.GameStages>()
+            {
+                GameManager.GameStages.PlayerTurn,
+                GameManager.GameStages.PlayerTurn_UnitSelected,
+                GameManager.GameStages.PlayerTurn_UnitSelected_EnemyTargetSelected,
+                GameManager.GameStages.PlayerTurn_UnitSelected_UnitMovement,
+            };
+
+        if(CheckStages(PlayerStages))
+        {  
+            StageUpdate_PlayerTurn(); 
+        }
+
+    }
     public void ClickOnNewObject(GameObject newSelectedObject)
     {
         IMouseSelectable lastActionable = null;
@@ -164,7 +191,7 @@ public class GameManager : MonoBehaviour
                 StageUpdate_PlayerTurn_UnitSelected_UnitMovement(selectedUnit, cell);
         }
 
-        if(CheckStage(GameStages.PlayerTurn_UnitSelected_EnemyTargetSelected))
+        if(CheckStage(GameStages.PlayerTurn_UnitSelected_EnemyTargetSelected)) // TODO: fix bug unit attack from far away
         {
             Unit targetUnit = battlefieldManager.GetTargetEnemyUnit();
             if (selectedUnit != null && targetUnit != null)
