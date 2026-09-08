@@ -98,8 +98,8 @@ public class GameManager : MonoBehaviour
         {  
             StageUpdate_PlayerTurn(); 
         }
-
     }
+
     public void ClickOnNewObject(GameObject newSelectedObject)
     {
         IMouseSelectable lastActionable = null;
@@ -301,7 +301,21 @@ public class GameManager : MonoBehaviour
     {
         gameStage = GameStages.PlayerTurn;
         this.turn++;
+        DisableSelectionLight();
+        DisableGridSelection();
         StageUpdate_PlayerTurn_DisableUnitsCoolDown();
+        
+    }
+
+    private void DisableGridSelection()
+    {
+        gridController.DisableAllCells();
+
+    }
+
+    private void DisableSelectionLight()
+    {
+        battlefieldManager.DeselectSelectedUnit();
     }
 
     public void StageUpdate_PlayerTurn_DisableUnitsCoolDown()

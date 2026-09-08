@@ -371,6 +371,7 @@ public class GridController : MonoBehaviour
         foreach (var cell in cellsList)
         {
             cell.canBeActionable = false;
+            cell.UnHighlight();
         }
     }
 

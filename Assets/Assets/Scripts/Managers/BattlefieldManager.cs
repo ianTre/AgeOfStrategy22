@@ -139,6 +139,13 @@ public class BattlefieldManager : MonoBehaviour
         return selectedUnit;
     }
 
+    public void DeselectSelectedUnit()
+    {
+        Unit playerUnit = GetSelectedUnit();
+        if (playerUnit != null)
+            playerUnit.transform.GetComponent<PlayerUnit>().Deselect();
+    }
+
 
     public bool IsEnemyNearBy(GridCell gridCell)
     {
