@@ -13,7 +13,7 @@ public class GridCell : MonoBehaviour, IMouseSelectable, IFocusable , IMouseActi
     public Material Normal, Offset, Highligh, HighlighEnemy;
     public bool isOccupied = false;
     public Unit unit;
-    private bool skipHover = false;
+    public bool isCellAnEnemyNeighbour = false;
     public bool canBeActionable = false;
 
 
@@ -33,13 +33,15 @@ public class GridCell : MonoBehaviour, IMouseSelectable, IFocusable , IMouseActi
 
     public void PaintCell()
     {
-        this.skipHover = true;
+        if (!canBeActionable)
+            return;
+        this.isCellAnEnemyNeighbour = true;
         this.Highlight(true);
     }
 
     public void UnPaintCell()
     {
-        this.skipHover = false;
+        this.isCellAnEnemyNeighbour = false;
         this.UnHighlight();
     }
 
@@ -123,7 +125,7 @@ public class GridCell : MonoBehaviour, IMouseSelectable, IFocusable , IMouseActi
 
         if (!isSelected)
         {
-            if(skipHover)
+            if(isCellAnEnemyNeighbour)
                 this.Highlight(true);
             else
             { 

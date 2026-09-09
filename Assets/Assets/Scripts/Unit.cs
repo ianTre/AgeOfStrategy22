@@ -89,7 +89,7 @@ public class Unit : MonoBehaviour , ISoldier, IFocusable , IMouseActionable
 
     public void Action()
     {
-        if (isAlive)
+        if (isAlive && cell && cell.canBeActionable)
         {
             BattlefieldManager.instance.SelectTargetUnit(this);
         }

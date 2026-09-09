@@ -106,7 +106,7 @@ namespace Assets.Assets.Scripts.Managers
                     int targetIndex = Random.Range(0, possibleTargets.Count); //Player unit whitin enemy range.
                     var possibleTargetPosition = possibleTargets[targetIndex];
 
-                    var cellsArroundTargetALL = gridController.FindFreeCellsAroundTarget(possibleTargetPosition);
+                    var cellsArroundTargetALL = gridController.FindFreeCellsAroundTarget(possibleTargetPosition, unitToMove);
                     var cellsWithinRange = cellsArroundTargetALL.Where(cell => cell.canBeActionable).ToList();
                     if (cellsWithinRange.Count == 0)
                     {

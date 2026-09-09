@@ -141,7 +141,7 @@ public class GridController : MonoBehaviour
         }
     }
 
-    public List<GridCell> FindFreeCellsAroundTarget(GridCell origin)
+    public List<GridCell> FindFreeCellsAroundTarget(GridCell origin , Unit Attcaker=null)
     {
         List<GridCell> gridCells = new List<GridCell>();
         int x = origin.x;
@@ -151,42 +151,42 @@ public class GridController : MonoBehaviour
         //1
         x = origin.x - 1;
         y = origin.y;
-        CheckCellIsFree(gridCells, x, y, target);
+        CheckCellIsFree(gridCells, x, y, target, Attcaker?.cell);
 
         //2
         x = origin.x + 1;
         y = origin.y;
-        CheckCellIsFree(gridCells, x, y, target);
+        CheckCellIsFree(gridCells, x, y, target , Attcaker?.cell);
 
         //3
         x = origin.x;
         y = origin.y + 1;
-        CheckCellIsFree(gridCells, x, y, target);
+        CheckCellIsFree(gridCells, x, y, target, Attcaker?.cell);
 
         //4
         x = origin.x;
         y = origin.y - 1;
-        CheckCellIsFree(gridCells, x, y, target);
+        CheckCellIsFree(gridCells, x, y, target, Attcaker?.cell);
 
         //5
         x = origin.x - 1;
         y = origin.y - 1;
-        CheckCellIsFree(gridCells, x, y, target);
+        CheckCellIsFree(gridCells, x, y, target, Attcaker?.cell);
 
         //6
         x = origin.x + 1;
         y = origin.y + 1;
-        CheckCellIsFree(gridCells, x, y, target);
+        CheckCellIsFree(gridCells, x, y, target, Attcaker?.cell);
 
         //7
         x = origin.x + 1;
         y = origin.y - 1;
-        CheckCellIsFree(gridCells, x, y, target);
+        CheckCellIsFree(gridCells, x, y, target, Attcaker?.cell);
 
         //8
         x = origin.x - 1;
         y = origin.y + 1;
-        CheckCellIsFree(gridCells, x, y, target);
+        CheckCellIsFree(gridCells, x, y, target, Attcaker?.cell);
 
         return gridCells;
     }
@@ -246,15 +246,17 @@ public class GridController : MonoBehaviour
         FindFreeCellsAroundTarget(target).ForEach(cell => cell.UnPaintCell());
     }
 
-    private GridCell CheckCellIsFree(List<GridCell> gridCells, int x, int y, GridCell target)
+    private void CheckCellIsFree(List<GridCell> gridCells, int x, int y, GridCell checkedCell ,GridCell originPosition=null)
     {
-        if (CoordinatesInsideScope(x, y) && gridArray[x, y] != null && gridArray[x, y].TryGetComponent<GridCell>(out target))
+        if (CoordinatesInsideScope(x, y) && gridArray[x, y] != null && gridArray[x, y].TryGetComponent<GridCell>(out checkedCell))
         {
-            if (!target.isOccupied)
-                gridCells.Add(target);
+            if (originPosition && originPosition?.x == x && originPosition?.y == y)
+            {
+                gridCells.Add(checkedCell);
+            }
+            if (!checkedCell.isOccupied)
+                gridCells.Add(checkedCell);
         }
-
-        return target;
     }
 
     private void CheckCell(List<GridCell> gridCells, int x, int y, GridCell target)
@@ -371,6 +373,7 @@ public class GridController : MonoBehaviour
         foreach (var cell in cellsList)
         {
             cell.canBeActionable = false;
+            cell.isCellAnEnemyNeighbour = false;
             cell.UnHighlight();
         }
     }

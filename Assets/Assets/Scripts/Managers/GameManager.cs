@@ -191,11 +191,18 @@ public class GameManager : MonoBehaviour
                 StageUpdate_PlayerTurn_UnitSelected_UnitMovement(selectedUnit, cell);
         }
 
-        if(CheckStage(GameStages.PlayerTurn_UnitSelected_EnemyTargetSelected)) // TODO: fix bug unit attack from far away
+        if(CheckStage(GameStages.PlayerTurn_UnitSelected_EnemyTargetSelected)) 
         {
-            Unit targetUnit = battlefieldManager.GetTargetEnemyUnit();
-            if (selectedUnit != null && targetUnit != null)
-                StageUpdate_PlayerTurn_UnitSelected_EnemyTargetSelected_PositionToAttackSelected(selectedUnit, targetUnit, cell);
+            if (cell.isCellAnEnemyNeighbour) //El jugador puede selccionar una unidad enemiga pero arrepentirse y moverse a cualquier otra posicion del mapa sin necesidad de realizar un ataque.
+            {
+                Unit targetUnit = battlefieldManager.GetTargetEnemyUnit();
+                if (selectedUnit != null && targetUnit != null)
+                    StageUpdate_PlayerTurn_UnitSelected_EnemyTargetSelected_PositionToAttackSelected(selectedUnit, targetUnit, cell);
+            }
+            else
+            {
+                StageUpdate_PlayerTurn_UnitSelected_UnitMovement(selectedUnit, cell);
+            }
         }
     }
 
@@ -338,13 +345,13 @@ public class GameManager : MonoBehaviour
         gameStage = GameStages.PlayerTurn_Precondition_PlayerReadyToPlay;
         InputManager.instance.EnableControllers();
         gridController.DisableAllCells();
-        gridController.EnableCells(listOfUnitsReady.Select(unit => unit.cell).ToList());
+        gridController.EnableCells(listOfUnitsReady.Select(unit => unit.cell).ToList()); // Need to Enable cells to let player click on a cell where there is a UNIT.
     }
 
     public bool StageUpdate_PlayerTurn_UnitSelected(Unit selectedUnit)
     {
         BattlefieldManager.instance.DeselectAllOtherUnits(selectedUnit);
-        gridController.DisableAllCells();
+        gridController.DisableAllCells(); // Cells where player has other units were enabled on previous step. Disable all cells.
 
         var listOfUnitsReady = battlefieldManager.SetCooldownForUnits_Player(this.turn);
         if (!listOfUnitsReady.Contains(selectedUnit))
@@ -358,7 +365,6 @@ public class GameManager : MonoBehaviour
     public void StageUpdate_PlayerTurn_UnitSelected_EnemyTargetSelected(Unit playerUnit , Unit targetUnit)
     {
         gameStage = GameStages.PlayerTurn_UnitSelected_EnemyTargetSelected;
-        
     }
 
     /// <summary>

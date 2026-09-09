@@ -265,7 +265,8 @@ public class BattlefieldManager : MonoBehaviour
         if (!GameManager.instance.CheckStage(GameManager.GameStages.PlayerTurn_UnitSelected))
             return;
         targetEnemyUnit = target;
-        var cells = gridController.FindFreeCellsAroundTarget(target.cell);
+        var cells = gridController.FindFreeCellsAroundTarget(target.cell,playerUnit);
+        
         foreach (var cell in cells) 
             cell.PaintCell();
         GameManager.instance.StageUpdate_PlayerTurn_UnitSelected_EnemyTargetSelected(playerUnit, target);
