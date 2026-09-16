@@ -25,6 +25,7 @@ public class Unit : MonoBehaviour , ISoldier, IFocusable , IMouseActionable
     public int Id;
     public bool isPlayerUnit = true;
     public int CoolDownTurn = 0;
+    public bool actionMade = false;
 
 
     public void InitUnit(UnitData data, GridCell cell, int amount , bool isPlayer)
