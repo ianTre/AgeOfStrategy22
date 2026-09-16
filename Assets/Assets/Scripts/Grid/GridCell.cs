@@ -31,7 +31,7 @@ public class GridCell : MonoBehaviour, IMouseSelectable, IFocusable , IMouseActi
 
     }
 
-    public void PaintCell()
+    public void PaintEnemyPerimeter()
     {
         if (!canBeActionable)
             return;
@@ -150,18 +150,35 @@ public class GridCell : MonoBehaviour, IMouseSelectable, IFocusable , IMouseActi
         this.isOccupied = true;
     }
 
+    /// <summary>
+    /// Posible actions : 
+    ///     1 - Unit will move to this CELL.
+    ///     2 - Unit will Target enemy unit on this CELL.
+    /// </summary>
     public void Action()
     {
+        GameManager gManager = GameManager.instance;
         if (!canBeActionable)
             return;
-        if (unit != null)
+        if (unit != null && gManager.CheckStage(GameManager.GameStages.PlayerTurn_UnitSelected))
         {
             unit.Action();
+            return;
         }
-        else
-        {
-            DoTheAction();
+
+        List<GameManager.GameStages> possibleStagesToAttack = new List<GameManager.GameStages>
+        { 
+            GameManager.GameStages.PlayerTurn_UnitSelected,
+            GameManager.GameStages.PlayerTurn_UnitSelected_EnemyTargetSelected,
+            GameManager.GameStages.PlayerTurn_UnitSelected_EnemyTargetSelected_PositionToAttackSelected
+        };
+        if (gManager.CheckStages(possibleStagesToAttack))
+        { 
+            MovementAction();
+            return;
         }
+
+
     }
     public bool IsGridCellNearToMe(GridCell gridCell)
     {
@@ -170,7 +187,7 @@ public class GridCell : MonoBehaviour, IMouseSelectable, IFocusable , IMouseActi
         return isNear;
     }
 
-    private void DoTheAction()
+    private void MovementAction()
     {
         GameManager.instance.CellCalledForAction(this);
     }

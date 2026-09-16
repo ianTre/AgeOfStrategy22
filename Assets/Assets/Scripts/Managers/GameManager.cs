@@ -436,7 +436,7 @@ public class GameManager : MonoBehaviour
         aIEnemyManager.ChooseNextMovement(enemyUnit);
     }
 
-    internal bool CheckStage(GameStages stage)
+    public bool CheckStage(GameStages stage)
     {
         return gameStage == stage;
     }

@@ -95,6 +95,8 @@ public class GridController : MonoBehaviour
         gridArray[startX, startY].GetComponent<GridCell>().visited = 0;
     }
 
+
+    //TODO : Check this to solve the problem of pathfinding when the target is occupied by an enemy unit
     void SetPath()
     {
         int step;
@@ -141,52 +143,52 @@ public class GridController : MonoBehaviour
         }
     }
 
-    public List<GridCell> FindFreeCellsAroundTarget(GridCell origin , Unit Attcaker=null)
+    public List<GridCell> FindFreeCellsAroundTarget(GridCell targetPosition , Unit Attacker=null)
     {
         List<GridCell> gridCells = new List<GridCell>();
-        int x = origin.x;
-        int y = origin.y;
+        int x = targetPosition.x;
+        int y = targetPosition.y;
         GridCell target = null;
 
         //1
-        x = origin.x - 1;
-        y = origin.y;
-        CheckCellIsFree(gridCells, x, y, target, Attcaker?.cell);
+        x = targetPosition.x - 1;
+        y = targetPosition.y;
+        CheckCellIsFree(gridCells, x, y, target, Attacker?.cell);
 
         //2
-        x = origin.x + 1;
-        y = origin.y;
-        CheckCellIsFree(gridCells, x, y, target , Attcaker?.cell);
+        x = targetPosition.x + 1;
+        y = targetPosition.y;
+        CheckCellIsFree(gridCells, x, y, target , Attacker?.cell);
 
         //3
-        x = origin.x;
-        y = origin.y + 1;
-        CheckCellIsFree(gridCells, x, y, target, Attcaker?.cell);
+        x = targetPosition.x;
+        y = targetPosition.y + 1;
+        CheckCellIsFree(gridCells, x, y, target, Attacker?.cell);
 
         //4
-        x = origin.x;
-        y = origin.y - 1;
-        CheckCellIsFree(gridCells, x, y, target, Attcaker?.cell);
+        x = targetPosition.x;
+        y = targetPosition.y - 1;
+        CheckCellIsFree(gridCells, x, y, target, Attacker?.cell);
 
         //5
-        x = origin.x - 1;
-        y = origin.y - 1;
-        CheckCellIsFree(gridCells, x, y, target, Attcaker?.cell);
+        x = targetPosition.x - 1;
+        y = targetPosition.y - 1;
+        CheckCellIsFree(gridCells, x, y, target, Attacker?.cell);
 
         //6
-        x = origin.x + 1;
-        y = origin.y + 1;
-        CheckCellIsFree(gridCells, x, y, target, Attcaker?.cell);
+        x = targetPosition.x + 1;
+        y = targetPosition.y + 1;
+        CheckCellIsFree(gridCells, x, y, target, Attacker?.cell);
 
         //7
-        x = origin.x + 1;
-        y = origin.y - 1;
-        CheckCellIsFree(gridCells, x, y, target, Attcaker?.cell);
+        x = targetPosition.x + 1;
+        y = targetPosition.y - 1;
+        CheckCellIsFree(gridCells, x, y, target, Attacker?.cell);
 
         //8
-        x = origin.x - 1;
-        y = origin.y + 1;
-        CheckCellIsFree(gridCells, x, y, target, Attcaker?.cell);
+        x = targetPosition.x - 1;
+        y = targetPosition.y + 1;
+        CheckCellIsFree(gridCells, x, y, target, Attacker?.cell);
 
         return gridCells;
     }
@@ -253,6 +255,8 @@ public class GridController : MonoBehaviour
             if (originPosition && originPosition?.x == x && originPosition?.y == y)
             {
                 gridCells.Add(checkedCell);
+                originPosition.canBeActionable = true;
+                return;
             }
             if (!checkedCell.isOccupied)
                 gridCells.Add(checkedCell);
@@ -420,8 +424,6 @@ public class GridController : MonoBehaviour
                 }
             }
         }
-
-
         return scopedCells;
     }
 

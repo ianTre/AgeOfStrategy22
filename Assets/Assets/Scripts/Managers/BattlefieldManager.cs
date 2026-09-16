@@ -169,7 +169,11 @@ public class BattlefieldManager : MonoBehaviour
     public bool TryToMoveToNewCell(GridCell newCell, Unit unitToMove , Action onComplete)
     {
         if (newCell.isOccupied)
+        {
+            if (newCell == unitToMove.cell)
+                onComplete?.Invoke();
             return false;
+        }
         unitToMove.path = FindShortestPath(unitToMove.cell, newCell);
         if (unitToMove.path != null && unitToMove.path.Count > 0)
         {
@@ -178,6 +182,7 @@ public class BattlefieldManager : MonoBehaviour
             unitToMove.cell = newCell;
             unitToMove.cell.OcuppyNewUnit(unitToMove); //Assign new Cell
             unitToMove.CoolDownTurn = GameManager.instance.turn + unitToMove.data.cooldown + 1;
+            unitToMove.actionMade = true;
             StartCoroutine(unitToMove.MoveToNewPosition(unitToMove.path , onComplete));
             
             return true;
@@ -195,6 +200,7 @@ public class BattlefieldManager : MonoBehaviour
         if (!target.isAlive)
             return false;
         backendService.AttackUnit(target, attacker);
+        attacker.CoolDownTurn = GameManager.instance.turn + attacker.data.cooldown + 1;
         StartCoroutine(attacker.AttackTarget(target, onComplete));
         return true;
     }
@@ -253,6 +259,10 @@ public class BattlefieldManager : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Select a UNIT to be Attacked.
+    /// </summary>
+    /// <param name="target"></param>
     internal void SelectTargetUnit(Unit target)
     {
         Unit playerUnit = GetSelectedUnit();
@@ -268,7 +278,7 @@ public class BattlefieldManager : MonoBehaviour
         var cells = gridController.FindFreeCellsAroundTarget(target.cell,playerUnit);
         
         foreach (var cell in cells) 
-            cell.PaintCell();
+            cell.PaintEnemyPerimeter();
         GameManager.instance.StageUpdate_PlayerTurn_UnitSelected_EnemyTargetSelected(playerUnit, target);
     }
 
