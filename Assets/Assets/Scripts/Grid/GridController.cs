@@ -86,13 +86,13 @@ public class GridController : MonoBehaviour
         }
     }
 
-    void InitialSetup()
+    void InitialSetup(int x, int y)
     {
         foreach (GameObject obj in gridArray)
         {
             obj.GetComponent<GridCell>().visited = -1;
         }
-        gridArray[startX, startY].GetComponent<GridCell>().visited = 0;
+        gridArray[x, y].GetComponent<GridCell>().visited = 0;
     }
 
 
@@ -285,7 +285,7 @@ public class GridController : MonoBehaviour
         this.endX = destiniy.x;
         this.endY = destiniy.y;
 
-        SetDistance();
+        SetDistance(origin.x,origin.y);
         SetPath();
         return pathList.OrderBy(cell => cell.visited).ToList();
     }
@@ -338,11 +338,9 @@ public class GridController : MonoBehaviour
         }
     }
 
-    void SetDistance()
+    void SetDistance(int x, int y)
     {
-        InitialSetup();
-        int x = startX;
-        int y = startY;
+        InitialSetup(x,y);
         int[] testArray = new int[rows * columns];
         for (int step = 1; step < columns * rows; step++)
         {
@@ -387,58 +385,26 @@ public class GridController : MonoBehaviour
         gridCells.ForEach(cell => cell.canBeActionable = true);
     }
 
-    internal void EnableScopedCells(Unit selectedUnit,List<Unit> samePlayerUnits)
+    internal void EnableScopedCells(Unit selectedUnit,List<Unit> otherPlayerUnits)
     {
         GridCell currentCell = selectedUnit.cell;
         int scope = selectedUnit.data.scope;
 
-        var scopedCells = FindScopedCells(currentCell, scope, samePlayerUnits);
+        var scopedCells = FindScopedCellsWithPathfinding(currentCell, scope, otherPlayerUnits);
         EnableCells(scopedCells);
     }
 
-    private List<GridCell> FindScopedCells(GridCell currentCell, int scope,List<Unit> samePlayerUnits)
+    private List<GridCell> FindScopedCellsWithPathfinding(GridCell currentCell, int scope, List<Unit> samePlayerUnits)
     {
         var scopedCells = new List<GridCell>();
         int x = currentCell.x;
         var y = currentCell.y;
 
-        int minX, maxX, minY, maxY;
+        SetDistance(x,y);
+        scopedCells = cellsList.Where(cell => cell.visited <= scope && cell.visited != -1).ToList();
+        
 
-        minX = Mathf.Max(0, x - scope);
-        maxX = Mathf.Min(columns, x + scope);
-        minY = Mathf.Max(0, y - scope);
-        maxY = Mathf.Min(rows, y + scope);
-
-        for (int i = minX; i <= maxX; i++)
-        {
-            for (int j = minY; j <= maxY; j++)
-            {
-                if (CoordinatesInsideScope(i, j))
-                {
-                    GridCell gCell = gridArray[i, j].GetComponent<GridCell>();
-                    if (gCell == currentCell)
-                        continue;
-
-                    if (CanBeActionable(gCell, samePlayerUnits))
-                        scopedCells.Add(gCell);
-                }
-            }
-        }
         return scopedCells;
     }
 
-    private bool CanBeActionable(GridCell gCell, List<Unit> samePlayerUnits)
-    {
-        if (gCell.canBeActionable) //Already actionable
-            return false;
-
-        if (gCell.isOccupied && gCell.unit != null) //Cell ocuppied by friendly Unit
-        {
-            Unit unit = gCell.unit;
-            if (samePlayerUnits.Contains(unit))
-                return false;
-        }
-
-        return true;
-    }
 }
