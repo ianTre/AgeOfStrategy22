@@ -394,17 +394,32 @@ public class GridController : MonoBehaviour
         EnableCells(scopedCells);
     }
 
-    private List<GridCell> FindScopedCellsWithPathfinding(GridCell currentCell, int scope, List<Unit> samePlayerUnits)
+    private List<GridCell> FindScopedCellsWithPathfinding(GridCell currentCell, int scope, List<Unit> otherPlayerUnits)
     {
         var scopedCells = new List<GridCell>();
+        var returnedCells = new List<GridCell>();
+
         int x = currentCell.x;
         var y = currentCell.y;
 
         SetDistance(x,y);
         scopedCells = cellsList.Where(cell => cell.visited <= scope && cell.visited != -1).ToList();
+        returnedCells = cellsList.Where(cell => cell.visited <= scope && cell.visited != -1).ToList();
         
+        List<GridCell> cellsAroundEnemy = new List<GridCell>();
 
-        return scopedCells;
+        foreach (var unit in otherPlayerUnits)
+        {
+            cellsAroundEnemy = findAllCellsAroundTarget(unit.cell);
+            List<GridCell> intersectionCells = new List<GridCell>();
+            intersectionCells = scopedCells.Intersect(cellsAroundEnemy).ToList();
+            if (intersectionCells != null && intersectionCells.Count > 0)
+            {
+                returnedCells.Add(unit.cell);
+            }
+        }
+        
+        return returnedCells;
     }
 
 }
