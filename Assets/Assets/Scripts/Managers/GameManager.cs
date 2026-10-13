@@ -357,7 +357,7 @@ public class GameManager : MonoBehaviour
         if (!listOfUnitsReady.Contains(selectedUnit))
             return false;
 
-        gridController.EnableScopedCells(selectedUnit,battlefieldManager.EnemyUnits);
+        gridController.EnableScopedCells(selectedUnit,battlefieldManager.GetEnemyUnits());
         gameStage = GameStages.PlayerTurn_UnitSelected;
         return true;
     }
@@ -416,7 +416,7 @@ public class GameManager : MonoBehaviour
         Unit enemyUnit = aIEnemyManager.ChooseNextUnit(turn);
         BattlefieldManager.instance.DeselectAllOtherUnits(enemyUnit);
         gridController.DisableAllCells();
-        gridController.EnableScopedCells(enemyUnit,battlefieldManager.PlayerUnits);
+        gridController.EnableScopedCells(enemyUnit,battlefieldManager.GetPlayerUnits());
         gameStage = GameStages.EnemyTurn;
         StageUpdate_EnemyTurn_ReadyToPlay(enemyUnit);
     }

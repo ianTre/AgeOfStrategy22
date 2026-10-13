@@ -23,6 +23,7 @@ public class BattlefieldManager : MonoBehaviour
 
     List<UnitModel> PlayerInitialUnits;
     List<UnitModel> EnemyInitialUnits;
+
     public List<Unit> PlayerUnits;
     public List<Unit> EnemyUnits;
     
@@ -36,6 +37,16 @@ public class BattlefieldManager : MonoBehaviour
     void Start()
     {
         gridController = FindObjectOfType<GridController>();
+    }
+
+    public List<Unit> GetPlayerUnits()
+    {
+        return PlayerUnits.Where(unit => unit.isAlive).ToList();
+    }
+
+    public List<Unit> GetEnemyUnits()
+    {
+        return EnemyUnits.Where(unit => unit.isAlive).ToList();
     }
 
     public void Awake()
@@ -128,14 +139,14 @@ public class BattlefieldManager : MonoBehaviour
 
     public void DeselectAllOtherUnits(Unit unit)
     {
-        var selectedUnits = PlayerUnits.FindAll(u => u.transform.GetComponent<PlayerUnit>().hasBeingSelected && u != unit);
+        var selectedUnits = GetPlayerUnits().FindAll(u => u.transform.GetComponent<PlayerUnit>().hasBeingSelected && u != unit);
         if (selectedUnits != null && selectedUnits.Count > 0)
             selectedUnits.ForEach(u => u.transform.GetComponent<PlayerUnit>().Deselect());
     }
 
     public Unit GetSelectedUnit()
     {
-        var selectedUnit = PlayerUnits.FirstOrDefault(u => u.transform.GetComponent<PlayerUnit>().hasBeingSelected && u.isAlive);
+        var selectedUnit = GetPlayerUnits().FirstOrDefault(u => u.transform.GetComponent<PlayerUnit>().hasBeingSelected && u.isAlive);
         return selectedUnit;
     }
 
@@ -149,9 +160,9 @@ public class BattlefieldManager : MonoBehaviour
 
     public bool IsEnemyNearBy(GridCell gridCell)
     {
-        if (EnemyUnits == null || EnemyUnits.Count == 0) return false;
+        if (EnemyUnits == null || GetEnemyUnits().Count == 0) return false;
 
-        var anyNear = EnemyUnits.Exists(u => u.cell.IsGridCellNearToMe(gridCell));
+        var anyNear = GetEnemyUnits().Exists(u => u.cell && u.cell.IsGridCellNearToMe(gridCell));
         return anyNear;
     }
 
@@ -209,15 +220,15 @@ public class BattlefieldManager : MonoBehaviour
     {
         if (!allUnitsDeployed)
             return;
-        backendService.DeployPlayerUnits(1, PlayerUnits);
+        backendService.DeployPlayerUnits(1, GetPlayerUnits());
         CreateEnemyUnits(enemyUnits);
-        backendService.DeployPlayerUnits(2 ,EnemyUnits);
+        backendService.DeployPlayerUnits(2 ,GetEnemyUnits());
     }
 
 
     public void SpecialOrder1()
     {
-        Unit selectedUnit = PlayerUnits.Find(u => u.transform.GetComponent<PlayerUnit>().hasBeingSelected);
+        Unit selectedUnit = GetPlayerUnits().Find(u => u.transform.GetComponent<PlayerUnit>().hasBeingSelected);
         if (selectedUnit == null)
             return;
         selectedUnit.GetComponent<UnitAnimationController>().TriggerAttack();
@@ -225,7 +236,7 @@ public class BattlefieldManager : MonoBehaviour
 
     public void SpecialOrder2()
     {
-        Unit selectedUnit = PlayerUnits.Find(u => u.transform.GetComponent<PlayerUnit>().hasBeingSelected);
+        Unit selectedUnit = GetPlayerUnits().Find(u => u.transform.GetComponent<PlayerUnit>().hasBeingSelected);
         if (selectedUnit == null)
             return;
         selectedUnit.GetComponent<UnitAnimationController>().TriggerDefend();
@@ -233,7 +244,7 @@ public class BattlefieldManager : MonoBehaviour
 
     public void SpecialOrder3()
     {
-        Unit selectedUnit = PlayerUnits.Find(u => u.transform.GetComponent<PlayerUnit>().hasBeingSelected);
+        Unit selectedUnit = GetPlayerUnits().Find(u => u.transform.GetComponent<PlayerUnit>().hasBeingSelected);
         if (selectedUnit == null)
             return;
         selectedUnit.GetComponent<UnitAnimationController>().TriggerDeath();
@@ -295,6 +306,6 @@ public class BattlefieldManager : MonoBehaviour
 
     internal List<Unit> SetCooldownForUnits_Player(int turn )
     {
-        return this.PlayerUnits.Where(unit => unit.CoolDownTurn <=  turn && unit.isAlive).ToList();
+        return this.GetPlayerUnits().Where(unit => unit.CoolDownTurn <=  turn && unit.isAlive).ToList();
     }
 }

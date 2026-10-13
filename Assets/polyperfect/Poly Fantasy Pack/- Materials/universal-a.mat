@@ -22,7 +22,7 @@ Material:
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2000
   stringTagMap:
     RenderType: Opaque
   disabledShaderPasses:
@@ -31,7 +31,7 @@ Material:
   - TransparentDepthPrepass
   - TransparentDepthPostpass
   - TransparentBackface
-  m_LockedProperties: _ParallaxMap _Smoothness
+  m_LockedProperties: _BaseColor _BaseMap _ParallaxMap _Smoothness
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:

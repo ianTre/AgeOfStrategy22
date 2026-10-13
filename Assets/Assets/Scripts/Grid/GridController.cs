@@ -390,7 +390,7 @@ public class GridController : MonoBehaviour
         GridCell currentCell = selectedUnit.cell;
         int scope = selectedUnit.data.scope;
 
-        var scopedCells = FindScopedCellsWithPathfinding(currentCell, scope, otherPlayerUnits);
+        var scopedCells = FindScopedCellsWithPathfinding(currentCell, scope, otherPlayerUnits.Where(unit => unit.isAlive).ToList());
         EnableCells(scopedCells);
     }
 

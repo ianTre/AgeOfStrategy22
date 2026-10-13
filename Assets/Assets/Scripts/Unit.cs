@@ -82,9 +82,14 @@ public class Unit : MonoBehaviour , ISoldier, IFocusable , IMouseActionable
         onComplete?.Invoke();
     }
 
-    public void IsAlive(bool alive)
+    public void SetIsAlive(bool alive)
     {
         this.isAlive = alive;
+        if(this.isAlive == false)
+        {
+            this.cell.RemoveUnit(this);
+            this.cell = null;
+        }
     }
 
 

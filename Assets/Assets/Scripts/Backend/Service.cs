@@ -89,7 +89,7 @@ namespace Assets.Assets.Scripts.Backend
             RecibirImpacto(defenderUnit, damage);
             if(defenderUnit.healthTotal <= 0)
             {
-                defender.IsAlive(false);
+                defender.SetIsAlive(false);
             }
             var healthBarController = defender.transform.GetComponentInChildren<HealthBarController>();
             healthBarController?.calculateDamage(defenderUnit.healthTotal);

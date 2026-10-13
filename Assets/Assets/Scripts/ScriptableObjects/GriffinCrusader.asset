@@ -17,7 +17,7 @@ MonoBehaviour:
   attack: 20
   meleeArmor: 3
   pierceArmor: 3
-  cooldown: 6
+  cooldown: 20
   scope: 3
   unitType: 2
   prefab: {fileID: 3087810720983206177, guid: bc72e313966f8b04280c8890ae2869e6, type: 3}

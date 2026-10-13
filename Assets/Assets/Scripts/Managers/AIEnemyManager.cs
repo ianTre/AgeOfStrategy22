@@ -21,7 +21,7 @@ namespace Assets.Assets.Scripts.Managers
 
         public Unit ChooseNextUnit(int turn)
         {
-            List<Unit> enemyUnits = BattlefieldManager.instance.EnemyUnits.Where(unit => unit.CoolDownTurn <= turn && unit.isAlive).ToList();
+            List<Unit> enemyUnits = BattlefieldManager.instance.GetEnemyUnits().Where(unit => unit.CoolDownTurn <= turn).ToList();
             Unit unitToMove = null;
             while (unitToMove == null && enemyUnits.Count > 0)
             {
@@ -48,7 +48,6 @@ namespace Assets.Assets.Scripts.Managers
                     GameManager.instance.StageUpdate_PlayerTurn();
                 }
 
-
                 movementOk = BattlefieldManager.instance.TryToMoveToNewCell(cellToMove, unitToMove, () =>
                 {
                     Unit unit = FindPlayerTargetsToHit(unitToMove);
@@ -65,8 +64,8 @@ namespace Assets.Assets.Scripts.Managers
         {
             Unit target = null;
             var adyacentCells = gridController.findAllCellsAroundTarget(unitToMove.cell);
-            var playerUnits = BattlefieldManager.instance.PlayerUnits;
-            var targetCell = adyacentCells.Where(cell => cell.isOccupied && cell.unit != null && playerUnits.Contains(cell.unit)).FirstOrDefault();
+            var playerUnits = BattlefieldManager.instance.GetPlayerUnits();
+            var targetCell = adyacentCells.Where(cell => cell.isOccupied && cell.unit != null && playerUnits.Contains(cell.unit)).FirstOrDefault(); //TODO : Refactor using PlayerUnits flatten intersection
             if (targetCell)
             {
                 target = targetCell.unit;
@@ -81,7 +80,7 @@ namespace Assets.Assets.Scripts.Managers
             if (possibleMovments.Count == 0)
                 return null;
 
-            var playerUnits = BattlefieldManager.instance.PlayerUnits.Where(u => u.isAlive);
+            var playerUnits = BattlefieldManager.instance.GetPlayerUnits();
             var possibleTargets = possibleMovments.Where(cell => cell.isOccupied && cell.unit != null).ToList(); //List all cells with Player units.
             possibleTargets = possibleTargets.Where(cell => playerUnits.Contains(cell.unit)).ToList();
             

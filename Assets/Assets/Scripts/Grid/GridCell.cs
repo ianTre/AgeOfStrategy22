@@ -177,8 +177,6 @@ public class GridCell : MonoBehaviour, IMouseSelectable, IFocusable , IMouseActi
             MovementAction();
             return;
         }
-
-
     }
     public bool IsGridCellNearToMe(GridCell gridCell)
     {
