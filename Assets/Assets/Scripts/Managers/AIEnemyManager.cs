@@ -31,7 +31,7 @@ namespace Assets.Assets.Scripts.Managers
             return unitToMove;
         }
 
-        public void ChooseNextMovement(Unit unitToMove)
+        public bool ChooseNextMovement(Unit unitToMove)
         {
             GridCell cellToMove = null;
             int numberOfAttempts = 8;
@@ -45,7 +45,7 @@ namespace Assets.Assets.Scripts.Managers
                 if (cellToMove == null)
                 {
                     Debug.Log("Unit" + unitToMove.name + "couldnt find a possible movement");
-                    GameManager.instance.StageUpdate_PlayerTurn();
+                    return false;
                 }
 
                 movementOk = BattlefieldManager.instance.TryToMoveToNewCell(cellToMove, unitToMove, () =>
@@ -53,11 +53,16 @@ namespace Assets.Assets.Scripts.Managers
                     Unit unit = FindPlayerTargetsToHit(unitToMove);
                     if (unit)
                     {
-                        BattlefieldManager.instance.TryToAttackTarget(unitToMove, unit, () => { });
+                        BattlefieldManager.instance.TryToAttackTarget(unitToMove, unit, () => {
+                            GameManager.instance.StageUpdate(GameManager.GameStages.PlayerTurn);
+                        });
                     }
-                    GameManager.instance.StageUpdate_PlayerTurn();
+                    else
+                        GameManager.instance.StageUpdate(GameManager.GameStages.PlayerTurn);
+
                 });
             }
+            return movementOk;
         }
 
         private Unit FindPlayerTargetsToHit(Unit unitToMove)

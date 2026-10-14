@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
     {
         if (gameStage != oldGameStage)
         {
+            oldGameStage = gameStage;
             switch (gameStage)
             {
                 case GameStages.Start:
@@ -56,20 +57,33 @@ public class GameManager : MonoBehaviour
                 case GameStages.EnemyDeploy:
                     break;
                 case GameStages.PlayerTurn:
-                    break;
-                case GameStages.PlayerTurn_UnitSelected:
-                    break;
-                case GameStages.PlayerTurn_UnitSelected_UnitMovement:
-                    break;
-                case GameStages.PlayerTurn_UnitSelected_EnemyTargetSelected:
+                    StageUpdate_PlayerTurn();
                     break;
                 case GameStages.EnemyTurn:
-                    break;
-                default:
+                    StageUpdate_EnemyTurn();
                     break;
             }
         }
-        oldGameStage = gameStage;
+    }
+
+    public void UpdateTurn()
+    {
+        RotBodies();
+        turn++;
+    }
+
+    private void RotBodies()
+    {
+        List<Unit> deadUnits = battlefieldManager.GetDeadUnits();
+        foreach (Unit body in deadUnits)
+        {
+            body.transform.position = new Vector3(body.transform.position.x, body.transform.position.y -0.1f, body.transform.position.z);
+        }
+    }
+
+    public void StageUpdate(GameStages newStage)
+    {
+        gameStage = newStage;
     }
 
     public void CancelAction()
@@ -94,9 +108,9 @@ public class GameManager : MonoBehaviour
                 GameManager.GameStages.PlayerTurn_UnitSelected_UnitMovement,
             };
 
-        if(CheckStages(PlayerStages))
-        {  
-            StageUpdate_PlayerTurn(); 
+        if (CheckStages(PlayerStages))
+        {
+            StageUpdate(GameStages.PlayerTurn);
         }
     }
 
@@ -191,7 +205,7 @@ public class GameManager : MonoBehaviour
                 StageUpdate_PlayerTurn_UnitSelected_UnitMovement(selectedUnit, cell);
         }
 
-        if(CheckStage(GameStages.PlayerTurn_UnitSelected_EnemyTargetSelected)) 
+        if (CheckStage(GameStages.PlayerTurn_UnitSelected_EnemyTargetSelected))
         {
             if (cell.isCellAnEnemyNeighbour) //El jugador puede selccionar una unidad enemiga pero arrepentirse y moverse a cualquier otra posicion del mapa sin necesidad de realizar un ataque.
             {
@@ -301,17 +315,17 @@ public class GameManager : MonoBehaviour
         if (deployCanvas == null)
             throw new Exception("Cant find Battlefield_UnitsDeploy_Canvas");
         deployCanvas.SetActive(false);
-        StageUpdate_PlayerTurn();
+        StageUpdate(GameStages.PlayerTurn);
     }
 
     public void StageUpdate_PlayerTurn()
     {
         gameStage = GameStages.PlayerTurn;
-        this.turn++;
+        UpdateTurn();
         DisableSelectionLight();
         DisableGridSelection();
         StageUpdate_PlayerTurn_DisableUnitsCoolDown();
-        
+
     }
 
     private void DisableGridSelection()
@@ -331,13 +345,13 @@ public class GameManager : MonoBehaviour
         var listOfUnitsReady = battlefieldManager.SetCooldownForUnits_Player(this.turn);
         if (listOfUnitsReady.Count == 0)
         {
-            StageUpdate_EnemyTurn();
+            StageUpdate(GameStages.EnemyTurn);
         }
         else
         {
             StageUpdate_PlayerTurn_Precondition_PlayerReadyToPlay(listOfUnitsReady);
         }
-        
+
     }
 
     public void StageUpdate_PlayerTurn_Precondition_PlayerReadyToPlay(List<Unit> listOfUnitsReady)
@@ -357,12 +371,12 @@ public class GameManager : MonoBehaviour
         if (!listOfUnitsReady.Contains(selectedUnit))
             return false;
 
-        gridController.EnableScopedCells(selectedUnit,battlefieldManager.GetEnemyUnits());
+        gridController.EnableScopedCells(selectedUnit, battlefieldManager.GetEnemyUnits());
         gameStage = GameStages.PlayerTurn_UnitSelected;
         return true;
     }
 
-    public void StageUpdate_PlayerTurn_UnitSelected_EnemyTargetSelected(Unit playerUnit , Unit targetUnit)
+    public void StageUpdate_PlayerTurn_UnitSelected_EnemyTargetSelected(Unit playerUnit, Unit targetUnit)
     {
         gameStage = GameStages.PlayerTurn_UnitSelected_EnemyTargetSelected;
     }
@@ -384,19 +398,19 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void PrepareToAttackUnit(Unit playerUnit , Unit targetUnit)
+    public void PrepareToAttackUnit(Unit playerUnit, Unit targetUnit)
     {
         battlefieldManager.TryToAttackTarget(playerUnit, targetUnit, () =>
         {
-            StageUpdate_PlayerTurn_UnitSelected_EnemyTargetSelected_PositionToAttackSelected_attackMade(playerUnit,targetUnit);
+            StageUpdate_PlayerTurn_UnitSelected_EnemyTargetSelected_PositionToAttackSelected_attackMade(playerUnit, targetUnit);
         });
     }
 
-    public void StageUpdate_PlayerTurn_UnitSelected_EnemyTargetSelected_PositionToAttackSelected_attackMade(Unit playerUnit , Unit targetUnit)
+    public void StageUpdate_PlayerTurn_UnitSelected_EnemyTargetSelected_PositionToAttackSelected_attackMade(Unit playerUnit, Unit targetUnit)
     {
         gameStage = GameStages.PlayerTurn_UnitSelected_EnemyTargetSelected_PositionToAttackSelected_attackMade;
-        battlefieldManager.SaveAttack(playerUnit,targetUnit);
-        StageUpdate_EnemyTurn();
+        battlefieldManager.SaveAttack(playerUnit, targetUnit);
+        StageUpdate(GameStages.EnemyTurn);
     }
 
 
@@ -404,36 +418,43 @@ public class GameManager : MonoBehaviour
     {
         gameStage = GameStages.PlayerTurn_UnitSelected_UnitMovement;
         InputManager.instance.DisableControllers();
-        battlefieldManager.TryToMoveToNewCell(destinyCell, selectedUnit , () =>
+        battlefieldManager.TryToMoveToNewCell(destinyCell, selectedUnit, () =>
         {
-            StageUpdate_EnemyTurn();
+            StageUpdate(GameStages.EnemyTurn);
         });
     }
 
     public void StageUpdate_EnemyTurn()
     {
-        turn++;
+        UpdateTurn();
         Unit enemyUnit = aIEnemyManager.ChooseNextUnit(turn);
         BattlefieldManager.instance.DeselectAllOtherUnits(enemyUnit);
         gridController.DisableAllCells();
-        gridController.EnableScopedCells(enemyUnit,battlefieldManager.GetPlayerUnits());
+        gridController.EnableScopedCells(enemyUnit, battlefieldManager.GetPlayerUnits());
         gameStage = GameStages.EnemyTurn;
         StageUpdate_EnemyTurn_ReadyToPlay(enemyUnit);
     }
 
     public void StageUpdate_EnemyTurn_ReadyToPlay(Unit enemyUnit)
     {
-        if(enemyUnit == null)
+        if (enemyUnit == null)
         {
-            StageUpdate_PlayerTurn();
+            StageUpdate(GameStages.PlayerTurn);
         }
-        StageUpdate_EnemyTurn_MovementSelected(enemyUnit);
+        else
+        {
+            StageUpdate_EnemyTurn_MovementSelected(enemyUnit);
+        }
     }
 
     public void StageUpdate_EnemyTurn_MovementSelected(Unit enemyUnit)
     {
         gameStage = GameStages.EnemyTurn_ReadyToPlay;
-        aIEnemyManager.ChooseNextMovement(enemyUnit);
+        var movementOk = aIEnemyManager.ChooseNextMovement(enemyUnit);
+        if (movementOk == false)
+        {
+            StageUpdate(GameStages.PlayerTurn);
+        }
     }
 
     public bool CheckStage(GameStages stage)

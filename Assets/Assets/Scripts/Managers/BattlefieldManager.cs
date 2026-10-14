@@ -280,7 +280,7 @@ public class BattlefieldManager : MonoBehaviour
         if (playerUnit == null)
         {
             Debug.Log("Player unit selected not Found in SelectTargetUnit");
-            GameManager.instance.StageUpdate_PlayerTurn();
+            GameManager.instance.StageUpdate(GameStages.PlayerTurn);
         }
 
         if (!GameManager.instance.CheckStage(GameManager.GameStages.PlayerTurn_UnitSelected))
@@ -307,5 +307,12 @@ public class BattlefieldManager : MonoBehaviour
     internal List<Unit> SetCooldownForUnits_Player(int turn )
     {
         return this.GetPlayerUnits().Where(unit => unit.CoolDownTurn <=  turn && unit.isAlive).ToList();
+    }
+
+    internal List<Unit> GetDeadUnits()
+    {
+        var playerDeadUnits = this.PlayerUnits.Where(unit => !unit.isAlive).ToList();
+        var enemyDeadUnits = this.EnemyUnits.Where(unit => !unit.isAlive).ToList();
+        return playerDeadUnits.Concat(enemyDeadUnits).ToList();
     }
 }

@@ -387,6 +387,11 @@ public class GridController : MonoBehaviour
 
     internal void EnableScopedCells(Unit selectedUnit,List<Unit> otherPlayerUnits)
     {
+        if(selectedUnit == null)
+        {
+            Debug.Log("Selected unit is null, cannot enable scoped cells.");
+            return;
+        }
         GridCell currentCell = selectedUnit.cell;
         int scope = selectedUnit.data.scope;
 
