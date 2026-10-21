@@ -26,6 +26,17 @@ public class HealthBarController : MonoBehaviour
 
     }
 
+    public void ActivateBar()
+    {
+        var healthCanvas = this.transform.Find("HealthCanvas");
+        if(healthCanvas == null)
+        {
+            Debug.LogError("HealthCanvas not found in HealthBarController");
+            return;
+        }
+        healthCanvas.gameObject.SetActive(true);
+    }
+
     public void DisplayDamage()
     {
         this.slider.value = health;
@@ -64,13 +75,13 @@ public class HealthBarController : MonoBehaviour
     }
     public void OnBarHover()
     {
-            healthValue?.ShowHealthValue(health.ToString());
-            this.transform.localScale = HighScale;
+        healthValue?.ShowHealthValue(health.ToString());
+        this.transform.localScale = HighScale;
 
     }
     public void OnBarExit()
     {
-            healthValue?.HideHealthValue();
-            this.transform.localScale = LowScale;        
+        healthValue?.HideHealthValue();
+        this.transform.localScale = LowScale;
     }
 }

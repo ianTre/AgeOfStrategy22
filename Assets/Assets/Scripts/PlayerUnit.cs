@@ -23,12 +23,14 @@ public class PlayerUnit : MonoBehaviour, IMouseSelectable
 
     public void Select()
     {
+        GameManager _gameManager = GameManager.instance;
         bool canSelect = unit?.isAlive ?? false;
         if (!canSelect)
             return;
-        if (GameManager.instance.StageUpdate_UnitSelected(this.transform.GetComponent<Unit>()))
+        if (_gameManager.StageUpdate_UnitSelected(this.transform.GetComponent<Unit>()))
         {
             CreateSelectionLight();
+            _gameManager.DisplayDeleteButton(this);
             this.hasBeingSelected = true;
         }
     }

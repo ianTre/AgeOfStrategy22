@@ -315,4 +315,19 @@ public class BattlefieldManager : MonoBehaviour
         var enemyDeadUnits = this.EnemyUnits.Where(unit => !unit.isAlive).ToList();
         return playerDeadUnits.Concat(enemyDeadUnits).ToList();
     }
+
+    internal void EnableBarHealthForAllUnits()
+    {
+        List<Unit> allUnits = this.PlayerUnits.Concat(this.EnemyUnits).ToList();
+        foreach (Unit unit in allUnits)
+        {
+            HealthBarController healthBarController = unit.transform.GetComponentInChildren<HealthBarController>(true);
+            if (healthBarController == null)
+            {
+                Debug.LogError("HealthBarController not found in unit: " + unit.name);
+                throw new Exception("HealthBarController not found in unit: " + unit.name);
+            }
+            healthBarController.ActivateBar();
+        }
+    }
 }

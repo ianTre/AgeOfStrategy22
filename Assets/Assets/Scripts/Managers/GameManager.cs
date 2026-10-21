@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     BattlefieldManager battlefieldManager;
     AIEnemyManager aIEnemyManager;
     public int turn = 0;
+    public GameObject deleteButton;
 
 
     void Start()
@@ -77,7 +78,7 @@ public class GameManager : MonoBehaviour
         List<Unit> deadUnits = battlefieldManager.GetDeadUnits();
         foreach (Unit body in deadUnits)
         {
-            body.transform.position = new Vector3(body.transform.position.x, body.transform.position.y -0.1f, body.transform.position.z);
+            body.transform.position = new Vector3(body.transform.position.x, body.transform.position.y - 0.1f, body.transform.position.z);
         }
     }
 
@@ -157,6 +158,9 @@ public class GameManager : MonoBehaviour
                 actionable.Select();
         }
     }
+
+
+
 
     public void RightClickOnNewObject(GameObject newSelectedObject)
     {
@@ -315,6 +319,7 @@ public class GameManager : MonoBehaviour
         if (deployCanvas == null)
             throw new Exception("Cant find Battlefield_UnitsDeploy_Canvas");
         deployCanvas.SetActive(false);
+        battlefieldManager.EnableBarHealthForAllUnits();
         StageUpdate(GameStages.PlayerTurn);
     }
 
@@ -455,6 +460,19 @@ public class GameManager : MonoBehaviour
         {
             StageUpdate(GameStages.PlayerTurn);
         }
+    }
+
+
+    public void DisplayDeleteButton(PlayerUnit unit)
+    {
+        deleteButton.SetActive(true);
+        Vector3 unitPosition = unit.transform.position;
+        deleteButton.GetComponent<RectTransform>().position = Camera.main.ScreenToWorldPoint(new Vector3(unitPosition.x - 4, unitPosition.y, unitPosition.z - 4));
+    }
+
+    public void HideDeleteButton()
+    {
+        deleteButton.SetActive(false);
     }
 
     public bool CheckStage(GameStages stage)
