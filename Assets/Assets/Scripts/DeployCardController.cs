@@ -10,6 +10,7 @@ using UnityEngine.UIElements;
 public class DeployCardController : MonoBehaviour
 {
     [SerializeField] private RectTransform image;
+    [SerializeField] private RectTransform SelectedImage;
     [SerializeField] private RectTransform numberPanel;
     public UnitData unitsInitialData;
     public int unitsLeftToBeCreated = 0;
@@ -22,7 +23,6 @@ public class DeployCardController : MonoBehaviour
 
     public void Start()
     {
-        this.GetComponent<UnityEngine.UI.Image>().color = RegularColor;
         if (image == null)
         {
             Debug.LogError("DeployCardController: image is not assigned.");
@@ -89,12 +89,14 @@ public class DeployCardController : MonoBehaviour
 
     public void DeselectCard()
     {
-        this.GetComponent<UnityEngine.UI.Image>().color = RegularColor;
+        SelectedImage.gameObject.SetActive(false);
+        SelectedImage.GetComponent<UnityEngine.UI.Image>().color = RegularColor;
     }
 
     public void SelectCard()
     {
-        this.GetComponent<UnityEngine.UI.Image>().color = selectedColor;
+        SelectedImage.gameObject.SetActive(true);
+        SelectedImage.GetComponent<UnityEngine.UI.Image>().color = selectedColor;
     }
 
 
