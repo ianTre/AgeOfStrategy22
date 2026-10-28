@@ -71,7 +71,7 @@ public class DeployCardController : MonoBehaviour
     public void DisableCard()
     {
         unitsLeftToBeCreated = 0;
-        this.transform.GetComponent<UnityEngine.UI.Image>().color = disableColor;
+        this.SelectedImage.transform.GetComponent<UnityEngine.UI.Image>().color = disableColor;
         image.GetComponent<UnityEngine.UI.Image>().color = disableColorImage;
         UpdateText(0);
         cardIsEnable = false;

@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     BattlefieldManager battlefieldManager;
     AIEnemyManager aIEnemyManager;
     public int turn = 0;
-    public GameObject deleteButton;
+    private GameObject deleteButton;
 
 
     void Start()
@@ -460,19 +460,6 @@ public class GameManager : MonoBehaviour
         {
             StageUpdate(GameStages.PlayerTurn);
         }
-    }
-
-
-    public void DisplayDeleteButton(PlayerUnit unit)
-    {
-        deleteButton.SetActive(true);
-        Vector3 unitPosition = unit.transform.position;
-        deleteButton.GetComponent<RectTransform>().position = Camera.main.ScreenToWorldPoint(new Vector3(unitPosition.x - 4, unitPosition.y, unitPosition.z - 4));
-    }
-
-    public void HideDeleteButton()
-    {
-        deleteButton.SetActive(false);
     }
 
     public bool CheckStage(GameStages stage)

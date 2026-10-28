@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2723783046037411811
 RectTransform:
   m_ObjectHideFlags: 0
@@ -29,7 +29,7 @@ RectTransform:
   m_GameObject: {fileID: 5031881771858884660}
   m_LocalRotation: {x: 0.5433942, y: 0, z: 0, w: 0.83947766}
   m_LocalPosition: {x: 0, y: 0, z: 3.06}
-  m_LocalScale: {x: 0.1, y: 0.10000001, z: 0.10000001}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3760294133556682785}
@@ -134,9 +134,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounceDistance: 2
-  bounceTime: 10
-  minScale: 0.5
-  maxScale: 0.8
+  bounceTime: 6
+  minScale: 0.8
+  maxScale: 1.2
 --- !u!1 &8595042048906828443
 GameObject:
   m_ObjectHideFlags: 0
@@ -149,6 +149,7 @@ GameObject:
   - component: {fileID: 4279889935067024141}
   - component: {fileID: 1472347447609183799}
   - component: {fileID: 8794552469649183311}
+  - component: {fileID: 3526103520700299234}
   m_Layer: 0
   m_Name: UnitsDisplayCanvas
   m_TagString: Untagged
@@ -239,6 +240,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &3526103520700299234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8595042048906828443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2688f8b57464834f83dde2b54a9ae65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deleteButton: {fileID: 5031881771858884660}
 --- !u!1001 &928635363833318877
 PrefabInstance:
   m_ObjectHideFlags: 0
